@@ -1,52 +1,86 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FPSMovementController : MonoBehaviour
-{
+public class FPSMovementController : MonoBehaviour {
+    [Header("Camera")]
+    public Transform cam;
+    public bool lockCursor;
 
-    public GameObject player;
+    [Range(0.1f, 10)] public float lookSensitivity;
 
-    public float movementSpeed = 5.0f;
-    public float jumpSpeed = 5.0f;
+    public float maxUpRotation;
+    public float maxDownRotation;
 
-    private bool isGrounded = true;
+    private float xRotation = 0;
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
+    [Header("Movement")]
+    public CharacterController controller;
 
-        float verticalMoveInput = Input.GetAxis("Vertical");
-        Vector3 verticalMovement = Vector3.forward * verticalMoveInput * movementSpeed * Time.deltaTime;
+    // Speed of forwards and backwards movement
+    [Range(0.5f, 20)] public float walkSpeed;
 
-        float horizontalMoveInput = Input.GetAxis("Horizontal");
-        Vector3 horizontalMovement = Vector3.right * horizontalMoveInput * movementSpeed * Time.deltaTime;
+    // Speed of sideways (left and right) movement
+    [Range(0.5f, 15)] public float strafeSpeed;
 
-        Vector3 jumpMovement = Vector3.up * jumpSpeed * 9.81f;
+    public KeyCode sprintKey;
 
-        if (verticalMoveInput != 0) {
-            player.transform.Translate(verticalMovement);
-        }
+    // How many times faster movement along the X and Z axes
+    // is when sprinting
+    [Range(1, 3)] public float sprintFactor;
 
-        if (horizontalMoveInput != 0) {
-            player.transform.Translate(horizontalMovement);
-        }
+    [Range(0.5f, 10)] public float jumpHeight;
+    public int maxJumps;
 
-        if (isGrounded && Input.GetKey(KeyCode.Space)) {
-            print("JUMPED");
-            player.GetComponent<Rigidbody>().AddForce(jumpMovement);
-        }
-    }
+    private Vector3 velocity = Vector3.zero;
+    private int jumpsSinceLastLand = 0;
 
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.layer == 3 && !isGrounded) {
-            isGrounded = true;
+    void Start() {
+        if (lockCursor) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
-    void OnCollisionExit(Collision collision) {
-        if (collision.gameObject.layer == 3 && isGrounded) {
-            isGrounded = false;
+    void Update() {
+        transform.Rotate(0, Input.GetAxis("Mouse X") * lookSensitivity, 0);
+        xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
+        xRotation = Mathf.Clamp(xRotation, -maxUpRotation, maxDownRotation);
+        cam.localRotation = Quaternion.Euler(xRotation, 0, 0);
+
+        velocity.z = Input.GetAxis("Vertical") * walkSpeed;
+        velocity.x = Input.GetAxis("Horizontal") * strafeSpeed;
+        velocity = transform.TransformDirection(velocity);
+
+        if (Input.GetKey(sprintKey)) { Sprint(); }
+
+        // Apply manual gravity
+        velocity.y += Physics.gravity.y * Time.deltaTime;
+
+        if (controller.isGrounded && velocity.y < 0) { Land(); }
+
+        if (Input.GetButtonDown("Jump")) {
+            if (controller.isGrounded) {
+                Jump();
+            }
+            else if (jumpsSinceLastLand < maxJumps) {
+                Jump();
+            }
         }
+
+        controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void Sprint() {
+        velocity.z *= sprintFactor;
+        velocity.x *= sprintFactor;
+    }
+
+    private void Jump() {
+        velocity.y = Mathf.Sqrt(jumpHeight * -2 * Physics.gravity.y);
+        jumpsSinceLastLand++;
+    }
+
+    private void Land() {
+        velocity.y = 0;
+        jumpsSinceLastLand = 0;
     }
 }
