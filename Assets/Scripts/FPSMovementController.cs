@@ -13,7 +13,7 @@ public class FPSMovementController : MonoBehaviour {
     private float xRotation = 0;
 
     [Header("Movement")]
-    public CharacterController controller;
+    private CharacterController controller;
 
     // Speed of forwards and backwards movement
     [Range(0.5f, 20)] public float walkSpeed;
@@ -38,6 +38,8 @@ public class FPSMovementController : MonoBehaviour {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+        controller = GetComponent<CharacterController>();
     }
 
     void Update() {
