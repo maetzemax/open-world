@@ -11,6 +11,8 @@ public class GenerateMesh : MonoBehaviour {
     public Vector3 TerrainSize { get; set; }
     public float CellSize { get; set; }
     public float NoiseScale { get; set; }
+    //addition in this script
+    public float UVScale { get; set; }
 
     public Gradient Gradient { get; set; }
 
@@ -22,7 +24,7 @@ public class GenerateMesh : MonoBehaviour {
     public void Generate() {
         meshFilter = GetComponent<MeshFilter>();
 
-        MeshDraft draft = TerrainDraft(TerrainSize, CellSize, NoiseOffset, NoiseScale, Gradient);
+        MeshDraft draft = TerrainDraft(TerrainSize, CellSize, NoiseOffset, NoiseScale, Gradient, UVScale);//change in this script
         draft.Move(Vector3.left * TerrainSize.x / 2 + Vector3.back * TerrainSize.z / 2);
         meshFilter.mesh = draft.ToMesh();
 
@@ -31,7 +33,7 @@ public class GenerateMesh : MonoBehaviour {
             meshCollider.sharedMesh = meshFilter.mesh;
     }
 
-    private static MeshDraft TerrainDraft(Vector3 terrainSize, float cellSize, Vector2 noiseOffset, float noiseScale, Gradient gradient) {
+    private static MeshDraft TerrainDraft(Vector3 terrainSize, float cellSize, Vector2 noiseOffset, float noiseScale, Gradient gradient, float uvScale) {//change in this script
         int xSegments = Mathf.FloorToInt(terrainSize.x / cellSize);
         int zSegments = Mathf.FloorToInt(terrainSize.z / cellSize);
 
@@ -43,7 +45,8 @@ public class GenerateMesh : MonoBehaviour {
             vertices = new List<Vector3>(vertexCount),
             triangles = new List<int>(vertexCount),
             normals = new List<Vector3>(vertexCount),
-            colors = new List<Color>(vertexCount)
+            colors = new List<Color>(vertexCount),
+            uv = new List<Vector2>(vertexCount)//addition in this script
         };
 
         for (int i = 0; i < vertexCount; i++) {
@@ -51,6 +54,7 @@ public class GenerateMesh : MonoBehaviour {
             draft.triangles.Add(0);
             draft.normals.Add(Vector3.zero);
             draft.colors.Add(Color.black);
+            draft.uv.Add(Vector2.zero);//addition in this script
         }
 
         for (int x = 0; x < xSegments; x++) {
@@ -102,6 +106,18 @@ public class GenerateMesh : MonoBehaviour {
                 draft.triangles[index3] = index3;
                 draft.triangles[index4] = index4;
                 draft.triangles[index5] = index5;
+
+                //addition in this script
+                float xUV0 = ((float)x / (float)xSegments) * uvScale;
+                float zUV0 = ((float)z / (float)zSegments) * uvScale;
+                float xUV1 = ((float)(x + 1) / (float)xSegments) * uvScale;
+                float zUV1 = ((float)(z + 1) / (float)zSegments) * uvScale;
+                draft.uv[index0] = new Vector2(xUV0, zUV0);
+                draft.uv[index1] = new Vector2(xUV0, zUV1);
+                draft.uv[index2] = new Vector2(xUV1, zUV1);
+                draft.uv[index3] = new Vector2(xUV0, zUV0);
+                draft.uv[index4] = new Vector2(xUV1, zUV1);
+                draft.uv[index5] = new Vector2(xUV1, zUV0);
             }
         }
 

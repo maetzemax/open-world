@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 9593775}
   - component: {fileID: 9593774}
   - component: {fileID: 9593773}
+  - component: {fileID: 9593776}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -173,8 +174,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  far clip plane: 400
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -207,6 +208,26 @@ Transform:
   m_Father: {fileID: 102943342}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9593776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9593772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b5ec6153a1d55438228df10fe66844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 1
+  excludeFarPixels: 1
+  useRadialDistance: 1
+  heightFog: 0
+  height: 0
+  heightDensity: 2
+  startDistance: 250
+  fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
 --- !u!1 &102943338
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102943338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8000002, y: 60, z: 0}
+  m_LocalPosition: {x: -2.8000002, y: 201, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -323,14 +344,14 @@ MonoBehaviour:
   cam: {fileID: 9593775}
   lockCursor: 1
   lookSensitivity: 1
-  maxUpRotation: 60
+  maxUpRotation: 90
   maxDownRotation: 60
-  walkSpeed: 5
-  strafeSpeed: 5
-  sprintKey: 0
-  sprintFactor: 0
+  walkSpeed: 10
+  strafeSpeed: 10
+  sprintKey: 304
+  sprintFactor: 1.5
   jumpHeight: 1.2
-  maxJumps: 1
+  maxJumps: 2
 --- !u!143 &102943344
 CharacterController:
   m_ObjectHideFlags: 0
@@ -394,21 +415,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainTilePrefab: {fileID: 1458032746511054, guid: 11edba34140e0b64884b0415dbac3757, type: 3}
-  terrainSize: {x: 90, y: 30, z: 90}
+  terrainSize: {x: 16, y: 100, z: 16}
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 0.8517409, b: 0.5518868, a: 1}
     key1: {r: 0, g: 1, b: 0.08923602, a: 1}
     key2: {r: 0.764151, g: 0.764151, b: 0.764151, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0.764151, g: 0.764151, b: 0.764151, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 28206
+    ctime0: 19661
     ctime1: 44911
     ctime2: 65535
-    ctime3: 0
+    ctime3: 65535
     ctime4: 0
     ctime5: 0
     ctime6: 0
@@ -424,21 +445,22 @@ MonoBehaviour:
     m_Mode: 1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  noiseScale: 5
-  cellSize: 1
-  radiusToRender: 5
+  noiseScale: 0.075
+  cellSize: 16
+  uvScale: 1
+  radiusToRender: 20
   gameTransforms:
   - {fileID: 1560302064}
   playerTransform: {fileID: 102943342}
   water: {fileID: 580105534}
-  seed: 7676787
+  seed: 420
   placeableObjects:
   - {fileID: 7457085981203874184, guid: e0c452242007a4481bcdf29fca9e9774, type: 3}
   placeableObjectSizes:
-  - {x: 1, y: 1, z: 1}
+  - {x: 2, y: 3, z: 2}
   minObjectsPerTile: 0
-  maxObjectsPerTile: 20
-  destroyDistance: 100
+  maxObjectsPerTile: 10
+  destroyDistance: 500
   usePerlinNoise: 1
   noise: {fileID: 0}
 --- !u!1 &580105530
@@ -517,7 +539,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580105530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 40, z: 0}
+  m_LocalPosition: {x: 0, y: 128, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

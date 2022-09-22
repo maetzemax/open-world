@@ -15,6 +15,8 @@ public class TerrainController : MonoBehaviour {
     [SerializeField]
     private float noiseScale = 3, cellSize = 1;
     [SerializeField]
+    private float uvScale = 1;
+    [SerializeField]
     private int radiusToRender = 5;
     [SerializeField]
     private Transform[] gameTransforms;
@@ -155,6 +157,7 @@ public class TerrainController : MonoBehaviour {
         gm.TerrainSize = terrainSize;
         gm.Gradient = gradient;
         gm.NoiseScale = noiseScale;
+        gm.UVScale = uvScale;
         gm.CellSize = cellSize;
         gm.NoiseOffset = NoiseOffset(xIndex, yIndex);
         gm.Generate();
