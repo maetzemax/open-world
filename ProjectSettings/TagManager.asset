@@ -10,6 +10,7 @@ TagManager:
   - Mountain
   - Terrain
   - Swamp
+  - Village
   layers:
   - Default
   - TransparentFX

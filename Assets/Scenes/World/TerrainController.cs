@@ -159,10 +159,12 @@ public class TerrainController : MonoBehaviour {
 
         float randomValue = Mathf.PerlinNoise(xCoord, yCoord);
 
-        if (randomValue <= .3f) {
+        if (randomValue <= .4f) {
             terrain.tag = "Swamp";
+        } else if (randomValue > .7f && randomValue < .72f) {
+            terrain.tag = "Village";
         }
-        else {
+    else {
             terrain.tag = "Terrain";
         }
 

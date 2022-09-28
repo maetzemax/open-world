@@ -11,9 +11,25 @@ public class PlaceObjects : MonoBehaviour {
     public void Place() {
         int numObjects = Random.Range(TerrainController.MinObjectsPerTile, TerrainController.MaxObjectsPerTile);
 
+        int limitHouses = 3;
+        for (int i = 0; i < limitHouses; i++) {
+
+            Vector3 startPoint = RandomPointAboveTerrain();
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(startPoint, Vector3.down, out hit) && hit.point.y < TerrainController.Forest.transform.position.y && hit.point.y > TerrainController.Water.transform.position.y && hit.collider.CompareTag("Village")) {
+                Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
+                RaycastHit boxHit;
+                if (Physics.BoxCast(startPoint, TerrainController.PlaceableObjectSizes[0], Vector3.down, out boxHit, orientation) && boxHit.collider) {
+                    Instantiate(TerrainController.PlaceableObjects[0], new Vector3(startPoint.x, hit.point.y, startPoint.z), orientation, transform);
+                }
+            }
+        }
+
         // hit.collider.CompareTag(); -> bezieht sich auf den Tag des Tiles
-        int randomValue = 10;
-        for (int i = 0; i < randomValue; i++) {
+        int limitTrees = 10;
+        for (int i = 0; i < limitTrees; i++) {
 
             Vector3 startPoint = RandomPointAboveTerrain();
 
@@ -24,6 +40,22 @@ public class PlaceObjects : MonoBehaviour {
                 RaycastHit boxHit;
                 if (Physics.BoxCast(startPoint, TerrainController.PlaceableObjectSizes[2], Vector3.down, out boxHit, orientation) && boxHit.collider) {
                     Instantiate(TerrainController.PlaceableObjects[2], new Vector3(startPoint.x, hit.point.y, startPoint.z), orientation, transform);
+                }
+            }
+        }
+
+        int limitBushes = 8;
+        for (int i = 0; i < limitBushes; i++) {
+
+            Vector3 startPoint = RandomPointAboveTerrain();
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(startPoint, Vector3.down, out hit) && hit.point.y < TerrainController.Mountain.transform.position.y && (hit.collider.CompareTag("Terrain") || hit.collider.CompareTag("Swamp"))) {
+                Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
+                RaycastHit boxHit;
+                if (Physics.BoxCast(startPoint, TerrainController.PlaceableObjectSizes[1], Vector3.down, out boxHit, orientation) && boxHit.collider) {
+                    Instantiate(TerrainController.PlaceableObjects[1], new Vector3(startPoint.x, hit.point.y, startPoint.z), orientation, transform);
                 }
             }
         }
@@ -44,8 +76,7 @@ public class PlaceObjects : MonoBehaviour {
                     Instantiate(TerrainController.PlaceableObjects[3], new Vector3(startPoint.x, hit.point.y, startPoint.z), orientation, transform);
                 }
             }
-
-
+                  
             /*if (Physics.Raycast(startPoint, Vector3.down, out hit) && hit.point.y > TerrainController.Mountain.transform.position.y && (hit.collider.CompareTag("Terrain") || hit.collider.CompareTag("Swamp"))) {
                 Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
                 RaycastHit boxHit;

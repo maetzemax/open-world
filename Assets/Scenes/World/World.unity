@@ -354,12 +354,12 @@ MonoBehaviour:
   lookSensitivity: 1
   maxUpRotation: 90
   maxDownRotation: 60
-  walkSpeed: 10
-  strafeSpeed: 10
+  walkSpeed: 7
+  strafeSpeed: 7
   sprintKey: 304
   sprintFactor: 1.5
   jumpHeight: 1.2
-  maxJumps: 2
+  maxJumps: 1
 --- !u!143 &102943344
 CharacterController:
   m_ObjectHideFlags: 0
@@ -374,7 +374,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.4
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainTilePrefab: {fileID: 1458032746511054, guid: 11edba34140e0b64884b0415dbac3757, type: 3}
-  terrainSize: {x: 16, y: 64, z: 16}
+  terrainSize: {x: 32, y: 100, z: 32}
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 0.8517409, b: 0.5518868, a: 1}
@@ -496,7 +496,7 @@ MonoBehaviour:
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 13107
+    ctime0: 9059
     ctime1: 44911
     ctime2: 65535
     ctime3: 65535
@@ -515,12 +515,13 @@ MonoBehaviour:
     m_Mode: 1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  noiseScale: 0.15
+  noiseScale: 0.2
   cellSize: 1
-  biomeNoiseScale: 9.74
+  biomeNoiseScale: 10
   uvScale: 1
-  radiusToRender: 16
-  gameTransforms: []
+  radiusToRender: 8
+  gameTransforms:
+  - {fileID: 1560302064}
   playerTransform: {fileID: 102943342}
   water: {fileID: 580105534}
   greenLand: {fileID: 1010111625}
@@ -528,12 +529,12 @@ MonoBehaviour:
   mountain: {fileID: 1361763587}
   seed: 81
   placeableObjects:
-  - {fileID: 108544, guid: d638ef2ca2fe20c4c9c08e125692d3f4, type: 3}
+  - {fileID: 7062205491592004861, guid: a732f8aaa0da34188873c0c6861282c4, type: 3}
   - {fileID: 108544, guid: d638ef2ca2fe20c4c9c08e125692d3f4, type: 3}
   - {fileID: 7457085981203874184, guid: e0c452242007a4481bcdf29fca9e9774, type: 3}
   - {fileID: 3620147966289061310, guid: 9aa46166f7ce642cba6598b25b7d0955, type: 3}
   placeableObjectSizes:
-  - {x: 1, y: 1, z: 1}
+  - {x: 8, y: 9, z: 8}
   - {x: 1, y: 1, z: 1}
   - {x: 1, y: 1, z: 1}
   - {x: 1, y: 1, z: 1}
@@ -618,7 +619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580105530}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 83.65, z: 0}
+  m_LocalPosition: {x: 0, y: 112, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -856,7 +857,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010111622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 85.37, z: 0}
+  m_LocalPosition: {x: 0, y: 130, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -938,7 +939,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120507940}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 91.2, z: 0}
+  m_LocalPosition: {x: 0, y: 150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1020,7 +1021,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361763584}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 110, z: 0}
+  m_LocalPosition: {x: 0, y: 170, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
