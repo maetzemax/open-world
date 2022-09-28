@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 23455885283343956}
   - component: {fileID: 64511578900453130}
   - component: {fileID: 114309512026578662}
+  - component: {fileID: 7627142895624185571}
   m_Layer: 0
   m_Name: Terrain Thingy
   m_TagString: Terrain
@@ -122,5 +123,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4259919bfd99ad4fa13ad63b1bd61ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7627142895624185571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458032746511054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388be54f8294f4dd4af5ab71c08b8596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

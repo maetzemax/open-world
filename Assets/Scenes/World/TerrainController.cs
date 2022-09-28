@@ -5,47 +5,42 @@ using UnityEngine;
 
 public class TerrainController : MonoBehaviour {
 
-    [SerializeField]
-    private GameObject terrainTilePrefab = null;
-    [SerializeField]
-    private Vector3 terrainSize = new Vector3(20, 1, 20);
+    [SerializeField] private GameObject terrainTilePrefab = null;
+    [SerializeField] private Vector3 terrainSize = new Vector3(20, 1, 20);
     public Vector3 TerrainSize { get { return terrainSize; } }
-    [SerializeField]
-    private Gradient gradient;
-    [SerializeField]
-    private float noiseScale = 3, cellSize = 1;
-    [SerializeField]
-    private float uvScale = 1;
-    [SerializeField]
-    private int radiusToRender = 5;
-    [SerializeField]
-    private Transform[] gameTransforms;
-    [SerializeField]
-    private Transform playerTransform;
-    [SerializeField]
-    private Transform water;
+    [SerializeField] private Gradient gradient;
+    [SerializeField] private float noiseScale = 3, cellSize = 1;
+    [SerializeField] private float biomeNoiseScale = 3;
+    [SerializeField] private float uvScale = 1;
+    [SerializeField] private int radiusToRender = 5;
+    [SerializeField] private Transform[] gameTransforms;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform water;
     public Transform Water { get { return water; } }
-    [SerializeField]
-    private int seed;
-    [SerializeField]
-    private GameObject[] placeableObjects;
+    [SerializeField] private Transform greenLand;
+    public Transform Greenland { get { return greenLand; } }
+    [SerializeField] private Transform forest;
+    public Transform Forest { get { return forest; } }
+    [SerializeField] private Transform mountain;
+    public Transform Mountain { get { return mountain; } }
+    [SerializeField] private int seed;
+
+    [SerializeField] private GameObject[] placeableObjects;
     public GameObject[] PlaceableObjects { get { return placeableObjects; } }
-    [SerializeField]
-    private Vector3[] placeableObjectSizes;//the sizes of placeableObjects, in matching order
+    [SerializeField] private Vector3[] placeableObjectSizes;//the sizes of placeableObjects, in matching order
     public Vector3[] PlaceableObjectSizes { get { return placeableObjectSizes; } }
-    [SerializeField]
-    private int minObjectsPerTile = 0, maxObjectsPerTile = 20;
+
+    [SerializeField] private int minObjectsPerTile = 0, maxObjectsPerTile = 20;
     public int MinObjectsPerTile { get { return minObjectsPerTile; } }
     public int MaxObjectsPerTile { get { return maxObjectsPerTile; } }
-    [SerializeField]
-    private float destroyDistance = 1000;
-    [SerializeField]
-    private bool usePerlinNoise = true;
-    [SerializeField]
-    private Texture2D noise;
+
+    [SerializeField] private float destroyDistance = 1000;
+    [SerializeField] private bool usePerlinNoise = true;
+    [SerializeField] private Texture2D noise;
     public static float[][] noisePixels;
 
     private Vector2 startOffset;
+    private WorldParser worldParser = WorldParser.instance;
 
     private Dictionary<Vector2, GameObject> terrainTiles = new Dictionary<Vector2, GameObject>();
 
@@ -70,6 +65,9 @@ public class TerrainController : MonoBehaviour {
 
         Level = new GameObject("Level").transform;
         water.parent = Level;
+        forest.parent = Level;
+        greenLand.parent = Level;
+        mountain.parent = Level;
         playerTransform.parent = Level;
         foreach (Transform t in gameTransforms)
             t.parent = Level;
@@ -77,7 +75,10 @@ public class TerrainController : MonoBehaviour {
         float waterSideLength = radiusToRender * 2 + 1;
         water.localScale = new Vector3(terrainSize.x / 10 * waterSideLength, 1, terrainSize.z / 10 * waterSideLength);
 
+        
         Random.InitState(seed);
+       
+
         //choose a random place on perlin noise
         startOffset = new Vector2(Random.Range(0f, noiseRange.x), Random.Range(0f, noiseRange.y));
         RandomizeInitState();
@@ -132,7 +133,8 @@ public class TerrainController : MonoBehaviour {
     private void ActivateOrCreateTile(int xIndex, int yIndex, List<GameObject> tileObjects) {
         if (!terrainTiles.ContainsKey(new Vector2(xIndex, yIndex))) {
             tileObjects.Add(CreateTile(xIndex, yIndex));
-        } else {
+        }
+        else {
             GameObject t = terrainTiles[new Vector2(xIndex, yIndex)];
             tileObjects.Add(t);
             if (!t.activeSelf)
@@ -150,6 +152,26 @@ public class TerrainController : MonoBehaviour {
         //had to move outside of instantiate because it's a local position
         terrain.transform.localPosition = new Vector3(terrainSize.x * xIndex, terrainSize.y, terrainSize.z * yIndex);
         terrain.name = TrimEnd(terrain.name, "(Clone)") + " [" + xIndex + " , " + yIndex + "]";
+
+
+        float xCoord = (float)xIndex / terrainSize.x * biomeNoiseScale;
+        float yCoord = (float)yIndex / terrainSize.y * biomeNoiseScale;
+
+        float randomValue = Mathf.PerlinNoise(xCoord, yCoord);
+
+        if (randomValue <= .4f) {
+            terrain.tag = "Swamp";
+        } else if (randomValue > .7f && randomValue < .72f) {
+            terrain.tag = "Village";
+        }
+    else {
+            terrain.tag = "Terrain";
+        }
+
+
+        if (terrain.CompareTag("Swamp")) {
+            
+        }
 
         terrainTiles.Add(new Vector2(xIndex, yIndex), terrain);
 
@@ -202,7 +224,10 @@ public class TerrainController : MonoBehaviour {
     }
 
     public void DestroyTerrain() {
+        forest.parent = null;
+        greenLand.parent = null;
         water.parent = null;
+        mountain.parent = null;
         playerTransform.parent = null;
         foreach (Transform t in gameTransforms)
             t.parent = Level;
