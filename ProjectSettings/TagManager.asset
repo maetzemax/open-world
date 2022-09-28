@@ -4,7 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Greenland
+  - Forest
+  - Beach
+  - Mountain
   - Terrain
+  - Swamp
   layers:
   - Default
   - TransparentFX
