@@ -105,7 +105,7 @@ public class MoveForward : MonoBehaviour {
             animator.SetBool("isHarvesting", true);
             print(hit.collider.tag);
             // wait 2sec
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             // add item to inventory
             print(hit.collider.tag);
             animator.SetBool("isHarvesting", false);
