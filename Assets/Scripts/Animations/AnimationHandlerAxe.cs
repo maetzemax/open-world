@@ -8,11 +8,13 @@ public class AnimationHandlerAxe : MonoBehaviour
     private bool isHarvesting;
     private Animator animator;
     private Camera cam;
+    private InventoryManager inventory;
 
 
     private void Start() {
         animator = gameObject.GetComponent<Animator>();
         cam = FindObjectOfType<Camera>();
+        inventory = FindObjectOfType<InventoryManager>();
     }
 
     // Update is called once per frame
@@ -30,10 +32,13 @@ public class AnimationHandlerAxe : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Mitte Bildschirm
         RaycastHit hit; // Hit Informationen
 
-        if (Physics.Raycast(ray, out hit, 5)) {
+        if (Physics.Raycast(ray, out hit, 1) && hit.collider.CompareTag("Ressource")) {
             isHarvesting = true;
+            Harvestable harvestable = hit.collider.gameObject.GetComponentInParent<Harvestable>();
+            print(harvestable.item.name);
+
             yield return new WaitForSeconds(0.5f);
-            print("Item collected" + hit.collider.name);
+            inventory.itemList.Add(harvestable.item);
         }
         else {
             isHarvesting = true;
