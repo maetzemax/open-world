@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public float radius = 3f;
     public Item item;
+
+    private void Start() {
+        Outline outline = gameObject.GetComponent<Outline>();
+        outline.enabled = false;
+    }
 
     public virtual void Interact() {
         print("INTERACT");
-
         Destroy(gameObject);
-    }
-
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawSphere(transform.position, radius);
     }
 }

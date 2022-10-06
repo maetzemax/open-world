@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [Header("Camera")]
@@ -36,12 +37,17 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Inventory")]
     public InventoryManager inventory;
+    public Text pickUp;
+
+    private GameObject currentLookAt;
 
     void Start() {
         if (lockCursor) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+        pickUp.enabled = false;
     }
 
     void Update() {
@@ -70,6 +76,25 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        // let item glow when look at it
+
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
+            currentLookAt = hit.collider.gameObject;
+            Outline outline = currentLookAt.GetComponent<Outline>();
+            outline.enabled = true;
+            pickUp.text = "Pick up " + currentLookAt.GetComponent<Interactable>().item.name;
+            pickUp.enabled = true;
+        } else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
+            Outline outline = currentLookAt.GetComponent<Outline>();
+            outline.enabled = false;
+            pickUp.text = "";
+            pickUp.enabled = false;
+        }
+
+        // Interact with Item
         if (Input.GetKeyDown(KeyCode.F)) {
             Interact();
         }
@@ -97,10 +122,12 @@ public class PlayerController : MonoBehaviour {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 5)) {
+        if (Physics.Raycast(ray, out hit, 3)) {
             Interactable interactable = hit.collider.gameObject.GetComponent<Interactable>();
             inventory.itemList.Add(interactable.item);
             interactable.Interact();
+            pickUp.text = "";
+            pickUp.enabled = false;
         }
     }
 }
