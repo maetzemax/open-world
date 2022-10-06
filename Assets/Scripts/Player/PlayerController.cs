@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
     private int jumpsSinceLastLand = 0;
 
+    [Header("Inventory")]
+    public InventoryManager inventory;
+
     void Start() {
         if (lockCursor) {
             Cursor.lockState = CursorLockMode.Locked;
@@ -67,6 +70,10 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.F)) {
+            Interact();
+        }
+
         controller.Move(velocity * Time.deltaTime);
     }
 
@@ -83,5 +90,17 @@ public class PlayerController : MonoBehaviour {
     private void Land() {
         velocity.y = 0;
         jumpsSinceLastLand = 0;
+    }
+
+    private void Interact() {
+
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 5)) {
+            Interactable interactable = hit.collider.gameObject.GetComponent<Interactable>();
+            inventory.itemList.Add(interactable.item);
+            interactable.Interact();
+        }
     }
 }
