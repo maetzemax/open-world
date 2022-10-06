@@ -1,24 +1,35 @@
-using System;
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace ProceduralToolkit.Editor
 {
-    /// <summary>
-    /// Submenu with constructors for primitives at `GameObject > Procedural Toolkit`
-    /// </summary>
     public class ProceduralToolkitMenu
     {
+        public const string version = "0.1.9";
+
         private const string primitivesPath = "GameObject/Procedural Toolkit/";
         private const string create = "Create ";
 
+        private const int platonicSolids = 0;
         private const string tetrahedron = "Tetrahedron";
+        private const string cube = "Cube";
         private const string octahedron = "Octahedron";
         private const string dodecahedron = "Dodecahedron";
         private const string icosahedron = "Icosahedron";
 
+        private const int other = 20;
+        private const string plane = "Plane";
         private const string pyramid = "Pyramid";
         private const string prism = "Prism";
+        private const string cylinder = "Cylinder";
+        private const string sphere = "Sphere";
+
+        [MenuItem("Help/About Procedural Toolkit")]
+        private static void About()
+        {
+            AboutWindow.Open();
+        }
 
         private static void PrimitiveTemplate(string name, Func<Mesh> mesh)
         {
@@ -31,46 +42,104 @@ namespace ProceduralToolkit.Editor
 
         #region Platonic solids
 
-        [MenuItem(primitivesPath + tetrahedron)]
+        [MenuItem(primitivesPath + tetrahedron, false, platonicSolids + 0)]
         public static void Tetrahedron()
         {
-            PrimitiveTemplate(tetrahedron, () => MeshDraft.Tetrahedron(1).ToMesh());
+            PrimitiveTemplate(tetrahedron, () => MeshE.Tetrahedron(1));
         }
 
-        [MenuItem(primitivesPath + octahedron)]
+        [MenuItem(primitivesPath + cube, false, platonicSolids + 1)]
+        public static void Cube()
+        {
+            PrimitiveTemplate(cube, () => MeshE.Cube(1));
+        }
+
+        [MenuItem(primitivesPath + octahedron, false, platonicSolids + 2)]
         public static void Octahedron()
         {
-            PrimitiveTemplate(octahedron, () => MeshDraft.Octahedron(1).ToMesh());
+            PrimitiveTemplate(octahedron, () => MeshE.Octahedron(1));
         }
 
-        [MenuItem(primitivesPath + dodecahedron)]
+        [MenuItem(primitivesPath + dodecahedron, false, platonicSolids + 3)]
         public static void Dodecahedron()
         {
-            PrimitiveTemplate(dodecahedron, () => MeshDraft.Dodecahedron(1).ToMesh());
+            PrimitiveTemplate(dodecahedron, () => MeshE.Dodecahedron(1));
         }
 
-        [MenuItem(primitivesPath + icosahedron)]
+        [MenuItem(primitivesPath + icosahedron, false, platonicSolids + 4)]
         public static void Icosahedron()
         {
-            PrimitiveTemplate(icosahedron, () => MeshDraft.Icosahedron(1).ToMesh());
+            PrimitiveTemplate(icosahedron, () => MeshE.Icosahedron(1));
         }
 
         #endregion Platonic solids
 
         #region Other
 
-        [MenuItem(primitivesPath + pyramid)]
-        public static void Pyramid()
+        [MenuItem(primitivesPath + plane, false, other + 0)]
+        public static void Plane()
         {
-            PrimitiveTemplate(pyramid, () => MeshDraft.Pyramid(1, 6, 1).ToMesh());
+            PrimitiveTemplate(plane, () => MeshE.Plane(10, 10, 10, 10));
         }
 
-        [MenuItem(primitivesPath + prism)]
+        [MenuItem(primitivesPath + pyramid, false, other + 1)]
+        public static void Pyramid()
+        {
+            PrimitiveTemplate(pyramid, () => MeshE.Pyramid(1, 6, 1));
+        }
+
+        [MenuItem(primitivesPath + prism, false, other + 2)]
         public static void Prism()
         {
-            PrimitiveTemplate(prism, () => MeshDraft.Prism(0.5f, 16, 2).ToMesh());
+            PrimitiveTemplate(prism, () => MeshE.Prism(1, 16, 1));
+        }
+
+        [MenuItem(primitivesPath + cylinder, false, other + 3)]
+        public static void Cylinder()
+        {
+            PrimitiveTemplate(cylinder, () => MeshE.Cylinder(1, 16, 1));
+        }
+
+        [MenuItem(primitivesPath + sphere, false, other + 4)]
+        public static void Sphere()
+        {
+            PrimitiveTemplate(sphere, () => MeshE.Sphere(1, 16, 16));
         }
 
         #endregion Other
+    }
+
+    public class AboutWindow : EditorWindow
+    {
+        public static void Open()
+        {
+            GetWindow<AboutWindow>(true, "About Procedural Toolkit");
+        }
+
+        private void OnGUI()
+        {
+            EditorGUILayout.Space();
+            EditorGUILayout.SelectableLabel("Version: " + ProceduralToolkitMenu.version + "\n" +
+                                            "Copyright © Daniil Basmanov\n" +
+                                            "Icon by Iuliana Koroviakovskaia", GUILayout.Height(50));
+
+            EditorGUILayout.Space();
+            if (GUILayout.Button("Repository"))
+            {
+                Application.OpenURL("https://github.com/Syomus/ProceduralToolkit/");
+            }
+            if (GUILayout.Button("Asset Store"))
+            {
+                Application.OpenURL("https://www.assetstore.unity3d.com/#!/content/16508");
+            }
+            if (GUILayout.Button("Issues"))
+            {
+                Application.OpenURL("https://github.com/Syomus/ProceduralToolkit/issues");
+            }
+            if (GUILayout.Button("Support email"))
+            {
+                Application.OpenURL("mailto:proceduraltoolkit@syomus.com");
+            }
+        }
     }
 }
