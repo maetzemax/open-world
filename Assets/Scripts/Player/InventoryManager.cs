@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Harvestable : MonoBehaviour
-{
-    public Item item;
+public class InventoryManager : MonoBehaviour {
+
+    public List<Item> itemList;
+
 }
