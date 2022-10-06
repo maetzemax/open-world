@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveForward : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
     [Header("Camera")]
     public Camera cam;
     public bool lockCursor;
@@ -34,16 +34,11 @@ public class MoveForward : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
     private int jumpsSinceLastLand = 0;
 
-    private bool isInteracting;
-    private Animator animator;
-
     void Start() {
         if (lockCursor) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-
-        animator = gameObject.GetComponent<Animator>();
     }
 
     void Update() {
@@ -72,10 +67,6 @@ public class MoveForward : MonoBehaviour {
             }
         }
 
-        if (Input.GetMouseButtonDown(1) && !isInteracting) {
-            StartCoroutine(ExampleCoroutine());
-        }
-
         controller.Move(velocity * Time.deltaTime);
     }
 
@@ -92,25 +83,5 @@ public class MoveForward : MonoBehaviour {
     private void Land() {
         velocity.y = 0;
         jumpsSinceLastLand = 0;
-    }
-
-    IEnumerator ExampleCoroutine() {
-
-        isInteracting = true;
-
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 4)) {
-            animator.SetBool("isHarvesting", true);
-            print(hit.collider.tag);
-            // wait 2sec
-            yield return new WaitForSeconds(0.5f);
-            // add item to inventory
-            print(hit.collider.tag);
-            animator.SetBool("isHarvesting", false);
-        }
-
-        isInteracting = false;
     }
 }
