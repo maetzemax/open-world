@@ -35,10 +35,6 @@ public class PlayerController : MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
     private int jumpsSinceLastLand = 0;
 
-    [Header("Inventory")]
-    public InventoryManager inventory;
-    public Text pickUp;
-
     private GameObject currentLookAt;
 
     void Start() {
@@ -46,8 +42,6 @@ public class PlayerController : MonoBehaviour {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-
-        pickUp.enabled = false;
     }
 
     void Update() {
@@ -85,13 +79,13 @@ public class PlayerController : MonoBehaviour {
             currentLookAt = hit.collider.gameObject;
             Outline outline = currentLookAt.GetComponent<Outline>();
             outline.enabled = true;
-            pickUp.text = "Pick up " + currentLookAt.GetComponent<Interactable>().item.name;
-            pickUp.enabled = true;
+            InventoryManager.instance.pickUpText.text = "Pick up " + currentLookAt.GetComponent<Interactable>().item.name;
+            InventoryManager.instance.pickUpText.enabled = true;
         } else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
             Outline outline = currentLookAt.GetComponent<Outline>();
             outline.enabled = false;
-            pickUp.text = "";
-            pickUp.enabled = false;
+            InventoryManager.instance.pickUpText.text = "";
+            InventoryManager.instance.pickUpText.enabled = false;
         }
 
         // Interact with Item
@@ -122,12 +116,9 @@ public class PlayerController : MonoBehaviour {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 3)) {
+        if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
             Interactable interactable = hit.collider.gameObject.GetComponent<Interactable>();
-            inventory.itemList.Add(interactable.item);
             interactable.Interact();
-            pickUp.text = "";
-            pickUp.enabled = false;
         }
     }
 }

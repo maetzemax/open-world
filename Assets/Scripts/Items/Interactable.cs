@@ -12,7 +12,12 @@ public class Interactable : MonoBehaviour
     }
 
     public virtual void Interact() {
-        print("INTERACT");
+
+        InventoryManager.instance.pickUpText.text = "";
+        InventoryManager.instance.pickUpText.enabled = false;
+
+        InventoryManager.instance.itemList.Add(item);
+
         Destroy(gameObject);
     }
 }
