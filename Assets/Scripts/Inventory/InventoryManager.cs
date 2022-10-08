@@ -46,6 +46,9 @@ public class InventoryManager : MonoBehaviour {
 
     public void RemoveItem(Item item) {
         itemList.Remove(item);
+
+        if (onItemChangedCallback != null)
+            onItemChangedCallback.Invoke();
     }
 
 }

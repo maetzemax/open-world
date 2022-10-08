@@ -7,6 +7,8 @@ public class HarvestAnimation : MonoBehaviour {
     public string parameterName;
     public Animator animator;
 
+    GameObject invetoryUI;
+
     private Camera cam;
 
     private bool isHarvesting;
@@ -14,11 +16,14 @@ public class HarvestAnimation : MonoBehaviour {
     private void Start() {
         animator = gameObject.GetComponent<Animator>();
         cam = FindObjectOfType<Camera>();
+        invetoryUI = FindObjectOfType<InventoryUI>().inventoryUI;
     }
 
     void Update() {
-        if (Input.GetMouseButtonDown(0) && !isHarvesting) {
-            Harvest();
+        if (!invetoryUI.activeSelf) {
+            if (Input.GetMouseButtonDown(0) && !isHarvesting) {
+                Harvest();
+            }
         }
 
         animator.SetBool(parameterName, isHarvesting);
