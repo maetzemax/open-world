@@ -16,7 +16,7 @@ public class Interactable : MonoBehaviour
         InventoryManager.instance.pickUpText.text = "";
         InventoryManager.instance.pickUpText.enabled = false;
 
-        InventoryManager.instance.itemList.Add(item);
+        InventoryManager.instance.AddItem(item);
 
         Destroy(gameObject);
     }

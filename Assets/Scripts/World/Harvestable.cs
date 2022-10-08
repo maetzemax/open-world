@@ -8,7 +8,9 @@ public class Harvestable : MonoBehaviour {
 
     public virtual void Harvest() {
 
-        InventoryManager.instance.itemList.Add(drop);
+
+        // TODO: Drop Item on the Ground if Inventory is full
+        InventoryManager.instance.AddItem(drop);
 
         health--;
 
