@@ -6,5 +6,10 @@ using UnityEngine;
 public class Item : ScriptableObject {
     public new string name;
     public int id;
-    public int stackSize;
+    public Sprite icon;
+
+    public virtual void Use() {
+        // USE ITEM
+        // SOMETHING SHOULD HAPPEND
+    }
 }
