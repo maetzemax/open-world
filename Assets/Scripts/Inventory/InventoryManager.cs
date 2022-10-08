@@ -5,7 +5,21 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
 
+    #region Singleton
+
     public static InventoryManager instance;
+
+    void Awake() {
+
+        if (instance != null) {
+            Debug.LogWarning("More than one instance Inventory found");
+            return;
+        }
+
+        instance = this;
+    }
+
+    #endregion
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
@@ -14,8 +28,7 @@ public class InventoryManager : MonoBehaviour {
     public int space = 20;
     public List<Item> itemList;
 
-    void Start() {
-        instance = this;
+    private void Start() {
         pickUpText.enabled = false;
     }
 

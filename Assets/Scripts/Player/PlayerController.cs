@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
     [Header("Camera")]
@@ -36,62 +35,82 @@ public class PlayerController : MonoBehaviour {
     private int jumpsSinceLastLand = 0;
 
     private GameObject currentLookAt;
+    private bool isInvetoryOpen = false;
+
+    InventoryManager inventory = InventoryManager.instance;
 
     void Start() {
-        if (lockCursor) {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        inventory = InventoryManager.instance;
     }
 
     void Update() {
-        transform.Rotate(0, Input.GetAxis("Mouse X") * lookSensitivity, 0);
-        xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
-        xRotation = Mathf.Clamp(xRotation, -maxUpRotation, maxDownRotation);
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
-        velocity.z = Input.GetAxis("Vertical") * walkSpeed;
-        velocity.x = Input.GetAxis("Horizontal") * strafeSpeed;
-        velocity = transform.TransformDirection(velocity);
+        if (Input.GetButtonDown("Inventory")) {
+            isInvetoryOpen = !isInvetoryOpen;
+        }
 
-        if (Input.GetKey(sprintKey)) { Sprint(); }
+        Cursor.visible = isInvetoryOpen;
 
-        // Apply manual gravity
+        if (isInvetoryOpen) {
+            Cursor.lockState = CursorLockMode.None;
+
+            velocity.z = 0;
+            velocity.x = 0;
+
+        } else {
+
+            Cursor.lockState = CursorLockMode.Locked;
+
+            transform.Rotate(0, Input.GetAxis("Mouse X") * lookSensitivity, 0);
+            xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
+            xRotation = Mathf.Clamp(xRotation, -maxUpRotation, maxDownRotation);
+            cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+
+            velocity.z = Input.GetAxis("Vertical") * walkSpeed;
+            velocity.x = Input.GetAxis("Horizontal") * strafeSpeed;
+            velocity = transform.TransformDirection(velocity);
+
+            // Apply manual gravity
+
+            if (Input.GetKey(sprintKey)) { Sprint(); }
+
+            if (Input.GetButtonDown("Jump")) {
+                if (controller.isGrounded) {
+                    Jump();
+                }
+                else if (jumpsSinceLastLand < maxJumps) {
+                    Jump();
+                }
+            }
+
+            // let item glow when look at it
+
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
+                currentLookAt = hit.collider.gameObject;
+                Outline outline = currentLookAt.GetComponent<Outline>();
+                outline.enabled = true;
+                inventory.pickUpText.text = "Pick up " + currentLookAt.GetComponent<Interactable>().item.name;
+                inventory.pickUpText.enabled = true;
+            }
+            else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
+                Outline outline = currentLookAt.GetComponent<Outline>();
+                outline.enabled = false;
+                inventory.pickUpText.text = "";
+                inventory.pickUpText.enabled = false;
+            }
+
+            // Interact with Item
+            if (Input.GetKeyDown(KeyCode.F)) {
+                Interact();
+            }
+        }
+
         velocity.y += Physics.gravity.y * Time.deltaTime;
 
         if (controller.isGrounded && velocity.y < 0) { Land(); }
-
-        if (Input.GetButtonDown("Jump")) {
-            if (controller.isGrounded) {
-                Jump();
-            }
-            else if (jumpsSinceLastLand < maxJumps) {
-                Jump();
-            }
-        }
-
-        // let item glow when look at it
-
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
-            currentLookAt = hit.collider.gameObject;
-            Outline outline = currentLookAt.GetComponent<Outline>();
-            outline.enabled = true;
-            InventoryManager.instance.pickUpText.text = "Pick up " + currentLookAt.GetComponent<Interactable>().item.name;
-            InventoryManager.instance.pickUpText.enabled = true;
-        } else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
-            Outline outline = currentLookAt.GetComponent<Outline>();
-            outline.enabled = false;
-            InventoryManager.instance.pickUpText.text = "";
-            InventoryManager.instance.pickUpText.enabled = false;
-        }
-
-        // Interact with Item
-        if (Input.GetKeyDown(KeyCode.F)) {
-            Interact();
-        }
 
         controller.Move(velocity * Time.deltaTime);
     }

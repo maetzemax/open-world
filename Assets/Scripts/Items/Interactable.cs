@@ -5,18 +5,21 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public Item item;
+    InventoryManager inventory;
 
     private void Start() {
         Outline outline = gameObject.GetComponent<Outline>();
         outline.enabled = false;
+
+        inventory = InventoryManager.instance;
     }
 
     public virtual void Interact() {
 
-        InventoryManager.instance.pickUpText.text = "";
-        InventoryManager.instance.pickUpText.enabled = false;
+        inventory.pickUpText.text = "";
+        inventory.pickUpText.enabled = false;
 
-        InventoryManager.instance.AddItem(item);
+        inventory.AddItem(item);
 
         Destroy(gameObject);
     }
