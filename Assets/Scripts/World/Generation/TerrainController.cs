@@ -101,7 +101,7 @@ public class TerrainController : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 10) && hit.collider.CompareTag("Terrain")) {
                 Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
                 Instantiate(PrefabDatabase.instance.prefabItems.First().prefabGameobject, hit.point, orientation, hit.collider.transform);
-                WorldDataManager.instance.AddWorldObject(new WorldObject(PrefabDatabase.instance.prefabItems.First().prefabID, hit.collider.gameObject.name, hit.point, orientation, false));
+                WorldDataManager.instance.AddWorldObject(new WorldObject(PrefabDatabase.instance.prefabItems.First().prefabID, hit.collider.gameObject.name, hit.point, orientation, false, PrefabDatabase.instance.prefabItems.First().prefabGameobject.GetComponent<Harvestable>().health));
                 WorldDataManager.instance.SaveData();
             }
         }
