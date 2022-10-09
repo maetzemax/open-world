@@ -37,7 +37,12 @@ public class InventoryDataManager : MonoBehaviour {
     }
 
     public void RemoveInventoryObject(InventoryObject inventoryObject) {
-        inventoryObjectDB.inventoryObjects.Remove(inventoryObject);
+        for (int i = 0; i < inventoryObjectDB.inventoryObjects.Count; i++) {
+            if (inventoryObjectDB.inventoryObjects[i].itemGUID == inventoryObject.itemGUID) {
+                inventoryObjectDB.inventoryObjects.RemoveAt(i);
+                print("removed");
+            }
+        }
     }
 
     public void SaveData() {
@@ -68,9 +73,16 @@ public class InventoryDatabase {
 public class InventoryObject {
 
     public int itemID;
+    public string itemGUID;
 
     public InventoryObject(int itemID) {
         this.itemID = itemID;
+        itemGUID = System.Guid.NewGuid().ToString();
+    }
+
+    public InventoryObject(int itemID, string itemGUID) {
+        this.itemID = itemID;
+        this.itemGUID = itemGUID;
     }
 
     public InventoryObject() {

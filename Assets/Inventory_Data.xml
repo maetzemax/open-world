@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<InventoryDatabase xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <inventoryObjects>
+    <InventoryObject>
+      <itemID>2</itemID>
+      <itemGUID>1080f1c9-6905-4274-b7d1-e7cda27f16f1</itemGUID>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>2</itemID>
+      <itemGUID>94f829f9-87a9-4011-999c-6294bbbd7876</itemGUID>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>2</itemID>
+      <itemGUID>5ee14d7f-af3f-4d91-b847-eb4b004ee040</itemGUID>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>2</itemID>
+      <itemGUID>51239f83-da98-4f67-a356-21b0a4f4ccf4</itemGUID>
+    </InventoryObject>
+  </inventoryObjects>
+</InventoryDatabase>

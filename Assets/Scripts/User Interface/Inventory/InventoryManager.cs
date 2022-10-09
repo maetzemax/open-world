@@ -9,8 +9,6 @@ public class InventoryManager : MonoBehaviour {
 
     public static InventoryManager instance;
 
-    public bool isInventoryLoaded = false;
-
     void Awake() {
 
         if (instance != null) {
@@ -28,7 +26,9 @@ public class InventoryManager : MonoBehaviour {
 
     public Text pickUpText;
     public int space = 20;
-    public List<Item> itemList;
+    public List<ItemObject> itemList;
+
+    private bool isInventoryLoaded = false;
 
     private void Start() {
         pickUpText.enabled = false;
@@ -42,33 +42,43 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-    public void AddItem(Item item) {
+    public void AddItem(ItemObject item) {
 
         if (itemList.Count >= space) {
             return;
         }
 
         itemList.Add(item);
-        InventoryDataManager.instance.AddInventoryObject(new InventoryObject(item.id));
-        InventoryDataManager.instance.SaveData();
+
+        for (int i = 0; i < itemList.Count; i++) { 
+            if (itemList[i] == item) {
+                InventoryDataManager.instance.AddInventoryObject(new InventoryObject(item.item.id));
+            }
+        }
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
+
+        InventoryDataManager.instance.SaveData();
     }
 
-    public void RemoveItem(Item item) {
+    public void RemoveItem(ItemObject item) {
+
+
         itemList.Remove(item);
-        InventoryDataManager.instance.RemoveInventoryObject(new InventoryObject(item.id));
-        InventoryDataManager.instance.SaveData();
+        InventoryDataManager.instance.RemoveInventoryObject(item.inventoryObject);
+
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
+
+        InventoryDataManager.instance.SaveData();
     }
 
     void LoadInventory(List<InventoryObject> inventoryObjects) {
         foreach (var item in inventoryObjects) {
 
-            itemList.Add(ItemDatabase.instance.itemList.Find(p => p.id == item.itemID));
+            itemList.Add(new ItemObject(ItemDatabase.instance.itemList.Find(p => p.id == item.itemID), new InventoryObject(item.itemID, item.itemGUID)));
 
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
@@ -77,4 +87,15 @@ public class InventoryManager : MonoBehaviour {
         isInventoryLoaded = true;
     }
 
+}
+
+[System.Serializable]
+public class ItemObject {
+    public Item item;
+    public InventoryObject inventoryObject;
+
+    public ItemObject(Item item, InventoryObject inventoryObject) {
+        this.item = item;
+        this.inventoryObject = inventoryObject;
+    }
 }

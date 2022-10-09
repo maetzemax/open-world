@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Harvestable : MonoBehaviour {
 
-    public Item drop;
+    public ItemObject drop;
     public int health = 5;
 
     public string prefabID;
@@ -24,7 +24,7 @@ public class Harvestable : MonoBehaviour {
 
 
         // TODO: Drop Item on the Ground if Inventory is full
-        inventory.AddItem(drop);
+        
 
         health--;
 
@@ -34,13 +34,13 @@ public class Harvestable : MonoBehaviour {
         List<WorldObject> filteredObjects = worldObjects.FindAll(e => e.terrainID == terrainTile.name);
 
         if (filteredObjects.Count == 0) {
-            // Get all other Elements and save them
-            Harvestable[] tileObjects = gameObject.GetComponentsInParent<Harvestable>();
 
-            foreach (var item in tileObjects) {
-                print("filteredObjects:" + item);
-                saveGameObject(item.gameObject);
-            }
+            GameObject tile = gameObject.GetComponentInParent<PlaceObjects>().gameObject;
+
+            foreach (Transform child in tile.transform)
+                saveGameObject(child.gameObject);
+
+            WorldDataManager.instance.SaveData();
 
         } else {
 
@@ -65,12 +65,13 @@ public class Harvestable : MonoBehaviour {
 
             Destroy(gameObject);
         }
+
+        inventory.AddItem(drop);
     }
 
     private void saveGameObject(GameObject gameObject) {
         Harvestable harvestable = gameObject.GetComponent<Harvestable>();
-        string prefabID = harvestable.prefabID;
         GameObject terrainTile = gameObject.GetComponentInParent<GenerateMesh>().gameObject;
-        WorldDataManager.instance.AddWorldObject(new WorldObject(prefabID, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, false, harvestable.health));
+        WorldDataManager.instance.AddWorldObject(new WorldObject(harvestable.prefabID, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, false, harvestable.health));
     }
 }

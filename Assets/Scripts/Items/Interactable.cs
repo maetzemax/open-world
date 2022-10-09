@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
-{
-    public Item item;
+public class Interactable : MonoBehaviour {
+    public ItemObject item;
     InventoryManager inventory;
 
     private void Start() {

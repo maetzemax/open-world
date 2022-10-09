@@ -6,12 +6,12 @@ public class InventorySlot : MonoBehaviour {
     public Image icon;
     public Button removeButton;
 
-    Item item;
+    ItemObject item;
 
-    public void AddItem(Item newItem) {
+    public void AddItem(ItemObject newItem) {
         item = newItem;
 
-        icon.sprite = item.icon;
+        icon.sprite = item.item.icon;
         icon.enabled = true;
         removeButton.interactable = true;
     }
@@ -30,7 +30,7 @@ public class InventorySlot : MonoBehaviour {
 
     public void UseItem() {
         if (item != null) {
-            item.Use();
+            item.item.Use();
         }
     }
 }
