@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<InventoryDatabase xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <inventoryObjects>
+    <InventoryObject>
+      <itemID>2</itemID>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>2</itemID>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>2</itemID>
+    </InventoryObject>
+  </inventoryObjects>
+</InventoryDatabase>

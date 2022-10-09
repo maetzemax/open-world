@@ -27,7 +27,7 @@ public class Harvestable : MonoBehaviour {
 
             GameObject terrainTile = GetComponentInParent<GenerateMesh>().gameObject;
 
-            List<WorldObject> worldObjects = DataManager.instance.worldObjectDB.worldObjects;
+            List<WorldObject> worldObjects = WorldDataManager.instance.worldObjectDB.worldObjects;
             List<WorldObject> filteredObjects = worldObjects.FindAll(e => e.terrainID == terrainTile.name);
 
             if (filteredObjects.Count == 0) {
@@ -40,11 +40,11 @@ public class Harvestable : MonoBehaviour {
                 }
 
                 // Remove current destroyed one
-                WorldObject worldObject = DataManager.instance.worldObjectDB.worldObjects.Find(p => p.worldPosition == transform.position);
+                WorldObject worldObject = WorldDataManager.instance.worldObjectDB.worldObjects.Find(p => p.worldPosition == transform.position);
                 worldObject.isDestroyed = true;
 
                 // Save
-                DataManager.instance.SaveData();
+                WorldDataManager.instance.SaveData();
 
 
             } else {
@@ -52,11 +52,11 @@ public class Harvestable : MonoBehaviour {
                 print("Updated Database");
 
                 // Remove current
-                WorldObject worldObject = DataManager.instance.worldObjectDB.worldObjects.Find(p => p.worldPosition == transform.position);
+                WorldObject worldObject = WorldDataManager.instance.worldObjectDB.worldObjects.Find(p => p.worldPosition == transform.position);
                 worldObject.isDestroyed = true;
 
                 // Save
-                DataManager.instance.SaveData();
+                WorldDataManager.instance.SaveData();
             }
             
             Destroy(gameObject);
@@ -66,6 +66,6 @@ public class Harvestable : MonoBehaviour {
     private void saveGameObject(GameObject gameObject) {
         string prefabID = gameObject.GetComponent<Harvestable>().prefabID;
         GameObject terrainTile = gameObject.GetComponentInParent<GenerateMesh>().gameObject;
-        DataManager.instance.AddWorldObject(new WorldObject(prefabID, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, false));
+        WorldDataManager.instance.AddWorldObject(new WorldObject(prefabID, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, false));
     }
 }

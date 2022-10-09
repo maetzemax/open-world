@@ -8,11 +8,11 @@ using System.Xml.Serialization;
 using System.IO;
 
 
-public class DataManager : MonoBehaviour {
+public class WorldDataManager : MonoBehaviour {
 
     #region Singleton
 
-    public static DataManager instance;
+    public static WorldDataManager instance;
 
     void Awake() {
 
@@ -53,24 +53,7 @@ public class DataManager : MonoBehaviour {
         FileStream stream = new FileStream(Application.dataPath + "/Stream Files/Game_Data.xml", FileMode.Open);
         worldObjectDB = xmlSerializer.Deserialize(stream) as WorldObjectDatabase;
         stream.Close();
-
-        //StartCoroutine(WaitForWorldRenderer());
     }
-
-    //IEnumerator WaitForWorldRenderer() {
-    //    yield return new WaitForSeconds(1f);
-
-    //    foreach (var item in worldObjectDB.worldObjects) {
-    //        PrefabItem prefabItem = PrefabDatabase.instance.prefabItems.Where(p => p.prefabID == item.prefabID).First();
-
-    //        RaycastHit hit;
-    //        Ray ray = new(item.worldPosition + new Vector3(0, 100, 0), Vector3.down);
-    //        if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
-    //            GameObject go = Instantiate(prefabItem.prefabGameobject, item.worldPosition, item.orientation, hit.transform);
-    //            go.name = prefabItem.prefabID;
-    //        }
-    //    }
-    //}
 }
 
 [System.Serializable]

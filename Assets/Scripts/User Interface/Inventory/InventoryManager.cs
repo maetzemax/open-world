@@ -30,6 +30,14 @@ public class InventoryManager : MonoBehaviour {
 
     private void Start() {
         pickUpText.enabled = false;
+
+        foreach (var item in InventoryDataManager.instance.inventoryObjectDB.inventoryObjects) {
+
+            itemList.Add(ItemDatabase.instance.itemList.Find(p => p.id == item.itemID));
+
+            if (onItemChangedCallback != null)
+                onItemChangedCallback.Invoke();
+        }
     }
 
     public void AddItem(Item item) {
@@ -39,6 +47,8 @@ public class InventoryManager : MonoBehaviour {
         }
 
         itemList.Add(item);
+        InventoryDataManager.instance.AddInventoryObject(new InventoryObject(item.id));
+        InventoryDataManager.instance.SaveData();
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
@@ -46,6 +56,8 @@ public class InventoryManager : MonoBehaviour {
 
     public void RemoveItem(Item item) {
         itemList.Remove(item);
+        InventoryDataManager.instance.RemoveInventoryObject(new InventoryObject(item.id));
+        InventoryDataManager.instance.SaveData();
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();

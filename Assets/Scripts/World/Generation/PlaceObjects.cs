@@ -21,7 +21,7 @@ public class PlaceObjects : MonoBehaviour {
 
     public void Place(string terrainName) {
 
-        List<WorldObject> worldObjects = DataManager.instance.worldObjectDB.worldObjects;
+        List<WorldObject> worldObjects = WorldDataManager.instance.worldObjectDB.worldObjects;
         List<WorldObject> filteredObjects = worldObjects.FindAll(e => e.terrainID == terrainName);
 
         if (filteredObjects.Count == 0) {
