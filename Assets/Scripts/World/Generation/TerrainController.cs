@@ -12,7 +12,7 @@ public class TerrainController : MonoBehaviour {
     void Awake() {
 
         if (instance != null) {
-            Debug.LogWarning("More than one instance Inventory found");
+            Debug.LogWarning("More than one instance TerrainController found");
             return;
         }
 
@@ -100,10 +100,8 @@ public class TerrainController : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, 10) && hit.collider.CompareTag("Terrain")) {
                 Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
-                GameObject go = Instantiate(PrefabDatabase.instance.prefabItems.First().prefabGameobject, hit.point, orientation, hit.collider.transform);
-                DataManager.instance.AddWorldObject(new WorldObject(PrefabDatabase.instance.prefabItems.First().prefabID, hit.collider.gameObject.name, hit.point, go.transform.localPosition, orientation));
-                print(hit.point);
-                print(go.transform.localPosition);
+                Instantiate(PrefabDatabase.instance.prefabItems.First().prefabGameobject, hit.point, orientation, hit.collider.transform);
+                DataManager.instance.AddWorldObject(new WorldObject(PrefabDatabase.instance.prefabItems.First().prefabID, hit.collider.gameObject.name, hit.point, orientation, false));
                 DataManager.instance.SaveData();
             }
         }
@@ -188,7 +186,7 @@ public class TerrainController : MonoBehaviour {
         Random.InitState((int)(seed + (long)xIndex * 100 + yIndex));//so it doesn't form a (noticable) pattern of similar tiles
         PlaceObjects po = gm.GetComponent<PlaceObjects>();
         po.TerrainController = this;
-        po.Place();
+        po.Place(gm.name);
         RandomizeInitState();
 
         return terrain;
