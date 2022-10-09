@@ -24,7 +24,6 @@ public class Harvestable : MonoBehaviour {
 
 
         // TODO: Drop Item on the Ground if Inventory is full
-        
 
         health--;
 
@@ -66,7 +65,7 @@ public class Harvestable : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        inventory.AddItem(drop);
+        inventory.AddItem(new ItemObject(drop.item, new InventoryObject(drop.item.id)));
     }
 
     private void saveGameObject(GameObject gameObject) {

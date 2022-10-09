@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Xml;
-using System.Linq;
 using System.Xml.Serialization;
 using System.IO;
-
 
 public class InventoryDataManager : MonoBehaviour {
 
@@ -40,7 +37,6 @@ public class InventoryDataManager : MonoBehaviour {
         for (int i = 0; i < inventoryObjectDB.inventoryObjects.Count; i++) {
             if (inventoryObjectDB.inventoryObjects[i].itemGUID == inventoryObject.itemGUID) {
                 inventoryObjectDB.inventoryObjects.RemoveAt(i);
-                print("removed");
             }
         }
     }
@@ -54,7 +50,6 @@ public class InventoryDataManager : MonoBehaviour {
 
     void LoadData() {
         if (!File.Exists(Application.dataPath + "/Inventory_Data.xml")) { return; }
-        print(Application.dataPath);
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(InventoryDatabase));
         FileStream stream = new FileStream(Application.dataPath + "/Inventory_Data.xml", FileMode.Open);
         inventoryObjectDB = xmlSerializer.Deserialize(stream) as InventoryDatabase;
@@ -66,7 +61,6 @@ public class InventoryDataManager : MonoBehaviour {
 public class InventoryDatabase {
 
     public List<InventoryObject> inventoryObjects = new List<InventoryObject>();
-
 }
 
 [System.Serializable]
@@ -85,6 +79,5 @@ public class InventoryObject {
         this.itemGUID = itemGUID;
     }
 
-    public InventoryObject() {
-    }
+    public InventoryObject() { }
 }

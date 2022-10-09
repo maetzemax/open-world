@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Xml;
-using System.Linq;
 using System.Xml.Serialization;
 using System.IO;
-
 
 public class WorldDataManager : MonoBehaviour {
 
@@ -17,7 +14,7 @@ public class WorldDataManager : MonoBehaviour {
     void Awake() {
 
         if (instance != null) {
-            Debug.LogWarning("More than one instance DataManager found");
+            Debug.LogWarning("More than one instance WorldDataManager found");
             return;
         }
 
@@ -26,11 +23,11 @@ public class WorldDataManager : MonoBehaviour {
 
     #endregion
 
+    public WorldObjectDatabase worldObjectDB;
+
     void Start() {
         LoadData();
     }
-
-    public WorldObjectDatabase worldObjectDB;
 
     public void AddWorldObject(WorldObject worldObject) {
         worldObjectDB.worldObjects.Add(worldObject);
@@ -60,7 +57,6 @@ public class WorldDataManager : MonoBehaviour {
 public class WorldObjectDatabase {
 
     public List<WorldObject> worldObjects = new List<WorldObject>();
-
 }
 
 [System.Serializable]
@@ -82,6 +78,5 @@ public class WorldObject {
         this.health = health;
     }
 
-    public WorldObject() {
-    }
+    public WorldObject() { }
 }

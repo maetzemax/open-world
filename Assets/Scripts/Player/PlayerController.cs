@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour {
                 currentLookAt = hit.collider.gameObject;
                 Outline outline = currentLookAt.GetComponent<Outline>();
                 outline.enabled = true;
-                inventory.pickUpText.text = "Pick up " + currentLookAt.GetComponent<Interactable>().item.item.name;
+                inventory.pickUpText.text = "Pick up " + currentLookAt.GetComponent<Interactable>().itemObject.item.name;
                 inventory.pickUpText.enabled = true;
             }
             else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {

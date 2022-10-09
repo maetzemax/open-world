@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour {
     void Awake() {
 
         if (instance != null) {
-            Debug.LogWarning("More than one instance Inventory found");
+            Debug.LogWarning("More than one instance InventoryManager found");
             return;
         }
 
@@ -28,8 +28,6 @@ public class InventoryManager : MonoBehaviour {
     public int space = 20;
     public List<ItemObject> itemList;
 
-    private bool isInventoryLoaded = false;
-
     private void Start() {
         pickUpText.enabled = false;
     }
@@ -37,24 +35,19 @@ public class InventoryManager : MonoBehaviour {
     public void Update() {
         List<InventoryObject> inventoryObjects = InventoryDataManager.instance.inventoryObjectDB.inventoryObjects;
 
-        if (inventoryObjects.Count != 0 && !isInventoryLoaded) {
+        if (itemList.Count == 0) {
             LoadInventory(inventoryObjects);
         }
     }
 
-    public void AddItem(ItemObject item) {
+    public void AddItem(ItemObject itemObject) {
 
         if (itemList.Count >= space) {
             return;
         }
 
-        itemList.Add(item);
-
-        for (int i = 0; i < itemList.Count; i++) { 
-            if (itemList[i] == item) {
-                InventoryDataManager.instance.AddInventoryObject(new InventoryObject(item.item.id));
-            }
-        }
+        itemList.Add(itemObject);
+        InventoryDataManager.instance.AddInventoryObject(itemObject.inventoryObject);
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
@@ -62,11 +55,11 @@ public class InventoryManager : MonoBehaviour {
         InventoryDataManager.instance.SaveData();
     }
 
-    public void RemoveItem(ItemObject item) {
+    public void RemoveItem(ItemObject itemObject) {
 
 
-        itemList.Remove(item);
-        InventoryDataManager.instance.RemoveInventoryObject(item.inventoryObject);
+        itemList.Remove(itemObject);
+        InventoryDataManager.instance.RemoveInventoryObject(itemObject.inventoryObject);
 
 
         if (onItemChangedCallback != null)
@@ -76,15 +69,13 @@ public class InventoryManager : MonoBehaviour {
     }
 
     void LoadInventory(List<InventoryObject> inventoryObjects) {
-        foreach (var item in inventoryObjects) {
+        foreach (var itemObject in inventoryObjects) {
 
-            itemList.Add(new ItemObject(ItemDatabase.instance.itemList.Find(p => p.id == item.itemID), new InventoryObject(item.itemID, item.itemGUID)));
+            itemList.Add(new ItemObject(ItemDatabase.instance.itemList.Find(p => p.id == itemObject.itemID), new InventoryObject(itemObject.itemID, itemObject.itemGUID)));
 
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
         }
-
-        isInventoryLoaded = true;
     }
 
 }
