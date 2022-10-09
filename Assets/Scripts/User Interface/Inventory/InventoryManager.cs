@@ -9,6 +9,8 @@ public class InventoryManager : MonoBehaviour {
 
     public static InventoryManager instance;
 
+    public bool isInventoryLoaded = false;
+
     void Awake() {
 
         if (instance != null) {
@@ -30,13 +32,13 @@ public class InventoryManager : MonoBehaviour {
 
     private void Start() {
         pickUpText.enabled = false;
+    }
 
-        foreach (var item in InventoryDataManager.instance.inventoryObjectDB.inventoryObjects) {
+    public void Update() {
+        List<InventoryObject> inventoryObjects = InventoryDataManager.instance.inventoryObjectDB.inventoryObjects;
 
-            itemList.Add(ItemDatabase.instance.itemList.Find(p => p.id == item.itemID));
-
-            if (onItemChangedCallback != null)
-                onItemChangedCallback.Invoke();
+        if (inventoryObjects.Count != 0 && !isInventoryLoaded) {
+            LoadInventory(inventoryObjects);
         }
     }
 
@@ -61,6 +63,18 @@ public class InventoryManager : MonoBehaviour {
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
+    }
+
+    void LoadInventory(List<InventoryObject> inventoryObjects) {
+        foreach (var item in inventoryObjects) {
+
+            itemList.Add(ItemDatabase.instance.itemList.Find(p => p.id == item.itemID));
+
+            if (onItemChangedCallback != null)
+                onItemChangedCallback.Invoke();
+        }
+
+        isInventoryLoaded = true;
     }
 
 }

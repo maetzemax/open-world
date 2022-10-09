@@ -42,15 +42,15 @@ public class WorldDataManager : MonoBehaviour {
 
     public void SaveData() {
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(WorldObjectDatabase));
-        FileStream stream = new FileStream(Application.dataPath + "/Stream Files/Game_Data.xml", FileMode.Create);
+        FileStream stream = new FileStream(Application.dataPath + "/Game_Data.xml", FileMode.Create);
         xmlSerializer.Serialize(stream, worldObjectDB);
         stream.Close();
     }
 
     void LoadData() {
-        if (!File.Exists(Application.dataPath + "/Stream Files/Game_Data.xml")) { return; }
+        if (!File.Exists(Application.dataPath + "/Game_Data.xml")) { return; }
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(WorldObjectDatabase));
-        FileStream stream = new FileStream(Application.dataPath + "/Stream Files/Game_Data.xml", FileMode.Open);
+        FileStream stream = new FileStream(Application.dataPath + "/Game_Data.xml", FileMode.Open);
         worldObjectDB = xmlSerializer.Deserialize(stream) as WorldObjectDatabase;
         stream.Close();
     }

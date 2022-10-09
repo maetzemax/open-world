@@ -42,15 +42,16 @@ public class InventoryDataManager : MonoBehaviour {
 
     public void SaveData() {
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(InventoryDatabase));
-        FileStream stream = new FileStream(Application.dataPath + "/Stream Files/Inventory_Data.xml", FileMode.Create);
+        FileStream stream = new FileStream(Application.dataPath + "/Inventory_Data.xml", FileMode.Create);
         xmlSerializer.Serialize(stream, inventoryObjectDB);
         stream.Close();
     }
 
     void LoadData() {
-        if (!File.Exists(Application.dataPath + "/Stream Files/Inventory_Data.xml")) { return; }
+        if (!File.Exists(Application.dataPath + "/Inventory_Data.xml")) { return; }
+        print(Application.dataPath);
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(InventoryDatabase));
-        FileStream stream = new FileStream(Application.dataPath + "/Stream Files/Inventory_Data.xml", FileMode.Open);
+        FileStream stream = new FileStream(Application.dataPath + "/Inventory_Data.xml", FileMode.Open);
         inventoryObjectDB = xmlSerializer.Deserialize(stream) as InventoryDatabase;
         stream.Close();
     }
