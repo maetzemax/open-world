@@ -6,33 +6,31 @@ public class InventorySlot : MonoBehaviour {
     public Image icon;
     public Button removeButton;
 
-    Item item;
+    ItemObject itemObject;
 
-    public void AddItem(Item newItem) {
-        item = newItem;
+    public void AddItem(ItemObject itemObject) {
+        this.itemObject = itemObject;
 
-        icon.sprite = item.icon;
+        icon.sprite = itemObject.item.icon;
         icon.enabled = true;
         removeButton.interactable = true;
     }
 
     public void ClearSlot() {
-        item = null;
+        itemObject = null;
 
         icon.sprite = null;
         icon.enabled = false;
         removeButton.interactable = false;
-
-        print("clear");
     }
 
     public void OnRemoveButton() {
-        InventoryManager.instance.RemoveItem(item);
+        InventoryManager.instance.RemoveItem(itemObject);
     }
 
     public void UseItem() {
-        if (item != null) {
-            item.Use();
+        if (itemObject != null) {
+            itemObject.item.Use();
         }
     }
 }

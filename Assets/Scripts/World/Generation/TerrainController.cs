@@ -5,6 +5,27 @@ using UnityEngine;
 
 public class TerrainController : MonoBehaviour {
 
+    #region Singleton
+
+    public static TerrainController instance;
+
+    void Awake() {
+
+        if (instance != null) {
+            Debug.LogWarning("More than one instance TerrainController found");
+            return;
+        }
+
+        if (noise)
+            noisePixels = GetGrayScalePixels(noise);
+        GenerateMesh.UsePerlinNoise = usePerlinNoise;
+        noiseRange = usePerlinNoise ? Vector2.one * 256 : new Vector2(noisePixels.Length, noisePixels[0].Length);
+
+        instance = this;
+    }
+
+    #endregion
+
     [SerializeField]
     private GameObject terrainTilePrefab = null;
     [SerializeField]
@@ -17,7 +38,7 @@ public class TerrainController : MonoBehaviour {
     [SerializeField]
     private int radiusToRender = 5;
     [SerializeField]
-    private Transform[] gameTransforms;
+    private List<Transform> gameTransforms;
     [SerializeField]
     private Transform playerTransform;
     [SerializeField]
@@ -25,12 +46,6 @@ public class TerrainController : MonoBehaviour {
     public Transform Water { get { return water; } }
     [SerializeField]
     private int seed;
-    [SerializeField]
-    private GameObject[] placeableObjects;
-    public GameObject[] PlaceableObjects { get { return placeableObjects; } }
-    [SerializeField]
-    private Vector3[] placeableObjectSizes;//the sizes of placeableObjects, in matching order
-    public Vector3[] PlaceableObjectSizes { get { return placeableObjectSizes; } }
     [SerializeField]
     private int minObjectsPerTile = 0, maxObjectsPerTile = 20;
     public int MinObjectsPerTile { get { return minObjectsPerTile; } }
@@ -43,21 +58,17 @@ public class TerrainController : MonoBehaviour {
     private Texture2D noise;
     public static float[][] noisePixels;
 
+    public Camera cam;
+
     private Vector2 startOffset;
 
     private Dictionary<Vector2, GameObject> terrainTiles = new Dictionary<Vector2, GameObject>();
+    public Dictionary<Vector2, GameObject> TerrainTiles { get { return terrainTiles; } }
 
     private Vector2[] previousCenterTiles;
     private List<GameObject> previousTileObjects = new List<GameObject>();
     public Transform Level { get; set; }
     private Vector2 noiseRange;
-
-    private void Awake() {
-        if (noise)
-            noisePixels = GetGrayScalePixels(noise);
-        GenerateMesh.UsePerlinNoise = usePerlinNoise;
-        noiseRange = usePerlinNoise ? Vector2.one * 256 : new Vector2(noisePixels.Length, noisePixels[0].Length);
-    }
 
     private void Start() {
         InitialLoad();
@@ -82,6 +93,19 @@ public class TerrainController : MonoBehaviour {
     }
 
     private void Update() {
+
+        if (Input.GetKeyDown(KeyCode.T)) {
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 10) && hit.collider.CompareTag("Terrain")) {
+                Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
+                Instantiate(PrefabDatabase.instance.prefabItems.First().prefabGameobject, hit.point, orientation, hit.collider.transform);
+                WorldDataManager.instance.AddWorldObject(new WorldObject(PrefabDatabase.instance.prefabItems.First().prefabID, hit.collider.gameObject.name, hit.point, orientation, false, PrefabDatabase.instance.prefabItems.First().prefabGameobject.GetComponent<Harvestable>().health));
+                WorldDataManager.instance.SaveData();
+            }
+        }
+
         //save the tile the player is on
         Vector2 playerTile = TileFromPosition(playerTransform.localPosition);
         //save the tiles of all tracked objects in gameTransforms (including the player)
@@ -162,7 +186,7 @@ public class TerrainController : MonoBehaviour {
         Random.InitState((int)(seed + (long)xIndex * 100 + yIndex));//so it doesn't form a (noticable) pattern of similar tiles
         PlaceObjects po = gm.GetComponent<PlaceObjects>();
         po.TerrainController = this;
-        po.Place();
+        po.Place(gm.name);
         RandomizeInitState();
 
         return terrain;

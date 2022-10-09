@@ -11,5 +11,6 @@ public class Item : ScriptableObject {
     public virtual void Use() {
         // USE ITEM
         // SOMETHING SHOULD HAPPEND
+        Debug.Log("Use item");
     }
 }
