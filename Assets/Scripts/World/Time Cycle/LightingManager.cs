@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class LigthningManager : MonoBehaviour {
+public class LigthingManager : MonoBehaviour {
 
     [SerializeField]
     private Light directionLight;
 
     [SerializeField]
-    private LightningPreset preset;
+    private LightingPreset preset;
 
     [SerializeField, Range(0, 24)]
     private float timeOfDay;
