@@ -27,15 +27,15 @@ public class PlaceObjects : MonoBehaviour {
         if (filteredObjects.Count == 0) {
             int numObjects = Random.Range(TerrainController.MinObjectsPerTile, TerrainController.MaxObjectsPerTile);
             for (int i = 0; i < numObjects; i++) {
-                int prefabType = Random.Range(0, placeableObjects.Count - 1);
+                int prefabType = Random.Range(0, placeableObjects.Count);
                 Vector3 startPoint = RandomPointAboveTerrain();
 
                 RaycastHit hit;
                 if (Physics.Raycast(startPoint, Vector3.down, out hit) && hit.point.y > TerrainController.Water.transform.position.y && hit.collider.CompareTag("Terrain")) {
                     Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
                     RaycastHit boxHit;
-                    if (Physics.BoxCast(startPoint, placeableObjectSizes[0], Vector3.down, out boxHit, orientation) && boxHit.collider.CompareTag("Terrain")) {
-                        PrefabItem prefabItem = PrefabDatabase.instance.prefabItems[0];
+                    if (Physics.BoxCast(startPoint, placeableObjectSizes[prefabType], Vector3.down, out boxHit, orientation) && boxHit.collider.CompareTag("Terrain")) {
+                        PrefabItem prefabItem = PrefabDatabase.instance.prefabItems[prefabType];
                         Vector3 position = new Vector3(startPoint.x, hit.point.y, startPoint.z);
                         Instantiate(prefabItem.prefabGameobject, position, orientation, transform);
                     }
