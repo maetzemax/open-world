@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class LigthingManager : MonoBehaviour {
+public class LightingManager : MonoBehaviour {
 
     [SerializeField]
     private Light directionLight;
