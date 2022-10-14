@@ -7,8 +7,6 @@ public class Harvestable : MonoBehaviour {
     public ItemObject drop;
     public int health = 5;
 
-    public string prefabID;
-
     InventoryManager inventory;
 
     private void Start() {
@@ -69,8 +67,8 @@ public class Harvestable : MonoBehaviour {
     }
 
     private void saveGameObject(GameObject gameObject) {
-        Harvestable harvestable = gameObject.GetComponent<Harvestable>();
+        PrefabIdentifier prefabIdentifier = gameObject.GetComponent<PrefabIdentifier>();
         GameObject terrainTile = gameObject.GetComponentInParent<GenerateMesh>().gameObject;
-        WorldDataManager.instance.AddWorldObject(new WorldObject(harvestable.prefabID, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, false, harvestable.health));
+        WorldDataManager.instance.AddWorldObject(new WorldObject(prefabIdentifier.prefabIdentifier, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, false, health));
     }
 }
