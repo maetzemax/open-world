@@ -90,14 +90,10 @@ public class PlayerController : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
                 currentLookAt = hit.collider.gameObject;
-                Outline outline = currentLookAt.GetComponent<Outline>();
-                outline.enabled = true;
                 inventory.pickUpText.text = "Pick up " + currentLookAt.GetComponent<Interactable>().itemObject.item.name;
                 inventory.pickUpText.enabled = true;
             }
             else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
-                Outline outline = currentLookAt.GetComponent<Outline>();
-                outline.enabled = false;
                 inventory.pickUpText.text = "";
                 inventory.pickUpText.enabled = false;
             }

@@ -7,9 +7,6 @@ public class Interactable : MonoBehaviour {
     InventoryManager inventory;
 
     private void Start() {
-        Outline outline = gameObject.GetComponent<Outline>();
-        outline.enabled = false;
-
         inventory = InventoryManager.instance;
     }
 

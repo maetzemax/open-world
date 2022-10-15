@@ -41,9 +41,19 @@ public class TerrainController : MonoBehaviour {
     private List<Transform> gameTransforms;
     [SerializeField]
     private Transform playerTransform;
+
+
     [SerializeField]
     private Transform water;
     public Transform Water { get { return water; } }
+    [SerializeField]
+    private Transform beach;
+    public Transform Beach { get { return beach; } }
+    [SerializeField]
+    private Transform mountain;
+    public Transform Mountain { get { return mountain; } }
+
+
     [SerializeField]
     private int seed;
     [SerializeField]

@@ -30,6 +30,7 @@ public class LightingManager : MonoBehaviour {
     private void UpdateLightning(float timePercent) {
         RenderSettings.ambientLight = preset.ambientColor.Evaluate(timePercent);
         RenderSettings.fogColor = preset.fogColor.Evaluate(timePercent);
+        RenderSettings.fogEndDistance = 300f;
 
         if (directionLight != null) {
             directionLight.color = preset.directionalColor.Evaluate(timePercent);
