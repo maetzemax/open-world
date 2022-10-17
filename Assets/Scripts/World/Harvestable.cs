@@ -44,7 +44,7 @@ public class Harvestable : MonoBehaviour {
             print("Updated Database");
 
             // Remove current
-            WorldObject worldObject = WorldDataManager.instance.worldObjectDB.worldObjects.Find(p => p.worldPosition == transform.position);
+            WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
             worldObject.health = health;
 
             // Save
@@ -54,7 +54,7 @@ public class Harvestable : MonoBehaviour {
         if (health == 0) {
 
             // Remove current destroyed one
-            WorldObject worldObject = WorldDataManager.instance.worldObjectDB.worldObjects.Find(p => p.worldPosition == transform.position);
+            WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
             worldObject.isDestroyed = true;
 
             // Save
