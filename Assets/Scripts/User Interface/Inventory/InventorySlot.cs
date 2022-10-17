@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour {
+public class InventorySlot : MonoBehaviour, IDropHandler {
 
     public Image icon;
     public Button removeButton;
@@ -25,6 +26,18 @@ public class InventorySlot : MonoBehaviour {
         icon.sprite = null;
         icon.enabled = false;
         removeButton.interactable = false;
+    }
+
+    public void OnDrop(PointerEventData eventData) {
+        Debug.Log("OnDrop11");
+        if (eventData.pointerDrag != null) {
+            //RectTransform rectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
+            //rectTransform.anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            //GetComponent<RectTransform>().anchoredPosition;
+            InventorySlot newItem = eventData.pointerDrag.GetComponentInParent<InventorySlot>();
+            this.AddItem(newItem.itemObject);
+            newItem.ClearSlot();
+        }
     }
 
     public void OnRemoveButton() {
