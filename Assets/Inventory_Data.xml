@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<InventoryDatabase xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <inventoryObjects>
+    <InventoryObject>
+      <itemID>3</itemID>
+      <itemGUID>08776e80-bc21-4714-8a11-314dfdb041c6</itemGUID>
+    </InventoryObject>
+  </inventoryObjects>
+</InventoryDatabase>

@@ -46,8 +46,21 @@ public class InventoryManager : MonoBehaviour {
             return;
         }
 
-        itemList.Add(itemObject);
-        InventoryDataManager.instance.AddInventoryObject(itemObject.inventoryObject);
+        Item copyItem = Instantiate(itemObject.item);
+
+        if (itemObject.item.itemAmount == 1) {
+            itemList.Add(itemObject);
+            InventoryDataManager.instance.AddInventoryObject(itemObject.inventoryObject);
+        }
+
+        foreach (var currentItem in itemList) {
+            if (currentItem.item.name == copyItem.name) {
+                itemObject.item.itemAmount++;
+                break;
+            }
+        }
+
+        print(itemObject.item.itemAmount);
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
@@ -57,10 +70,22 @@ public class InventoryManager : MonoBehaviour {
 
     public void RemoveItem(ItemObject itemObject) {
 
+        Item copyItem = Instantiate(itemObject.item);
 
-        itemList.Remove(itemObject);
-        InventoryDataManager.instance.RemoveInventoryObject(itemObject.inventoryObject);
+        if (itemObject.item.itemAmount == 1) {
+            itemList.Remove(itemObject);
 
+            InventoryDataManager.instance.RemoveInventoryObject(itemObject.inventoryObject);
+        }
+
+        foreach (var currentItem in itemList) {
+            if (currentItem.item.name == copyItem.name) {
+                itemObject.item.itemAmount--;
+                break;
+            }
+        }
+
+        print(itemObject.item.itemAmount);
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
