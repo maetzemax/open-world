@@ -34,9 +34,16 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
             //RectTransform rectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
             //rectTransform.anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
             //GetComponent<RectTransform>().anchoredPosition;
-            InventorySlot newItem = eventData.pointerDrag.GetComponentInParent<InventorySlot>();
-            this.AddItem(newItem.itemObject);
-            newItem.ClearSlot();
+            InventorySlot movedItemSlot = eventData.pointerDrag.GetComponentInParent<InventorySlot>();
+            ItemObject movedItem = eventData.pointerDrag.GetComponentInParent<InventorySlot>().itemObject;
+
+            movedItemSlot.ClearSlot();
+
+            if (itemObject != null) {
+                movedItemSlot.AddItem(itemObject);
+            }
+
+            AddItem(movedItem);
         }
     }
 
