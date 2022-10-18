@@ -3,7 +3,8 @@
   <inventoryObjects>
     <InventoryObject>
       <itemID>3</itemID>
-      <itemGUID>cd17c2ac-2123-42d1-810a-7f95e5f213ef</itemGUID>
+      <itemGUID>0ecdd541-00ea-4623-a873-93f764b8b1e5</itemGUID>
+      <slotId>1</slotId>
     </InventoryObject>
   </inventoryObjects>
 </InventoryDatabase>

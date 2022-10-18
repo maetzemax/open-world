@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -7,6 +8,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     public Image icon;
     public Button removeButton;
     public Text itemAmount;
+    public int slotID;
 
     ItemObject itemObject;
 
@@ -17,6 +19,18 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
         icon.sprite = itemObject.item.icon;
         icon.enabled = true;
         removeButton.interactable = true;
+
+        InventoryDataManager inventoryDM = InventoryDataManager.instance;
+        InventoryManager inventoryManager = InventoryManager.instance;
+        List<InventoryObject> inventoryObjects = inventoryDM.inventoryObjectDB.inventoryObjects;
+        List<ItemObject> inventoryObjectsManager = inventoryManager.itemList;
+
+        InventoryObject currentObjectDM = inventoryObjects.Find(io => io.itemGUID == itemObject.inventoryObject.itemGUID);
+        ItemObject currentObjectManager = inventoryObjectsManager.Find(io => io.inventoryObject.itemGUID == itemObject.inventoryObject.itemGUID);
+        currentObjectDM.slotId = slotID;
+        currentObjectManager.inventoryObject.slotId = slotID;
+
+        inventoryDM.SaveData();
     }
 
     public void ClearSlot() {
@@ -29,11 +43,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     }
 
     public void OnDrop(PointerEventData eventData) {
-        Debug.Log("OnDrop11");
         if (eventData.pointerDrag != null) {
-            //RectTransform rectTransform = eventData.pointerDrag.GetComponent<RectTransform>();
-            //rectTransform.anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-            //GetComponent<RectTransform>().anchoredPosition;
             InventorySlot movedItemSlot = eventData.pointerDrag.GetComponentInParent<InventorySlot>();
             ItemObject movedItem = eventData.pointerDrag.GetComponentInParent<InventorySlot>().itemObject;
 

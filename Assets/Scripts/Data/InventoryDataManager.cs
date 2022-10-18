@@ -68,6 +68,7 @@ public class InventoryObject {
 
     public int itemID;
     public string itemGUID;
+    public int slotId;
 
     public InventoryObject(int itemID) {
         this.itemID = itemID;
@@ -77,6 +78,12 @@ public class InventoryObject {
     public InventoryObject(int itemID, string itemGUID) {
         this.itemID = itemID;
         this.itemGUID = itemGUID;
+    }
+
+    public InventoryObject(int itemID, string itemGUID, int slotId) {
+        this.itemID = itemID;
+        this.itemGUID = itemGUID;
+        this.slotId = slotId;
     }
 
     public InventoryObject() { }

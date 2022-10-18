@@ -28,6 +28,10 @@ public class InventoryManager : MonoBehaviour {
     public int space = 20;
     public List<ItemObject> itemList;
 
+    [SerializeField] GameObject inventory;
+
+    private bool isSlotIDLoaded = false;
+
     private void Start() {
         pickUpText.enabled = false;
     }
@@ -37,6 +41,8 @@ public class InventoryManager : MonoBehaviour {
 
         if (itemList.Count == 0) {
             LoadInventory(inventoryObjects);
+        } else if (inventory.activeSelf && !isSlotIDLoaded) {
+            CheckInventoryPosition();
         }
     }
 
@@ -96,11 +102,34 @@ public class InventoryManager : MonoBehaviour {
     void LoadInventory(List<InventoryObject> inventoryObjects) {
         foreach (var itemObject in inventoryObjects) {
 
-            itemList.Add(new ItemObject(ItemDatabase.instance.itemList.Find(p => p.id == itemObject.itemID), new InventoryObject(itemObject.itemID, itemObject.itemGUID)));
+            itemList.Add(
+                new ItemObject(ItemDatabase.instance.itemList.Find(p => p.id == itemObject.itemID),
+                new InventoryObject(itemObject.itemID, itemObject.itemGUID, itemObject.slotId)
+                ));
 
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
         }
+    }
+
+    void CheckInventoryPosition() {
+        InventorySlot[] inventorySlots = inventory.GetComponentsInChildren<InventorySlot>();
+
+        foreach (var inventorySlot in inventorySlots) {
+            foreach (var itemObjc in itemList) {
+                if (itemObjc.inventoryObject.slotId == inventorySlot.slotID) {
+                    ItemObject inventoryObjc = itemObjc;
+                    int index = itemList.IndexOf(itemObjc);
+                    print("Object Found");
+
+                    inventorySlots[index].ClearSlot();
+                    inventorySlot.AddItem(inventoryObjc);
+                }
+            }
+        }
+
+        isSlotIDLoaded = true;
+
     }
 
 }
