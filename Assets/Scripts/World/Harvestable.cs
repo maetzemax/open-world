@@ -37,6 +37,18 @@ public class Harvestable : MonoBehaviour {
             foreach (Transform child in tile.transform)
                 SaveGameObject(child.gameObject);
 
+            var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
+            int slotID = 1;
+
+            //foreach (var slot in slots) {
+            //    if (slot.itemObject.item == null) {
+            //        slotID = slot.slotID;
+            //        break;
+            //    }
+            //}
+
+            inventory.AddItem(new ItemObject(drop.item, new InventoryObject(drop.item.id, 1, slotID)));
+
             WorldDataManager.instance.SaveData();
 
         } else {
@@ -46,6 +58,20 @@ public class Harvestable : MonoBehaviour {
             // Remove current
             WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
             worldObject.health = health;
+
+            var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
+            int slotID = 1;
+
+            //foreach (var slot in slots) {
+
+            //    if (slot.itemObject.item == null) {
+                    
+            //        slotID = slot.slotID;
+            //        break;
+            //    }
+            //}
+
+            inventory.AddItem(new ItemObject(drop.item, new InventoryObject(drop.item.id, 1, slotID)));
 
             // Save
             WorldDataManager.instance.SaveData();
@@ -63,12 +89,16 @@ public class Harvestable : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        inventory.AddItem(new ItemObject(drop.item, new InventoryObject(drop.item.id, 1)));
+        print("Item added to Inventory");
     }
 
     void SaveGameObject(GameObject gameObject) {
-        print(gameObject.name);
         PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
+
+        if (prefabIdentifier == null) {
+            prefabIdentifier = gameObject.GetComponent<PrefabIdentifier>();
+        }
+
         GameObject terrainTile = gameObject.GetComponentInParent<GenerateMesh>().gameObject;
 
         WorldDataManager.instance.AddWorldObject(new WorldObject(prefabIdentifier.prefabIdentifier, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, health));

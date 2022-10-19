@@ -30,6 +30,8 @@ public class InventoryManager : MonoBehaviour {
 
     [SerializeField] GameObject inventory;
 
+    private bool isInventoryLoaded = false;
+
     private void Start() {
         pickUpText.enabled = false;
     }
@@ -37,7 +39,7 @@ public class InventoryManager : MonoBehaviour {
     public void Update() {
         List<InventoryObject> inventoryObjects = InventoryDataManager.instance.inventoryObjectDB.inventoryObjects;
 
-        if (itemList.Count == 0) {
+        if (itemList.Count == 0 && !isInventoryLoaded) {
             LoadInventory(inventoryObjects);
         }
     }
@@ -48,18 +50,18 @@ public class InventoryManager : MonoBehaviour {
             return;
         }
 
-        ItemObject currentItem = itemList.Find(item => item.inventoryObject.itemGUID == itemObject.inventoryObject.itemGUID);
+        ItemObject currentItem = itemList.Find(item => item.inventoryObject.itemID == itemObject.inventoryObject.itemID);
 
         if (currentItem != null) {
             if (currentItem.inventoryObject.itemAmount == currentItem.item.stackSize) {
-                ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1));
+                ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1, itemObject.inventoryObject.slotId));
                 itemList.Add(newItem);
                 InventoryDataManager.instance.AddInventoryObject(newItem.inventoryObject);
             } else {
                 currentItem.inventoryObject.itemAmount++;
             }
         } else {
-            ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1));
+            ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1, itemObject.inventoryObject.slotId));
             itemList.Add(newItem);
             InventoryDataManager.instance.AddInventoryObject(newItem.inventoryObject);
         }
@@ -88,6 +90,9 @@ public class InventoryManager : MonoBehaviour {
     }
 
     void LoadInventory(List<InventoryObject> inventoryObjects) {
+
+        print("Inventory loaded");
+
         foreach (var itemObject in inventoryObjects) {
 
             var newItem = new ItemObject(ItemDatabase.instance.itemList.Find(p => p.id == itemObject.itemID), itemObject);
@@ -97,29 +102,8 @@ public class InventoryManager : MonoBehaviour {
                 onItemChangedCallback.Invoke();
         }
 
-        foreach (var item in itemList) {
-            print("slot id = " + item.inventoryObject.slotId);
-        }
-
-        CheckInventoryPosition();
+        isInventoryLoaded = true;
     }
-
-    void CheckInventoryPosition() {
-        InventorySlot[] inventorySlots = inventory.GetComponentsInChildren<InventorySlot>();
-
-        foreach (var inventorySlot in inventorySlots) {
-            inventorySlot.ClearSlot();
-
-            foreach (var itemObjc in itemList) {
-                print(itemObjc.inventoryObject.slotId );
-                if (inventorySlot.slotID == itemObjc.inventoryObject.slotId) {                
-                    inventorySlot.AddItem(itemObjc);
-                }
-            }
-        }
-
-    }
-
 }
 
 [System.Serializable]

@@ -2,16 +2,22 @@
 <InventoryDatabase xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <inventoryObjects>
     <InventoryObject>
-      <itemID>3</itemID>
-      <itemGUID>df7ac161-70e0-4c39-ad4b-519798c16012</itemGUID>
+      <itemID>2</itemID>
+      <itemGUID>be9f2697-4f34-4e47-bf6e-20adb275e8e6</itemGUID>
       <slotId>1</slotId>
-      <itemAmount>1</itemAmount>
+      <itemAmount>5</itemAmount>
     </InventoryObject>
     <InventoryObject>
       <itemID>3</itemID>
-      <itemGUID>152c5e8e-8080-46f1-bc36-a8db8d00b056</itemGUID>
-      <slotId>9</slotId>
+      <itemGUID>957d9b07-1f8d-4217-8b99-e46bd0d82f01</itemGUID>
+      <slotId>2</slotId>
       <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>4</itemID>
+      <itemGUID>6eead5d2-00e7-45e1-be55-76a11c774c51</itemGUID>
+      <slotId>3</slotId>
+      <itemAmount>5</itemAmount>
     </InventoryObject>
   </inventoryObjects>
 </InventoryDatabase>

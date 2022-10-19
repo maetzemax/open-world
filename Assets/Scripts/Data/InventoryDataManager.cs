@@ -77,6 +77,13 @@ public class InventoryObject {
         itemGUID = System.Guid.NewGuid().ToString();
     }
 
+    public InventoryObject(int itemID, int itemAmount, int slotID) {
+        this.itemID = itemID;
+        this.itemAmount = itemAmount;
+        itemGUID = System.Guid.NewGuid().ToString();
+        slotId = slotID;
+    }
+
     public InventoryObject(int itemID, string itemGUID, int itemAmount) {
         this.itemID = itemID;
         this.itemGUID = itemGUID;
