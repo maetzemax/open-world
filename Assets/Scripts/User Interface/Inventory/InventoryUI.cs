@@ -26,21 +26,12 @@ public class InventoryUI : MonoBehaviour {
     }
 
     void UpdateUI() {
-        //foreach (var slot in slots) {
-        //    foreach (var item in inventory.itemList) {
-        //        if (item.inventoryObject.slotId == slot.slotID) {
-        //            slot.AddItem(item);
-        //        } else if (slot.itemObject == null) {
-        //            slot.AddItem(item);
-        //        }
-        //    }
-        //}
-
         for (int i = 0; i < slots.Length; i++) {
             if (i < inventory.itemList.Count) {
-                slots[i].AddItem(inventory.itemList[i]);
+                slots[inventory.itemList[i].inventoryObject.slotId - 1].AddItem(inventory.itemList[i]);
             } else {
-                slots[i].ClearSlot();
+                if (!slots[i].isAssigned)
+                    slots[i].ClearSlot();
             }
         }
     }

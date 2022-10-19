@@ -12,10 +12,12 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
 
     public ItemObject itemObject;
 
+    public bool isAssigned = false;
+
     public void AddItem(ItemObject itemObject) {
         this.itemObject = itemObject;
+        isAssigned = true;
 
-        itemObject.inventoryObject.slotId = slotID;
         itemAmount.text = itemObject.inventoryObject.itemAmount.ToString();
         icon.sprite = itemObject.item.icon;
         icon.enabled = true;
@@ -24,6 +26,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
 
     public void ClearSlot() {
         itemObject = null;
+        isAssigned = false;
 
         itemAmount.text = "";
         icon.sprite = null;
