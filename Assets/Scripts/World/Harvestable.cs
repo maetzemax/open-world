@@ -35,7 +35,7 @@ public class Harvestable : MonoBehaviour {
             GameObject tile = gameObject.GetComponentInParent<PlaceObjects>().gameObject;
 
             foreach (Transform child in tile.transform)
-                saveGameObject(child.gameObject);
+                SaveGameObject(child.gameObject);
 
             WorldDataManager.instance.SaveData();
 
@@ -55,7 +55,7 @@ public class Harvestable : MonoBehaviour {
 
             // Remove current destroyed one
             WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
-            worldObject.isDestroyed = true;
+            WorldDataManager.instance.RemoveWorldObject(worldObject);
 
             // Save
             WorldDataManager.instance.SaveData();
@@ -63,12 +63,14 @@ public class Harvestable : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        inventory.AddItem(new ItemObject(drop.item, new InventoryObject(drop.item.id)));
+        inventory.AddItem(new ItemObject(drop.item, new InventoryObject(drop.item.id, 1)));
     }
 
-    private void saveGameObject(GameObject gameObject) {
-        PrefabIdentifier prefabIdentifier = gameObject.GetComponent<PrefabIdentifier>();
+    void SaveGameObject(GameObject gameObject) {
+        print(gameObject.name);
+        PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
         GameObject terrainTile = gameObject.GetComponentInParent<GenerateMesh>().gameObject;
-        WorldDataManager.instance.AddWorldObject(new WorldObject(prefabIdentifier.prefabIdentifier, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, false, health));
+
+        WorldDataManager.instance.AddWorldObject(new WorldObject(prefabIdentifier.prefabIdentifier, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, health));
     }
 }

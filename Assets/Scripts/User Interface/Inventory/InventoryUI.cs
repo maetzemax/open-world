@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryUI : MonoBehaviour
-{
+public class InventoryUI : MonoBehaviour {
     public Transform itemParent;
     public GameObject inventoryUI;
 
@@ -12,8 +11,7 @@ public class InventoryUI : MonoBehaviour
     InventorySlot[] slots;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         inventory = InventoryManager.instance;
         inventory.onItemChangedCallback += UpdateUI;
 
@@ -21,21 +19,22 @@ public class InventoryUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (Input.GetButtonDown("Inventory")) {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
         }
     }
 
     void UpdateUI() {
-
-        for (int i = 0; i < slots.Length; i++) {
-            if (i < inventory.itemList.Count) {
-                slots[i].AddItem(inventory.itemList[i]);
-            } else {
-                slots[i].ClearSlot();
+        foreach (var slot in slots) {
+            foreach (var item in inventory.itemList) {
+                if (item.inventoryObject.slotId == slot.slotID) {
+                    slot.AddItem(item);
+                } else if (slot.itemObject == null) {
+                    slot.AddItem(item);
+                }
             }
+
         }
     }
 }

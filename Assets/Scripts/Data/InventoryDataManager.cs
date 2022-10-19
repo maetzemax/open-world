@@ -69,21 +69,25 @@ public class InventoryObject {
     public int itemID;
     public string itemGUID;
     public int slotId;
+    public int itemAmount;
 
-    public InventoryObject(int itemID) {
+    public InventoryObject(int itemID, int itemAmount) {
         this.itemID = itemID;
+        this.itemAmount = itemAmount;
         itemGUID = System.Guid.NewGuid().ToString();
     }
 
-    public InventoryObject(int itemID, string itemGUID) {
+    public InventoryObject(int itemID, string itemGUID, int itemAmount) {
         this.itemID = itemID;
         this.itemGUID = itemGUID;
+        this.itemAmount = itemAmount;
     }
 
-    public InventoryObject(int itemID, string itemGUID, int slotId) {
+    public InventoryObject(int itemID, string itemGUID, int slotId, int itemAmount) {
         this.itemID = itemID;
         this.itemGUID = itemGUID;
         this.slotId = slotId;
+        this.itemAmount = itemAmount;
     }
 
     public InventoryObject() { }

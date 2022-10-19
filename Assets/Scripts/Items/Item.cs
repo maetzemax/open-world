@@ -8,7 +8,6 @@ public class Item : ScriptableObject {
     public int id;
     public Sprite icon;
 
-    public int itemAmount = 1;
     public int stackSize = 1;
 
     public virtual void Use() {

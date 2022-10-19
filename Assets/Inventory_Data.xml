@@ -3,8 +3,15 @@
   <inventoryObjects>
     <InventoryObject>
       <itemID>3</itemID>
-      <itemGUID>0ecdd541-00ea-4623-a873-93f764b8b1e5</itemGUID>
+      <itemGUID>df7ac161-70e0-4c39-ad4b-519798c16012</itemGUID>
       <slotId>1</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>3</itemID>
+      <itemGUID>152c5e8e-8080-46f1-bc36-a8db8d00b056</itemGUID>
+      <slotId>9</slotId>
+      <itemAmount>1</itemAmount>
     </InventoryObject>
   </inventoryObjects>
 </InventoryDatabase>

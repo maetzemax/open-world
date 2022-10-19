@@ -65,16 +65,14 @@ public class PlaceObjects : MonoBehaviour {
         } else {
             foreach (var item in filteredObjects) {
 
-                if (!item.isDestroyed) {
 
-                    PrefabItem prefabItem = PrefabDatabase.instance.prefabItems.Where(p => p.prefabID == item.prefabID).First();
+                PrefabItem prefabItem = PrefabDatabase.instance.prefabItems.Where(p => p.prefabID == item.prefabID).First();
 
-                    RaycastHit hit;
-                    Ray ray = new(item.worldPosition + new Vector3(0, 100, 0), Vector3.down);
-                    if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
-                        GameObject go = Instantiate(prefabItem.prefabGameobject, item.worldPosition, item.orientation, hit.transform);
-                        go.name = prefabItem.prefabID;
-                    }
+                RaycastHit hit;
+                Ray ray = new(item.worldPosition + new Vector3(0, 100, 0), Vector3.down);
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
+                    GameObject go = Instantiate(prefabItem.prefabGameobject, item.worldPosition, item.orientation, hit.transform);
+                    go.name = prefabItem.prefabID;
                 }
             }
         }

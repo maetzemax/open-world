@@ -30,8 +30,6 @@ public class InventoryManager : MonoBehaviour {
 
     [SerializeField] GameObject inventory;
 
-    private bool isSlotIDLoaded = false;
-
     private void Start() {
         pickUpText.enabled = false;
     }
@@ -41,8 +39,6 @@ public class InventoryManager : MonoBehaviour {
 
         if (itemList.Count == 0) {
             LoadInventory(inventoryObjects);
-        } else if (inventory.activeSelf && !isSlotIDLoaded) {
-            CheckInventoryPosition();
         }
     }
 
@@ -52,21 +48,21 @@ public class InventoryManager : MonoBehaviour {
             return;
         }
 
-        Item copyItem = Instantiate(itemObject.item);
+        ItemObject currentItem = itemList.Find(item => item.inventoryObject.itemGUID == itemObject.inventoryObject.itemGUID);
 
-        if (itemObject.item.itemAmount == 1) {
-            itemList.Add(itemObject);
-            InventoryDataManager.instance.AddInventoryObject(itemObject.inventoryObject);
-        }
-
-        foreach (var currentItem in itemList) {
-            if (currentItem.item.name == copyItem.name) {
-                itemObject.item.itemAmount++;
-                break;
+        if (currentItem != null) {
+            if (currentItem.inventoryObject.itemAmount == currentItem.item.stackSize) {
+                ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1));
+                itemList.Add(newItem);
+                InventoryDataManager.instance.AddInventoryObject(newItem.inventoryObject);
+            } else {
+                currentItem.inventoryObject.itemAmount++;
             }
+        } else {
+            ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1));
+            itemList.Add(newItem);
+            InventoryDataManager.instance.AddInventoryObject(newItem.inventoryObject);
         }
-
-        print(itemObject.item.itemAmount);
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
@@ -76,22 +72,14 @@ public class InventoryManager : MonoBehaviour {
 
     public void RemoveItem(ItemObject itemObject) {
 
-        Item copyItem = Instantiate(itemObject.item);
+        ItemObject currentItem = itemList.Find(item => item.inventoryObject.itemGUID == itemObject.inventoryObject.itemGUID);
 
-        if (itemObject.item.itemAmount == 1) {
+        if (currentItem.inventoryObject.itemAmount == 0) {
             itemList.Remove(itemObject);
-
             InventoryDataManager.instance.RemoveInventoryObject(itemObject.inventoryObject);
+        } else if (currentItem.inventoryObject.itemAmount > 0) {
+            currentItem.inventoryObject.itemAmount--;
         }
-
-        foreach (var currentItem in itemList) {
-            if (currentItem.item.name == copyItem.name) {
-                itemObject.item.itemAmount--;
-                break;
-            }
-        }
-
-        print(itemObject.item.itemAmount);
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
@@ -102,33 +90,33 @@ public class InventoryManager : MonoBehaviour {
     void LoadInventory(List<InventoryObject> inventoryObjects) {
         foreach (var itemObject in inventoryObjects) {
 
-            itemList.Add(
-                new ItemObject(ItemDatabase.instance.itemList.Find(p => p.id == itemObject.itemID),
-                new InventoryObject(itemObject.itemID, itemObject.itemGUID, itemObject.slotId)
-                ));
+            var newItem = new ItemObject(ItemDatabase.instance.itemList.Find(p => p.id == itemObject.itemID), itemObject);
+            itemList.Add(newItem);            
 
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
         }
+
+        foreach (var item in itemList) {
+            print("slot id = " + item.inventoryObject.slotId);
+        }
+
+        CheckInventoryPosition();
     }
 
     void CheckInventoryPosition() {
         InventorySlot[] inventorySlots = inventory.GetComponentsInChildren<InventorySlot>();
 
         foreach (var inventorySlot in inventorySlots) {
-            foreach (var itemObjc in itemList) {
-                if (itemObjc.inventoryObject.slotId == inventorySlot.slotID) {
-                    ItemObject inventoryObjc = itemObjc;
-                    int index = itemList.IndexOf(itemObjc);
-                    print("Object Found");
+            inventorySlot.ClearSlot();
 
-                    inventorySlots[index].ClearSlot();
-                    inventorySlot.AddItem(inventoryObjc);
+            foreach (var itemObjc in itemList) {
+                print(itemObjc.inventoryObject.slotId );
+                if (inventorySlot.slotID == itemObjc.inventoryObject.slotId) {                
+                    inventorySlot.AddItem(itemObjc);
                 }
             }
         }
-
-        isSlotIDLoaded = true;
 
     }
 

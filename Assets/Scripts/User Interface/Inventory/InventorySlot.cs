@@ -10,27 +10,16 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     public Text itemAmount;
     public int slotID;
 
-    ItemObject itemObject;
+    public ItemObject itemObject;
 
     public void AddItem(ItemObject itemObject) {
         this.itemObject = itemObject;
 
-        itemAmount.text = itemObject.item.itemAmount.ToString();
+        itemObject.inventoryObject.slotId = slotID;
+        itemAmount.text = itemObject.inventoryObject.itemAmount.ToString();
         icon.sprite = itemObject.item.icon;
         icon.enabled = true;
         removeButton.interactable = true;
-
-        InventoryDataManager inventoryDM = InventoryDataManager.instance;
-        InventoryManager inventoryManager = InventoryManager.instance;
-        List<InventoryObject> inventoryObjects = inventoryDM.inventoryObjectDB.inventoryObjects;
-        List<ItemObject> inventoryObjectsManager = inventoryManager.itemList;
-
-        InventoryObject currentObjectDM = inventoryObjects.Find(io => io.itemGUID == itemObject.inventoryObject.itemGUID);
-        ItemObject currentObjectManager = inventoryObjectsManager.Find(io => io.inventoryObject.itemGUID == itemObject.inventoryObject.itemGUID);
-        currentObjectDM.slotId = slotID;
-        currentObjectManager.inventoryObject.slotId = slotID;
-
-        inventoryDM.SaveData();
     }
 
     public void ClearSlot() {
@@ -53,7 +42,10 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
                 movedItemSlot.AddItem(itemObject);
             }
 
+            movedItem.inventoryObject.slotId = slotID;
+
             AddItem(movedItem);
+            InventoryDataManager.instance.SaveData();
         }
     }
 

@@ -66,15 +66,13 @@ public class WorldObject {
     public string terrainID;
     public Vector3 worldPosition;
     public Quaternion orientation;
-    public bool isDestroyed;
     public int health;
 
-    public WorldObject(string prefabID, string terrainID, Vector3 worldPosition, Quaternion orientation, bool isDestroyed, int health) {
+    public WorldObject(string prefabID, string terrainID, Vector3 worldPosition, Quaternion orientation, int health) {
         this.prefabID = prefabID;
         this.terrainID = terrainID;
         this.worldPosition = worldPosition;
         this.orientation = orientation;
-        this.isDestroyed = isDestroyed;
         this.health = health;
     }
 
