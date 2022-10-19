@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,14 +39,19 @@ public class Harvestable : MonoBehaviour {
                 SaveGameObject(child.gameObject);
 
             var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
+
+            Array.Sort(slots, delegate (InventorySlot slot1, InventorySlot slot2) {
+                return slot1.slotID.CompareTo(slot2.slotID);
+            });
+
             int slotID = 1;
 
-            //foreach (var slot in slots) {
-            //    if (slot.itemObject.item == null) {
-            //        slotID = slot.slotID;
-            //        break;
-            //    }
-            //}
+            foreach (var slot in slots) {
+                if (!slot.isAssigned && slot.slotID != 0) {
+                    slotID = slot.slotID;
+                    break;
+                }
+            }
 
             inventory.AddItem(new ItemObject(drop.item, new InventoryObject(drop.item.id, 1, slotID)));
 
@@ -53,23 +59,24 @@ public class Harvestable : MonoBehaviour {
 
         } else {
 
-            print("Updated Database");
-
             // Remove current
             WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
             worldObject.health = health;
 
             var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
+
+            Array.Sort(slots, delegate (InventorySlot slot1, InventorySlot slot2) {
+                return slot1.slotID.CompareTo(slot2.slotID);
+            });
+
             int slotID = 1;
 
-            //foreach (var slot in slots) {
-
-            //    if (slot.itemObject.item == null) {
-                    
-            //        slotID = slot.slotID;
-            //        break;
-            //    }
-            //}
+            foreach (var slot in slots) {
+                if (!slot.isAssigned && slot.slotID != 0) {
+                    slotID = slot.slotID;
+                    break;
+                }
+            }
 
             inventory.AddItem(new ItemObject(drop.item, new InventoryObject(drop.item.id, 1, slotID)));
 
@@ -88,8 +95,6 @@ public class Harvestable : MonoBehaviour {
 
             Destroy(gameObject);
         }
-
-        print("Item added to Inventory");
     }
 
     void SaveGameObject(GameObject gameObject) {

@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,17 +36,15 @@ public class Interactable : MonoBehaviour {
 
                 Harvestable harvestable = child.gameObject.GetComponent<Harvestable>();
                 if (harvestable != null) {
-                    saveGameObject(child.gameObject, tile.name, harvestable.health);
+                    SaveGameObject(child.gameObject, tile.name, harvestable.health);
                 } else if (harvestable == null) {
-                    saveGameObject(child.gameObject, tile.name, health);
+                    SaveGameObject(child.gameObject, tile.name, health);
                 }
             }
 
             worldDataManager.SaveData();
 
         } else {
-
-            print("Updated Database");
 
             // Remove current
             WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
@@ -57,23 +56,26 @@ public class Interactable : MonoBehaviour {
         }
 
         var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
+
+        Array.Sort(slots, delegate (InventorySlot slot1, InventorySlot slot2) {
+            return slot1.slotID.CompareTo(slot2.slotID);
+        });
+
         int slotID = 1;
 
         foreach (var slot in slots) {
-            //if (slot.itemObject.item == null) {
-            //    slotID = slot.slotID;
-            //    break;
-            //}
+            if (!slot.isAssigned && slot.slotID != 0) {
+                slotID = slot.slotID;
+                break;
+            }
         }
 
         var newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1, slotID));
 
         inventory.AddItem(newItem);
-
-        print("Item added to Inventory to slot: " + newItem.inventoryObject.slotId);
     }
 
-    private void saveGameObject(GameObject gameObject, string tileName, int health) {
+    private void SaveGameObject(GameObject gameObject, string tileName, int health) {
         PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
         WorldObject worldObject = new(prefabIdentifier.prefabIdentifier, tileName, gameObject.transform.position, gameObject.transform.rotation, health);
         worldDataManager.AddWorldObject(worldObject);

@@ -30,10 +30,13 @@ public class InventoryManager : MonoBehaviour {
 
     [SerializeField] GameObject inventory;
 
+    private InventoryDataManager inventoryDataManager;
+
     private bool isInventoryLoaded = false;
 
     private void Start() {
         pickUpText.enabled = false;
+        inventoryDataManager = InventoryDataManager.instance;
     }
 
     public void Update() {
@@ -50,53 +53,51 @@ public class InventoryManager : MonoBehaviour {
             return;
         }
 
-        ItemObject currentItem = itemList.Find(item => item.inventoryObject.itemID == itemObject.inventoryObject.itemID);
+        var currentItems = itemList.FindAll(item => item.inventoryObject.itemID == itemObject.inventoryObject.itemID && item.inventoryObject.itemAmount < item.item.stackSize);
 
-        if (currentItem != null) {
-            if (currentItem.inventoryObject.itemAmount == currentItem.item.stackSize) {
-                ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1, itemObject.inventoryObject.slotId));
-                itemList.Add(newItem);
-                InventoryDataManager.instance.AddInventoryObject(newItem.inventoryObject);
-            } else {
-                currentItem.inventoryObject.itemAmount++;
-            }
+        if (currentItems.Count > 0) {
+            currentItems[0].inventoryObject.itemAmount++;
         } else {
             ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1, itemObject.inventoryObject.slotId));
             itemList.Add(newItem);
-            InventoryDataManager.instance.AddInventoryObject(newItem.inventoryObject);
+            inventoryDataManager.AddInventoryObject(newItem.inventoryObject);
         }
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
 
-        InventoryDataManager.instance.SaveData();
+        inventoryDataManager.SaveData();
     }
 
     public void RemoveItem(ItemObject itemObject) {
 
-        ItemObject currentItem = itemList.Find(item => item.inventoryObject.itemGUID == itemObject.inventoryObject.itemGUID);
 
-        if (currentItem.inventoryObject.itemAmount == 0) {
+        itemObject.inventoryObject.itemAmount--;
+
+        if (itemObject.inventoryObject.itemAmount == 0) {
             itemList.Remove(itemObject);
-            InventoryDataManager.instance.RemoveInventoryObject(itemObject.inventoryObject);
-        } else if (currentItem.inventoryObject.itemAmount > 0) {
-            currentItem.inventoryObject.itemAmount--;
+            inventoryDataManager.RemoveInventoryObject(itemObject.inventoryObject);
+
+            var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
+            foreach (var slot in slots) {
+                if (slot.slotID == itemObject.inventoryObject.slotId) {
+                    slot.ClearSlot();
+                }
+            }
         }
 
         if (onItemChangedCallback != null)
             onItemChangedCallback.Invoke();
 
-        InventoryDataManager.instance.SaveData();
+        inventoryDataManager.SaveData();
     }
 
     void LoadInventory(List<InventoryObject> inventoryObjects) {
 
-        print("Inventory loaded");
-
         foreach (var itemObject in inventoryObjects) {
 
             var newItem = new ItemObject(ItemDatabase.instance.itemList.Find(p => p.id == itemObject.itemID), itemObject);
-            itemList.Add(newItem);            
+            itemList.Add(newItem);
 
             if (onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();

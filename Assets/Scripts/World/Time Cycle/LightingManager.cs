@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,7 +48,6 @@ public class LightingManager : MonoBehaviour {
         } else {
             Light[] lights = GameObject.FindObjectsOfType<Light>();
             foreach (Light light in lights) {
-                print("Light found");
                 directionLight = light;
                 return;
             }

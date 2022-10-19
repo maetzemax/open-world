@@ -22,11 +22,11 @@ public class PlayerController : MonoBehaviour {
     // Speed of sideways (left and right) movement
     [Range(0.5f, 15)] public float strafeSpeed;
 
-    public KeyCode sprintKey;
+    public KeyCode sKey;
 
     // How many times faster movement along the X and Z axes
-    // is when sprinting
-    [Range(1, 3)] public float sprintFactor;
+    // is when sing
+    [Range(1, 3)] public float sFactor;
 
     [Range(0.5f, 10)] public float jumpHeight;
     public int maxJumps;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 
             // Apply manual gravity
 
-            if (Input.GetKey(sprintKey)) { Sprint(); }
+            if (Input.GetKey(sKey)) { S(); }
 
             if (Input.GetButtonDown("Jump")) {
                 if (controller.isGrounded) {
@@ -111,9 +111,9 @@ public class PlayerController : MonoBehaviour {
         controller.Move(velocity * Time.deltaTime);
     }
 
-    private void Sprint() {
-        velocity.z *= sprintFactor;
-        velocity.x *= sprintFactor;
+    private void S() {
+        velocity.z *= sFactor;
+        velocity.x *= sFactor;
     }
 
     private void Jump() {
