@@ -2,12 +2,14 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
+using TMPro;
 
 public class InventorySlot : MonoBehaviour, IDropHandler {
 
     public Image icon;
     public Button removeButton;
-    public Text itemAmount;
+    public TextMeshProUGUI itemAmount;
     public int slotID;
 
     public ItemObject itemObject;
@@ -15,6 +17,19 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     public bool isAssigned = false;
 
     public void AddItem(ItemObject itemObject) {
+
+        var slots = Resources.FindObjectsOfTypeAll<HotbarSlot>();
+
+        Array.Sort(slots, delegate (HotbarSlot slot1, HotbarSlot slot2) {
+            return slot1.identifier.CompareTo(slot2.identifier);
+        });
+
+        foreach (var slot in slots) {
+            if (slot.identifier == slotID) {
+                slot.AddItem(itemObject);
+            }
+        }
+
         this.itemObject = itemObject;
         isAssigned = true;
 
@@ -25,6 +40,19 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     }
 
     public void ClearSlot() {
+
+        var slots = Resources.FindObjectsOfTypeAll<HotbarSlot>();
+
+        Array.Sort(slots, delegate (HotbarSlot slot1, HotbarSlot slot2) {
+            return slot1.identifier.CompareTo(slot2.identifier);
+        });
+
+        foreach (var slot in slots) {
+            if (slot.identifier == slotID) {
+                slot.ClearSlot();
+            }
+        }
+
         itemObject = null;
         isAssigned = false;
 

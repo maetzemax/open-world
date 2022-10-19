@@ -14,6 +14,13 @@ public class LightingManager : MonoBehaviour {
     [SerializeField, Range(0, 24)]
     private float timeOfDay;
 
+    private void Start() {
+        if (PlayerPrefs.HasKey("daytime"))
+            timeOfDay = PlayerPrefs.GetFloat("dayTime", timeOfDay);
+        else
+            timeOfDay = 9;
+    }
+
     private void Update() {
         if (preset == null)
             return;
@@ -36,6 +43,9 @@ public class LightingManager : MonoBehaviour {
             directionLight.color = preset.directionalColor.Evaluate(timePercent);
             directionLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0));
         }
+
+        PlayerPrefs.SetFloat("dayTime", timeOfDay);
+        PlayerPrefs.Save();
 
     }
 

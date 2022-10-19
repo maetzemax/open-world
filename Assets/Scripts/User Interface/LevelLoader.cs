@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
 
 public class LevelLoader : MonoBehaviour {
 
@@ -27,5 +28,14 @@ public class LevelLoader : MonoBehaviour {
 
             yield return null;
         }
+    }
+
+    public void RestAllData() {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        File.Delete(Application.dataPath + "/Inventory_Data.xml");
+        File.Delete(Application.dataPath + "/World_Data.xml");
+
     }
 }

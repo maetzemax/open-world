@@ -53,8 +53,6 @@ public class TerrainController : MonoBehaviour {
     private Transform mountain;
     public Transform Mountain { get { return mountain; } }
 
-
-    [SerializeField]
     private int seed;
     [SerializeField]
     private int minObjectsPerTile = 0, maxObjectsPerTile = 20;
@@ -81,6 +79,19 @@ public class TerrainController : MonoBehaviour {
     private Vector2 noiseRange;
 
     private void Start() {
+
+        if (PlayerPrefs.HasKey("seed")) {
+            seed = PlayerPrefs.GetInt("seed");
+            Random.InitState(seed);
+            print("loaded seed: " + seed);
+        } else {
+            seed = Random.Range(1, 10000);
+            Random.InitState(seed);
+            PlayerPrefs.SetInt("seed", seed);
+            PlayerPrefs.Save();
+            print("generated seed: " + seed);
+        }
+
         InitialLoad();
     }
 
@@ -95,8 +106,7 @@ public class TerrainController : MonoBehaviour {
 
         float waterSideLength = radiusToRender * 4 + 1;
         water.localScale = new Vector3(terrainSize.x / 10 * waterSideLength, 1, terrainSize.z / 10 * waterSideLength);
-
-        Random.InitState(seed);
+        
         //choose a random place on perlin noise
         startOffset = new Vector2(Random.Range(0f, noiseRange.x), Random.Range(0f, noiseRange.y));
         RandomizeInitState();

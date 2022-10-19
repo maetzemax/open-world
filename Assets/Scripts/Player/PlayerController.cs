@@ -37,10 +37,23 @@ public class PlayerController : MonoBehaviour {
     private GameObject currentLookAt;
     private bool isInvetoryOpen = false;
 
-    InventoryManager inventory = InventoryManager.instance;
+    InventoryManager inventory;
 
-    void Start() {
+    private void Start() {
         inventory = InventoryManager.instance;
+    }
+
+    void Awake() {
+        if (PlayerPrefs.HasKey("y")) {
+            var playerRotation = Quaternion.Euler(0, PlayerPrefs.GetFloat("y_rotation"), 0);
+            var playerPosition = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"), PlayerPrefs.GetFloat("z"));
+            gameObject.transform.rotation = playerRotation;
+            gameObject.transform.position = playerPosition;
+
+            var camRotation = Quaternion.Euler(PlayerPrefs.GetFloat("x_rotation"), 0, 0);
+            cam.transform.rotation = camRotation;
+            xRotation = PlayerPrefs.GetFloat("x_rotation");
+        }
     }
 
     void Update() {
@@ -77,8 +90,7 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButtonDown("Jump")) {
                 if (controller.isGrounded) {
                     Jump();
-                }
-                else if (jumpsSinceLastLand < maxJumps) {
+                } else if (jumpsSinceLastLand < maxJumps) {
                     Jump();
                 }
             }
@@ -92,8 +104,7 @@ public class PlayerController : MonoBehaviour {
                 currentLookAt = hit.collider.gameObject;
                 inventory.pickUpText.text = "Pick up " + currentLookAt.GetComponent<Interactable>().itemObject.item.name;
                 inventory.pickUpText.enabled = true;
-            }
-            else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
+            } else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
                 inventory.pickUpText.text = "";
                 inventory.pickUpText.enabled = false;
             }
@@ -107,6 +118,14 @@ public class PlayerController : MonoBehaviour {
         velocity.y += Physics.gravity.y * Time.deltaTime;
 
         if (controller.isGrounded && velocity.y < 0) { Land(); }
+
+        PlayerPrefs.SetFloat("y_rotation", gameObject.transform.rotation.eulerAngles.y);
+        PlayerPrefs.SetFloat("x_rotation", cam.transform.rotation.eulerAngles.x);
+        PlayerPrefs.SetFloat("x", gameObject.transform.position.x);
+        PlayerPrefs.SetFloat("y", gameObject.transform.position.y);
+        PlayerPrefs.SetFloat("z", gameObject.transform.position.z);
+
+        PlayerPrefs.Save();
 
         controller.Move(velocity * Time.deltaTime);
     }
