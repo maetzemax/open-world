@@ -15,10 +15,10 @@ public class LightingManager : MonoBehaviour {
     private float timeOfDay;
 
     private void Start() {
-        if (PlayerPrefs.HasKey("daytime"))
+        if (PlayerPrefs.HasKey("dayTime"))
             timeOfDay = PlayerPrefs.GetFloat("dayTime", timeOfDay);
         else
-            timeOfDay = 9;
+            timeOfDay = 5;
     }
 
     private void Update() {
@@ -26,13 +26,21 @@ public class LightingManager : MonoBehaviour {
             return;
 
         if (Application.isPlaying) {
-            timeOfDay += Time.deltaTime * 0.1f;
+
+            if (timeOfDay < 5 || timeOfDay > 19) {
+                timeOfDay += Time.deltaTime * 0.33f;
+            } else {
+                timeOfDay += Time.deltaTime * 0.075f;
+            }
+
             timeOfDay %= 24;
             UpdateLightning(timeOfDay / 24f);
         } else {
             UpdateLightning(timeOfDay / 24f);
         }
     }
+
+    // 19-5
 
     private void UpdateLightning(float timePercent) {
         RenderSettings.ambientLight = preset.ambientColor.Evaluate(timePercent);

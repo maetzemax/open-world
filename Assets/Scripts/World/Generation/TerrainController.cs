@@ -83,13 +83,11 @@ public class TerrainController : MonoBehaviour {
         if (PlayerPrefs.HasKey("seed")) {
             seed = PlayerPrefs.GetInt("seed");
             Random.InitState(seed);
-            print("loaded seed: " + seed);
         } else {
             seed = Random.Range(1, 10000);
             Random.InitState(seed);
             PlayerPrefs.SetInt("seed", seed);
             PlayerPrefs.Save();
-            print("generated seed: " + seed);
         }
 
         InitialLoad();

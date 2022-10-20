@@ -15,14 +15,14 @@ public class CraftingUI : MonoBehaviour {
 
     private void Start() {
 
-        for (int i = 0; i < craftingRecipes.Count; i++) {
+        for (int i = 0; i < craftingRecipes.FindAll(cr => !cr.needCraftingBench).Count; i++) {
             Instantiate(craftingPanel, gameObject.transform);
         }
         
         panels = gameObject.GetComponentsInChildren<CraftingPanel>();
 
         for (int i = 0; i < panels.Length; i++) {
-            panels[i].AddRecipe(CraftingRecipes.instance.craftingRecipes[i]);
+            panels[i].AddRecipe(CraftingRecipes.instance.craftingRecipes.FindAll(cr => !cr.needCraftingBench)[i]);
         }
     }
 }

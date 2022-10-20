@@ -56,9 +56,19 @@ public class InventoryManager : MonoBehaviour {
         var currentItems = itemList.FindAll(item => item.inventoryObject.itemID == itemObject.inventoryObject.itemID && item.inventoryObject.itemAmount < item.item.stackSize);
 
         if (currentItems.Count > 0) {
-            currentItems[0].inventoryObject.itemAmount++;
+            var item = ItemDatabase.instance.itemList.Find(it => it.id == currentItems[0].inventoryObject.itemID);
+            if (currentItems[0].inventoryObject.itemAmount + itemObject.inventoryObject.itemAmount <= item.stackSize) {
+                currentItems[0].inventoryObject.itemAmount += itemObject.inventoryObject.itemAmount;
+            } else {
+                var extraAmount = currentItems[0].inventoryObject.itemAmount + itemObject.inventoryObject.itemAmount - item.stackSize;
+                currentItems[0].inventoryObject.itemAmount = item.stackSize;
+                ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, extraAmount, itemObject.inventoryObject.slotId));
+                itemList.Add(newItem);
+                inventoryDataManager.AddInventoryObject(newItem.inventoryObject);
+            }
+            
         } else {
-            ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1, itemObject.inventoryObject.slotId));
+            ItemObject newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, itemObject.inventoryObject.itemAmount, itemObject.inventoryObject.slotId));
             itemList.Add(newItem);
             inventoryDataManager.AddInventoryObject(newItem.inventoryObject);
         }
@@ -71,10 +81,9 @@ public class InventoryManager : MonoBehaviour {
 
     public void RemoveItem(ItemObject itemObject, int amount) {
 
-
         itemObject.inventoryObject.itemAmount -= amount;
 
-        if (itemObject.inventoryObject.itemAmount == 0) {
+        if (itemObject.inventoryObject.itemAmount <= 0) {
             itemList.Remove(itemObject);
             inventoryDataManager.RemoveInventoryObject(itemObject.inventoryObject);
 

@@ -82,16 +82,15 @@ public class CraftingPanel : MonoBehaviour {
             return;
 
         for (int x = 0; x < filteredSlots.Count; x++) {
-            if (ingredientAmount <= 0) {
-                break;
-            }
-
             if (ingredientAmount < filteredSlots[x].itemObject.inventoryObject.itemAmount) {
-                slots[x].itemObject.inventoryObject.itemAmount -= ingredientAmount;
                 inventory.RemoveItem(filteredSlots[x].itemObject, ingredientAmount);
             } else if (ingredientAmount >= filteredSlots[x].itemObject.inventoryObject.itemAmount) {
                 ingredientAmount -= filteredSlots[x].itemObject.inventoryObject.itemAmount;
                 inventory.RemoveItem(filteredSlots[x].itemObject, filteredSlots[x].itemObject.inventoryObject.itemAmount);
+            }
+
+            if (ingredientAmount <= 0) {
+                break;
             }
         }
 
@@ -111,7 +110,7 @@ public class CraftingPanel : MonoBehaviour {
                 }
             }
 
-            inventory.AddItem(new ItemObject(itemDatabase.itemList.Find(item => item.id == craftingRecipe.resultItemID), new InventoryObject(craftingRecipe.resultItemID, 1, slotID)));
+            inventory.AddItem(new ItemObject(itemDatabase.itemList.Find(item => item.id == craftingRecipe.resultItemID), new InventoryObject(craftingRecipe.resultItemID, craftingRecipe.resultAmount, slotID)));
 
             WorldDataManager.instance.SaveData();
         }
