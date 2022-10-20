@@ -69,10 +69,10 @@ public class InventoryManager : MonoBehaviour {
         inventoryDataManager.SaveData();
     }
 
-    public void RemoveItem(ItemObject itemObject) {
+    public void RemoveItem(ItemObject itemObject, int amount) {
 
 
-        itemObject.inventoryObject.itemAmount--;
+        itemObject.inventoryObject.itemAmount -= amount;
 
         if (itemObject.inventoryObject.itemAmount == 0) {
             itemList.Remove(itemObject);

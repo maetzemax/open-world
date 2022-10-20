@@ -81,7 +81,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     }
 
     public void OnRemoveButton() {
-        InventoryManager.instance.RemoveItem(itemObject);
+        InventoryManager.instance.RemoveItem(itemObject, 1);
     }
 
     public void UseItem() {
