@@ -39,10 +39,6 @@ public class PlayerController : MonoBehaviour {
 
     InventoryManager inventory;
 
-    public GameObject pickAxe;
-    public GameObject torch;
-    private bool isTorchActive = false;
-
     private void Start() {
         inventory = InventoryManager.instance;
     }
@@ -88,14 +84,6 @@ public class PlayerController : MonoBehaviour {
             velocity = transform.TransformDirection(velocity);
 
             // Apply manual gravity
-            if (isTorchActive) {
-                torch.SetActive(true);
-                pickAxe.SetActive(false);
-            } else if (!isTorchActive) {
-                torch.SetActive(false);
-                pickAxe.SetActive(true);
-            }
-
             if (Input.GetKey(sKey)) { S(); }
 
             if (Input.GetButtonDown("Jump")) {
@@ -121,13 +109,9 @@ public class PlayerController : MonoBehaviour {
             }
 
             // Interact with Item
-            if (Input.GetKeyDown(KeyCode.F)) {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
                 Interact();
-            }
-
-            // Interact with Item
-            if (Input.GetKeyDown(KeyCode.P)) {
-                isTorchActive = !isTorchActive;
             }
         }
 

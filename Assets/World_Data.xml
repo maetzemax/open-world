@@ -997,14 +997,14 @@
         <z>15.2454548</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.137324125</y>
-        <z>-0</z>
-        <w>0.9905262</w>
+        <x>0</x>
+        <y>0.137324139</y>
+        <z>0</z>
+        <w>0.99052614</w>
         <eulerAngles>
           <x>-0</x>
-          <y>15.786068</y>
-          <z>-0</z>
+          <y>15.7860718</y>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1018,12 +1018,12 @@
         <z>16.4446239</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.9967198</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.08093024</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>189.284073</y>
           <z>0</z>
         </eulerAngles>
@@ -1039,12 +1039,12 @@
         <z>12.16189</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.0038837418</y>
-        <z>-0</z>
-        <w>-0.9999925</w>
+        <x>0</x>
+        <y>0.00388374156</y>
+        <z>0</z>
+        <w>-0.99999243</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>359.554962</y>
           <z>0</z>
         </eulerAngles>
@@ -1060,14 +1060,14 @@
         <z>32.8257561</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.7718994</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.6357447</w>
         <eulerAngles>
           <x>-0</x>
           <y>101.049522</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1081,12 +1081,12 @@
         <z>29.8034325</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.6933163</y>
-        <z>-0</z>
-        <w>-0.7206335</w>
+        <x>0</x>
+        <y>0.6933162</y>
+        <z>0</z>
+        <w>-0.720633447</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>272.213623</y>
           <z>0</z>
         </eulerAngles>
@@ -1102,14 +1102,14 @@
         <z>32.20397</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.762481451</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.6470101</w>
         <eulerAngles>
           <x>-0</x>
           <y>99.3669</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1123,14 +1123,14 @@
         <z>18.7459831</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.749095857</y>
-        <z>-0</z>
-        <w>0.6624617</w>
+        <x>0</x>
+        <y>0.7490958</y>
+        <z>0</z>
+        <w>0.662461638</w>
         <eulerAngles>
           <x>-0</x>
           <y>97.02423</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1144,14 +1144,14 @@
         <z>14.10046</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.9327599</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.360498279</w>
         <eulerAngles>
           <x>-0</x>
           <y>137.7384</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1165,12 +1165,12 @@
         <z>24.4500046</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.220489159</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.9753894</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>334.524475</y>
           <z>0</z>
         </eulerAngles>
@@ -1186,14 +1186,14 @@
         <z>19.71352</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.218953967</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.9757352</w>
         <eulerAngles>
           <x>-0</x>
           <y>25.2952042</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1207,14 +1207,14 @@
         <z>14.6348648</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.978135</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.207971126</w>
         <eulerAngles>
           <x>-0</x>
           <y>155.993042</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1228,14 +1228,14 @@
         <z>14.0528164</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.00455174269</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.9999896</w>
         <eulerAngles>
           <x>-0</x>
           <y>0.5215931</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1249,14 +1249,14 @@
         <z>18.6291542</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.178769886</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.9838909</w>
         <eulerAngles>
           <x>-0</x>
           <y>20.5962334</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1270,12 +1270,12 @@
         <z>23.4504662</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.635663331</y>
-        <z>-0</z>
-        <w>-0.7719664</w>
+        <x>0</x>
+        <y>0.6356635</y>
+        <z>0</z>
+        <w>-0.7719663</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>281.061584</y>
           <z>0</z>
         </eulerAngles>
@@ -1291,14 +1291,14 @@
         <z>14.9375153</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.924629</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.3808691</w>
         <eulerAngles>
           <x>-0</x>
           <y>135.224945</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1312,14 +1312,14 @@
         <z>13.759203</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.5885689</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.808447063</w>
         <eulerAngles>
           <x>-0</x>
           <y>72.11104</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1333,12 +1333,12 @@
         <z>20.1248627</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.9394518</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.342680961</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>220.0806</y>
           <z>0</z>
         </eulerAngles>
@@ -1354,12 +1354,12 @@
         <z>14.8425732</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.9874026</y>
-        <z>-0</z>
-        <w>-0.158228233</w>
+        <x>0</x>
+        <y>0.987402558</y>
+        <z>0</z>
+        <w>-0.158228219</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>198.208145</y>
           <z>0</z>
         </eulerAngles>
@@ -1375,14 +1375,14 @@
         <z>31.5698833</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.9083607</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.4181876</w>
         <eulerAngles>
           <x>-0</x>
           <y>130.55957</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1396,12 +1396,12 @@
         <z>31.7935429</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.5021931</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.8647555</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>299.7096</y>
           <z>0</z>
         </eulerAngles>
@@ -1417,14 +1417,14 @@
         <z>28.8578548</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.2739388</y>
-        <z>-0</z>
+        <x>0</x>
+        <y>0.273938835</y>
+        <z>0</z>
         <w>0.9617471</w>
         <eulerAngles>
           <x>-0</x>
           <y>31.7975712</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1438,14 +1438,14 @@
         <z>32.1009445</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.640214</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.7681966</w>
         <eulerAngles>
           <x>-0</x>
           <y>79.61556</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1459,12 +1459,12 @@
         <z>23.2387848</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.9030237</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.429590732</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>230.883179</y>
           <z>0</z>
         </eulerAngles>
@@ -1480,14 +1480,14 @@
         <z>26.4819946</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.920854</y>
-        <z>-0</z>
-        <w>0.389907748</w>
+        <x>0</x>
+        <y>0.9208539</y>
+        <z>0</z>
+        <w>0.389907718</w>
         <eulerAngles>
           <x>-0</x>
           <y>134.1025</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1501,14 +1501,14 @@
         <z>24.0309</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.2714505</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.9624524</w>
         <eulerAngles>
           <x>-0</x>
           <y>31.501194</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1522,14 +1522,14 @@
         <z>10.9066048</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.655428052</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.7552576</w>
         <eulerAngles>
           <x>-0</x>
           <y>81.90423</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1543,12 +1543,12 @@
         <z>-1.55857468</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.6693416</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.742954731</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>275.967468</y>
           <z>0</z>
         </eulerAngles>
@@ -1564,14 +1564,14 @@
         <z>-8.411407</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.19222483</y>
-        <z>-0</z>
+        <x>0</x>
+        <y>0.19222486</y>
+        <z>0</z>
         <w>0.9813509</w>
         <eulerAngles>
           <x>-0</x>
-          <y>22.1653042</y>
-          <z>-0</z>
+          <y>22.165308</y>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1585,12 +1585,12 @@
         <z>0.118202209</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.9726556</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.23225221</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>206.8594</y>
           <z>0</z>
         </eulerAngles>
@@ -1606,12 +1606,12 @@
         <z>-3.43573761</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.361361384</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.932425857</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>317.632355</y>
           <z>0</z>
         </eulerAngles>
@@ -1627,12 +1627,12 @@
         <z>-4.92161369</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.904911</y>
-        <z>-0</z>
-        <w>-0.425601</w>
+        <x>0</x>
+        <y>0.9049109</y>
+        <z>0</z>
+        <w>-0.425600976</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>230.377426</y>
           <z>0</z>
         </eulerAngles>
@@ -1648,12 +1648,12 @@
         <z>5.47896147</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.625193536</y>
-        <z>-0</z>
-        <w>-0.780469835</w>
+        <x>0</x>
+        <y>0.6251935</y>
+        <z>0</z>
+        <w>-0.7804698</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>282.6072</y>
           <z>0</z>
         </eulerAngles>
@@ -1669,14 +1669,14 @@
         <z>4.27958059</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.9167466</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.399469167</w>
         <eulerAngles>
           <x>-0</x>
           <y>132.91</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1690,12 +1690,12 @@
         <z>-1.12148857</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.484208047</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.8749529</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>302.0788</y>
           <z>0</z>
         </eulerAngles>
@@ -1711,12 +1711,12 @@
         <z>-1.601923</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.860609055</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.509266257</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>241.229935</y>
           <z>0</z>
         </eulerAngles>
@@ -1732,14 +1732,14 @@
         <z>7.820383</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.678242743</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.734837949</w>
         <eulerAngles>
           <x>-0</x>
           <y>85.41295</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1753,14 +1753,14 @@
         <z>9.422745</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.8782258</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.478246242</w>
         <eulerAngles>
           <x>-0</x>
           <y>122.858154</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1774,14 +1774,14 @@
         <z>-6.45554352</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.230492547</y>
-        <z>-0</z>
+        <x>0</x>
+        <y>0.230492517</y>
+        <z>0</z>
         <w>0.9730741</w>
         <eulerAngles>
           <x>-0</x>
-          <y>26.6521435</y>
-          <z>-0</z>
+          <y>26.65214</y>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1795,14 +1795,14 @@
         <z>10.7538986</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.9980657</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.06216766</w>
         <eulerAngles>
           <x>-0</x>
           <y>172.871521</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1816,12 +1816,12 @@
         <z>4.26226</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
-        <y>0.3945717</y>
-        <z>-0</z>
-        <w>-0.9188652</w>
+        <x>0</x>
+        <y>0.394571662</y>
+        <z>0</z>
+        <w>-0.918865144</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>313.521484</y>
           <z>0</z>
         </eulerAngles>
@@ -1837,12 +1837,12 @@
         <z>2.118309</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.666399539</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.745594859</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>276.420441</y>
           <z>0</z>
         </eulerAngles>
@@ -1858,14 +1858,14 @@
         <z>2.43232346</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.991407454</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.130809888</w>
         <eulerAngles>
           <x>-0</x>
           <y>164.967209</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1879,14 +1879,14 @@
         <z>8.040244</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.6657039</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.746216</w>
         <eulerAngles>
           <x>-0</x>
           <y>83.4727</y>
-          <z>-0</z>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>
@@ -1900,12 +1900,12 @@
         <z>-4.470495</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.5749601</y>
-        <z>-0</z>
+        <z>0</z>
         <w>-0.818181455</w>
         <eulerAngles>
-          <x>0</x>
+          <x>-0</x>
           <y>289.806335</y>
           <z>0</z>
         </eulerAngles>
@@ -1921,14 +1921,1820 @@
         <z>6.21022749</z>
       </worldPosition>
       <orientation>
-        <x>-0</x>
+        <x>0</x>
         <y>0.9613323</y>
-        <z>-0</z>
+        <z>0</z>
         <w>0.2753909</w>
         <eulerAngles>
           <x>-0</x>
           <y>148.029373</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-325.120728</x>
+        <y>180.158051</y>
+        <z>-232.042236</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.8645187</y>
+        <z>0</z>
+        <w>-0.5026006</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>240.344421</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-330.2761</x>
+        <y>178.136322</y>
+        <z>-241.289642</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.696754634</y>
+        <z>0</z>
+        <w>0.717309535</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>88.334404</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-326.305328</x>
+        <y>177.229538</y>
+        <z>-245.227142</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.244271442</y>
+        <z>0</z>
+        <w>0.9697069</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>28.277565</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-339.492432</x>
+        <y>180.164688</y>
+        <z>-232.552368</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.5420369</y>
+        <z>0</z>
+        <w>0.8403547</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>65.64481</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-330.484558</x>
+        <y>180.74556</y>
+        <z>-229.21785</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9912192</y>
+        <z>0</z>
+        <w>-0.1322289</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>195.196823</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-344.6465</x>
+        <y>179.436554</y>
+        <z>-235.729584</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.5415789</y>
+        <z>0</z>
+        <w>-0.8406499</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>294.417633</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-345.845337</x>
+        <y>178.47345</y>
+        <z>-239.456375</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9951219</y>
+        <z>0</z>
+        <w>-0.0986527354</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>191.3232</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-329.114655</x>
+        <y>176.584244</y>
+        <z>-247.505</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9579858</y>
+        <z>0</z>
+        <w>-0.286815584</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>213.334808</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-336.0639</x>
+        <y>180.818054</y>
+        <z>-229.288742</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9798099</y>
+        <z>0</z>
+        <w>0.199931428</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>156.9341</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-336.286743</x>
+        <y>180.459854</y>
+        <z>-231.049438</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.955352366</y>
+        <z>0</z>
+        <w>0.295468867</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>145.6287</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-335.493622</x>
+        <y>177.333084</y>
+        <z>-244.200928</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.8616105</y>
+        <z>0</z>
+        <w>0.507570148</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>118.995773</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-342.184326</x>
+        <y>178.020523</y>
+        <z>-241.252975</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.939774036</y>
+        <z>0</z>
+        <w>0.3417963</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>140.0273</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-343.8203</x>
+        <y>175.8963</y>
+        <z>-248.696167</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.994214654</y>
+        <z>0</z>
+        <w>-0.107411236</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>192.332214</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-336.050232</x>
+        <y>179.239777</y>
+        <z>-236.548721</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.367151141</y>
+        <z>0</z>
+        <w>0.9301613</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>43.0800552</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-345.217621</x>
+        <y>179.181976</y>
+        <z>-236.72113</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.00576174259</y>
+        <z>0</z>
+        <w>-0.99998343</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>359.339752</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-328.834717</x>
+        <y>179.756378</y>
+        <z>-234.1229</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.4524925</y>
+        <z>0</z>
+        <w>-0.8917682</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>306.192566</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-347.035675</x>
+        <y>175.419464</y>
+        <z>-249.998657</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9639753</y>
+        <z>0</z>
+        <w>-0.265991718</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>210.851776</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-328.043365</x>
+        <y>180.543869</y>
+        <z>-230.1196</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.889394939</y>
+        <z>0</z>
+        <w>-0.4571396</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>234.405365</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-342.6294</x>
+        <y>179.473236</y>
+        <z>-235.564026</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.179623678</y>
+        <z>0</z>
+        <w>-0.9837354</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>339.304321</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-329.750275</x>
+        <y>178.0105</y>
+        <z>-241.814438</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.395160675</y>
+        <z>0</z>
+        <w>-0.918612</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>313.448</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>tree_pine</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-326.399933</x>
+        <y>175.857254</y>
+        <z>-250.461975</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.644872069</y>
+        <z>0</z>
+        <w>-0.7642905</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>279.687836</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-333.375854</x>
+        <y>178.892059</y>
+        <z>-238.016541</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.08612883</y>
+        <z>0</z>
+        <w>-0.996284</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>350.118134</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-327.337463</x>
+        <y>177.873016</y>
+        <z>-242.536209</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.36637938</y>
+        <z>0</z>
+        <w>-0.9304656</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>317.015</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>tree_acacia</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-327.875244</x>
+        <y>179.454742</y>
+        <z>-235.5864</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.5480557</y>
+        <z>0</z>
+        <w>0.8364419</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>66.46745</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-347.459839</x>
+        <y>179.712067</y>
+        <z>-234.5943</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.7870438</y>
+        <z>0</z>
+        <w>-0.6168971</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>256.1798</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>tree_acacia</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-327.903259</x>
+        <y>178.448944</y>
+        <z>-240.123383</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.464388847</y>
+        <z>0</z>
+        <w>-0.885631442</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>304.658661</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-341.7787</x>
+        <y>176.44487</y>
+        <z>-246.961441</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.113410473</y>
+        <z>0</z>
+        <w>-0.9935482</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>346.9761</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush3</prefabID>
+      <terrainID>Terrain Thingy [-14 , -10]</terrainID>
+      <worldPosition>
+        <x>-337.58197</x>
+        <y>179.388947</y>
+        <z>-235.925659</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9558531</y>
+        <z>0</z>
+        <w>-0.293844849</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>214.176559</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-366.1337</x>
+        <y>178.264145</y>
+        <z>-239.610184</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.652699351</y>
+        <z>0</z>
+        <w>-0.757617</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>278.509125</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-356.340057</x>
+        <y>175.953583</y>
+        <z>-247.6596</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9591285</y>
+        <z>0</z>
+        <w>0.282970935</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>147.1248</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-358.8496</x>
+        <y>179.475922</y>
+        <z>-235.494141</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9829141</y>
+        <z>0</z>
+        <w>-0.184064865</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>201.213242</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-363.48114</x>
+        <y>175.720337</y>
+        <z>-247.970108</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.382099658</y>
+        <z>0</z>
+        <w>0.924121141</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>44.9276</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-352.000549</x>
+        <y>175.385254</y>
+        <z>-249.742889</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.480006367</y>
+        <z>0</z>
+        <w>0.877265</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>57.3716354</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-355.485657</x>
+        <y>180.375153</y>
+        <z>-232.053467</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.755661368</y>
+        <z>0</z>
+        <w>0.65496254</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>98.16638</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-349.366821</x>
+        <y>177.380508</y>
+        <z>-243.278778</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.918895364</y>
+        <z>0</z>
+        <w>0.394501269</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>133.530258</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-351.083435</x>
+        <y>179.760483</y>
+        <z>-234.413452</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9496929</y>
+        <z>0</z>
+        <w>0.313182652</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>143.497726</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-363.968475</x>
+        <y>179.389023</y>
+        <z>-235.746765</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.8578368</y>
+        <z>0</z>
+        <w>-0.513922155</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>241.850891</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-367.280762</x>
+        <y>181.1062</y>
+        <z>-229.214569</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.329456955</y>
+        <z>0</z>
+        <w>0.9441706</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>38.4716377</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-369.6809</x>
+        <y>180.100128</y>
+        <z>-233.017273</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.8605673</y>
+        <z>0</z>
+        <w>-0.5093368</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>241.239334</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-355.3348</x>
+        <y>176.008133</y>
+        <z>-247.538254</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.6357962</y>
+        <z>0</z>
+        <w>-0.771856964</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>281.04187</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-351.791656</x>
+        <y>178.175476</y>
+        <z>-240.391174</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.5644962</y>
+        <z>0</z>
+        <w>0.825435638</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>68.7346344</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-367.650055</x>
+        <y>180.786346</y>
+        <z>-230.460754</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.09634159</y>
+        <z>0</z>
+        <w>-0.995348334</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>348.942932</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-364.8703</x>
+        <y>175.8099</y>
+        <z>-247.604126</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.981141</y>
+        <z>0</z>
+        <w>-0.193293542</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>202.290115</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-367.657745</x>
+        <y>179.218933</y>
+        <z>-236.266068</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.245863229</y>
+        <z>0</z>
+        <w>0.969304562</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>28.4657059</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-357.6996</x>
+        <y>176.08226</y>
+        <z>-247.1541</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.28390947</y>
+        <z>0</z>
+        <w>0.9588511</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>32.9873466</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-350.271271</x>
+        <y>176.1347</y>
+        <z>-247.446014</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.112016894</y>
+        <z>0</z>
+        <w>0.9937063</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>12.8631878</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-355.7084</x>
+        <y>177.720581</y>
+        <z>-241.82785</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.963401854</y>
+        <z>0</z>
+        <w>0.268061221</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>148.902145</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-365.568542</x>
+        <y>180.396637</y>
+        <z>-231.999</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.896697462</y>
+        <z>0</z>
+        <w>0.4426439</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>127.454613</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>stones</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-360.471924</x>
+        <y>181.316284</y>
+        <z>-228.2985</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.8811107</y>
+        <z>0</z>
+        <w>-0.472910076</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>236.446716</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>5</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-349.9178</x>
+        <y>179.497925</y>
+        <z>-235.469055</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.9386371</y>
+        <z>0</z>
+        <w>-0.3449064</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>220.352158</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-363.314</x>
+        <y>176.758728</y>
+        <z>-244.690811</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.8854089</y>
+        <z>0</z>
+        <w>-0.464813</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>235.39624</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-350.3247</x>
+        <y>181.019562</y>
+        <z>-229.171829</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.59454596</y>
+        <z>0</z>
+        <w>0.8040616</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>72.96055</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-365.831665</x>
+        <y>174.514313</y>
+        <z>-251.466309</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.5363518</y>
+        <z>0</z>
+        <w>-0.8439945</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>295.128723</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-350.6622</x>
+        <y>179.584564</y>
+        <z>-235.112671</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.344288826</y>
+        <z>0</z>
+        <w>0.938863754</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>40.27678</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>stones</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-363.944824</x>
+        <y>179.702667</y>
+        <z>-234.5842</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.303495079</y>
+        <z>0</z>
+        <w>0.952833</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>35.3352928</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>5</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-349.403748</x>
+        <y>176.931091</y>
+        <z>-244.820023</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.249344528</y>
+        <z>0</z>
+        <w>-0.968414843</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>331.122559</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-15 , -10]</terrainID>
+      <worldPosition>
+        <x>-353.103943</x>
+        <y>176.124588</y>
+        <z>-247.299652</z>
+      </worldPosition>
+      <orientation>
+        <x>0</x>
+        <y>0.359176666</y>
+        <z>0</z>
+        <w>-0.93326956</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>317.900726</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>0</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-415.709717</x>
+        <y>184.875656</y>
+        <z>-206.2598</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.708503842</y>
+        <z>-0</z>
+        <w>-0.705706954</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>269.773376</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-418.066132</x>
+        <y>180.6524</y>
+        <z>-226.146851</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.662342</y>
+        <z>-0</z>
+        <w>0.749201655</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>82.9574661</y>
           <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-407.261383</x>
+        <y>183.56192</y>
+        <z>-215.837357</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.112294883</y>
+        <z>-0</z>
+        <w>0.993674934</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>12.8952456</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-416.5002</x>
+        <y>183.92897</y>
+        <z>-211.35321</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.121273965</y>
+        <z>-0</z>
+        <w>0.9926191</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>13.9312649</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-402.34845</x>
+        <y>182.110046</y>
+        <z>-223.1213</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.238830447</y>
+        <z>-0</z>
+        <w>-0.9710613</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>332.36496</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-410.377563</x>
+        <y>184.3353</y>
+        <z>-211.1494</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.9913555</y>
+        <z>-0</z>
+        <w>0.1312032</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>164.921753</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-410.255737</x>
+        <y>181.098419</y>
+        <z>-225.923676</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.8842055</y>
+        <z>-0</z>
+        <w>-0.467098057</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>235.692184</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-397.251953</x>
+        <y>185.402451</y>
+        <z>-208.360687</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.584928036</y>
+        <z>-0</z>
+        <w>-0.8110852</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>288.4042</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-400.337219</x>
+        <y>182.707886</y>
+        <z>-220.907684</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.288067669</y>
+        <z>-0</z>
+        <w>0.9576101</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>33.48461</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-417.958527</x>
+        <y>184.024323</y>
+        <z>-210.271454</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.6805094</y>
+        <z>-0</z>
+        <w>-0.7327394</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>274.2331</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-398.449127</x>
+        <y>181.282959</y>
+        <z>-226.933136</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.713327765</y>
+        <z>-0</z>
+        <w>-0.7008306</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>268.987366</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-419.5704</x>
+        <y>184.022873</y>
+        <z>-209.631927</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.7417294</y>
+        <z>-0</z>
+        <w>0.670699239</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>95.75789</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-396.512848</x>
+        <y>185.283142</y>
+        <z>-209.119049</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.214643091</y>
+        <z>-0</z>
+        <w>-0.976692557</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>335.210815</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-419.8826</x>
+        <y>180.555527</y>
+        <z>-226.116608</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.9650629</y>
+        <z>-0</z>
+        <w>0.2620184</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>149.620285</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-398.797455</x>
+        <y>181.831024</y>
+        <z>-224.739578</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.9298622</y>
+        <z>-0</z>
+        <w>-0.367908031</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>223.173325</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-415.30957</x>
+        <y>183.1123</y>
+        <z>-215.926819</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.6039732</y>
+        <z>-0</z>
+        <w>0.79700464</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>74.30998</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-409.5246</x>
+        <y>185.2472</y>
+        <z>-206.304352</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.7877875</y>
+        <z>-0</z>
+        <w>0.6159472</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>103.95845</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-412.615723</x>
+        <y>183.548019</y>
+        <z>-214.53421</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.9960803</y>
+        <z>-0</z>
+        <w>-0.08845418</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>190.149368</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass2</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-407.203339</x>
+        <y>184.197723</y>
+        <z>-212.709442</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.751092851</y>
+        <z>-0</z>
+        <w>0.6601966</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>97.37027</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-402.4972</x>
+        <y>183.742859</y>
+        <z>-215.933319</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.9619612</y>
+        <z>-0</z>
+        <w>-0.273186177</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>211.7079</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass1</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-413.36322</x>
+        <y>180.707962</y>
+        <z>-226.906815</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.9826066</y>
+        <z>-0</z>
+        <w>-0.185699522</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>201.403839</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush2</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-417.7831</x>
+        <y>182.157</y>
+        <z>-219.7023</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.827903152</y>
+        <z>-0</z>
+        <w>0.560871065</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>111.767876</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush1</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-416.290558</x>
+        <y>184.3297</y>
+        <z>-209.218521</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.2249591</y>
+        <z>-0</z>
+        <w>0.9743682</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>26.000948</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>grass3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-404.768066</x>
+        <y>182.338486</y>
+        <z>-221.775635</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.8086128</y>
+        <z>-0</z>
+        <w>-0.5883412</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>252.078766</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush1</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-399.072784</x>
+        <y>182.089722</y>
+        <z>-223.670059</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.996794462</y>
+        <z>-0</z>
+        <w>-0.08000509</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>189.177719</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush3</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-396.7158</x>
+        <y>185.7342</y>
+        <z>-206.53006</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.7734495</y>
+        <z>-0</z>
+        <w>0.633857965</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>101.32933</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>tree_pine</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-399.487671</x>
+        <y>182.968384</y>
+        <z>-219.923279</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.968660831</y>
+        <z>-0</z>
+        <w>0.2483873</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>151.2358</y>
+          <z>-0</z>
+        </eulerAngles>
+      </orientation>
+      <health>1</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush2</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-412.9933</x>
+        <y>184.9145</y>
+        <z>-207.083344</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.102148063</y>
+        <z>-0</z>
+        <w>-0.9947692</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>348.274231</y>
+          <z>0</z>
+        </eulerAngles>
+      </orientation>
+      <health>4</health>
+    </WorldObject>
+    <WorldObject>
+      <prefabID>bush2</prefabID>
+      <terrainID>Terrain Thingy [-17 , -9]</terrainID>
+      <worldPosition>
+        <x>-408.2941</x>
+        <y>185.601669</y>
+        <z>-204.602768</z>
+      </worldPosition>
+      <orientation>
+        <x>-0</x>
+        <y>0.883404732</y>
+        <z>-0</z>
+        <w>-0.4686108</w>
+        <eulerAngles>
+          <x>0</x>
+          <y>235.8883</y>
+          <z>0</z>
         </eulerAngles>
       </orientation>
       <health>4</health>

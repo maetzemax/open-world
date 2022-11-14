@@ -31,7 +31,7 @@ public class Interactable : MonoBehaviour {
         if (filteredObjects.Count == 0) {
 
             GameObject tile = gameObject.GetComponentInParent<PlaceObjects>().gameObject;
-
+            
             foreach (Transform child in tile.transform) {
 
                 Harvestable harvestable = child.gameObject.GetComponent<Harvestable>();
