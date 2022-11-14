@@ -3,39 +3,27 @@
   <inventoryObjects>
     <InventoryObject>
       <itemID>2</itemID>
-      <itemGUID>e7f396f8-5981-4286-b752-585c0edfcb5c</itemGUID>
-      <slotId>1</slotId>
-      <itemAmount>16</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>2</itemID>
-      <itemGUID>40a133c0-20d4-4746-b41d-339aaa9beabb</itemGUID>
+      <itemGUID>7b5c62bd-76e2-4fe1-bd02-e4eade081a03</itemGUID>
       <slotId>2</slotId>
-      <itemAmount>16</itemAmount>
+      <itemAmount>4</itemAmount>
     </InventoryObject>
     <InventoryObject>
-      <itemID>2</itemID>
-      <itemGUID>35c37e7a-6ce7-46e2-91e3-e3966d6566b9</itemGUID>
+      <itemID>5</itemID>
+      <itemGUID>21875b21-650a-4832-9b69-ad893c104a7b</itemGUID>
+      <slotId>1</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>1</itemID>
+      <itemGUID>96fa19d4-d8a8-4287-bfdf-c9a541d4abf6</itemGUID>
       <slotId>3</slotId>
-      <itemAmount>16</itemAmount>
+      <itemAmount>8</itemAmount>
     </InventoryObject>
     <InventoryObject>
-      <itemID>2</itemID>
-      <itemGUID>b17e502b-9754-40d8-a921-bfd4418f5649</itemGUID>
+      <itemID>1</itemID>
+      <itemGUID>e1a300b9-82a0-4970-a41a-5b330b4cb2f1</itemGUID>
       <slotId>4</slotId>
       <itemAmount>8</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>1</itemID>
-      <itemGUID>7a15ca72-53d9-4f33-8f74-9b7f206f2c1c</itemGUID>
-      <slotId>5</slotId>
-      <itemAmount>8</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>1</itemID>
-      <itemGUID>24afca49-47ae-43a9-8170-d026dd2ea46a</itemGUID>
-      <slotId>6</slotId>
-      <itemAmount>1</itemAmount>
     </InventoryObject>
   </inventoryObjects>
 </InventoryDatabase>

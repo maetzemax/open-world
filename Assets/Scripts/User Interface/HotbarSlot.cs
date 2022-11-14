@@ -8,7 +8,7 @@ public class HotbarSlot : MonoBehaviour {
     public int identifier;
     public Image icon;
 
-    ItemObject selectedItem;
+    [HideInInspector] public ItemObject selectedItem = null;
 
     public void AddItem(ItemObject itemObject) {
         selectedItem = itemObject;

@@ -2,8 +2,7 @@
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
-    [Header("Camera")]
-    public Camera cam;
+    [Header("Camera")] public Camera cam;
     public bool lockCursor;
 
     [Range(0.1f, 10)] public float lookSensitivity;
@@ -13,8 +12,7 @@ public class PlayerController : MonoBehaviour {
 
     private float xRotation = 0;
 
-    [Header("Movement")]
-    public CharacterController controller;
+    [Header("Movement")] public CharacterController controller;
 
     // Speed of forwards and backwards movement
     [Range(0.5f, 20)] public float walkSpeed;
@@ -35,7 +33,11 @@ public class PlayerController : MonoBehaviour {
     private int jumpsSinceLastLand = 0;
 
     private GameObject currentLookAt;
-    private bool isInvetoryOpen = false;
+
+    [HideInInspector] public bool isInventoryOpen = false;
+    [HideInInspector] public ItemObject selectedTool = null;
+
+    public GameObject toolHolder;
 
     InventoryManager inventory;
 
@@ -46,7 +48,8 @@ public class PlayerController : MonoBehaviour {
     void Awake() {
         if (PlayerPrefs.HasKey("y")) {
             var playerRotation = Quaternion.Euler(0, PlayerPrefs.GetFloat("y_rotation"), 0);
-            var playerPosition = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"), PlayerPrefs.GetFloat("z"));
+            var playerPosition = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"),
+                PlayerPrefs.GetFloat("z"));
             gameObject.transform.rotation = playerRotation;
             gameObject.transform.position = playerPosition;
 
@@ -57,21 +60,19 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-
         if (Input.GetButtonDown("Inventory")) {
-            isInvetoryOpen = !isInvetoryOpen;
+            isInventoryOpen = !isInventoryOpen;
         }
 
-        Cursor.visible = isInvetoryOpen;
+        Cursor.visible = isInventoryOpen;
 
-        if (isInvetoryOpen) {
+        if (isInventoryOpen) {
             Cursor.lockState = CursorLockMode.None;
 
             velocity.z = 0;
             velocity.x = 0;
-
-        } else {
-
+        }
+        else {
             Cursor.lockState = CursorLockMode.Locked;
 
             transform.Rotate(0, Input.GetAxis("Mouse X") * lookSensitivity, 0);
@@ -84,12 +85,15 @@ public class PlayerController : MonoBehaviour {
             velocity = transform.TransformDirection(velocity);
 
             // Apply manual gravity
-            if (Input.GetKey(sKey)) { S(); }
+            if (Input.GetKey(sKey)) {
+                S();
+            }
 
             if (Input.GetButtonDown("Jump")) {
                 if (controller.isGrounded) {
                     Jump();
-                } else if (jumpsSinceLastLand < maxJumps) {
+                }
+                else if (jumpsSinceLastLand < maxJumps) {
                     Jump();
                 }
             }
@@ -101,23 +105,59 @@ public class PlayerController : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
                 currentLookAt = hit.collider.gameObject;
-                inventory.pickUpText.text = "Pick up " + currentLookAt.GetComponent<Interactable>().itemObject.item.name;
+                inventory.pickUpText.text =
+                    "Pick up " + currentLookAt.GetComponent<Interactable>().itemObject.item.name;
                 inventory.pickUpText.enabled = true;
-            } else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
+            }
+            else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
                 inventory.pickUpText.text = "";
                 inventory.pickUpText.enabled = false;
             }
 
             // Interact with Item
-            if (Input.GetKeyDown(KeyCode.F))
-            {
+            if (Input.GetKeyDown(KeyCode.F)) {
                 Interact();
+            }
+
+            GameObject currentSelectedTool = null;
+
+            if (selectedTool == null) {
+                if (toolHolder.transform.childCount > 0) {
+                    currentSelectedTool = toolHolder.transform.GetChild(0).gameObject;
+
+                    Destroy(currentSelectedTool);
+                    toolHolder.GetComponent<HarvestAnimation>().enabled = false;
+                }
+            }
+
+            if (selectedTool != null) {
+                toolHolder.GetComponent<HarvestAnimation>().enabled = selectedTool.item.isTool;
+                if (toolHolder.transform.childCount > 0)
+                    currentSelectedTool = toolHolder.transform.GetChild(0).gameObject;
+
+
+                if (currentSelectedTool != null && currentSelectedTool.gameObject.name != selectedTool.item.prefab.name + "(Clone)") {
+                    print("create new");
+
+                    Destroy(currentSelectedTool);
+
+                    if (selectedTool.item.isTool)
+                        Instantiate(selectedTool.item.prefab,
+                            toolHolder.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity,
+                            toolHolder.transform);
+                }
+                else if (currentSelectedTool == null) {
+                    if (selectedTool.item.isTool)
+                        Instantiate(selectedTool.item.prefab, toolHolder.transform);
+                }
             }
         }
 
         velocity.y += Physics.gravity.y * Time.deltaTime;
 
-        if (controller.isGrounded && velocity.y < 0) { Land(); }
+        if (controller.isGrounded && velocity.y < 0) {
+            Land();
+        }
 
         PlayerPrefs.SetFloat("y_rotation", gameObject.transform.rotation.eulerAngles.y);
         PlayerPrefs.SetFloat("x_rotation", cam.transform.rotation.eulerAngles.x);
@@ -146,7 +186,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Interact() {
-
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
