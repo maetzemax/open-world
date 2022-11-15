@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CraftingRecipes: MonoBehaviour {
+public class CraftingRecipe: MonoBehaviour {
 
     #region Singleton
 
-    public static CraftingRecipes instance;
+    public static CraftingRecipe instance;
 
     void Awake() {
 
@@ -26,14 +26,14 @@ public class CraftingRecipes: MonoBehaviour {
     public readonly bool needCraftingBench = true;
     public readonly int resultAmount = 1;
 
-    public CraftingRecipes(List<Ingredients> ingredients, int resultItemID, bool needCraftingBench, int resultAmount) {
+    public CraftingRecipe(List<Ingredients> ingredients, int resultItemID, bool needCraftingBench, int resultAmount) {
         this.ingredients = ingredients;
         this.resultItemID = resultItemID;
         this.needCraftingBench = needCraftingBench;
         this.resultAmount = resultAmount;
     }
 
-    public List<CraftingRecipes> craftingRecipes;
+    public List<CraftingRecipe> craftingRecipes;
 
     private void Start() {
         craftingRecipes = new() {

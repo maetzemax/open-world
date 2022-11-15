@@ -7,23 +7,5 @@
       <slotId>1</slotId>
       <itemAmount>1</itemAmount>
     </InventoryObject>
-    <InventoryObject>
-      <itemID>1</itemID>
-      <itemGUID>bb34e627-21bb-4c39-9984-6675dffdbc53</itemGUID>
-      <slotId>2</slotId>
-      <itemAmount>4</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>2</itemID>
-      <itemGUID>f7a03f0a-d633-4217-ba9e-020d5be3773c</itemGUID>
-      <slotId>3</slotId>
-      <itemAmount>5</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>1</itemID>
-      <itemGUID>57c743db-225e-481b-8ba1-165e71c01638</itemGUID>
-      <slotId>4</slotId>
-      <itemAmount>2</itemAmount>
-    </InventoryObject>
   </inventoryObjects>
 </InventoryDatabase>

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Linq;
 
 public class CraftingPanel : MonoBehaviour {
 
@@ -17,14 +18,14 @@ public class CraftingPanel : MonoBehaviour {
     ItemDatabase itemDatabase;
 
     Item craftingItem;
-    CraftingRecipes craftingRecipe;
+    CraftingRecipe craftingRecipe;
 
     private void Awake() {
         itemDatabase = ItemDatabase.instance;
         inventory = InventoryManager.instance;
     }
 
-    public void AddRecipe(CraftingRecipes craftingRecipe) {
+    public void AddRecipe(CraftingRecipe craftingRecipe) {
 
         this.craftingRecipe = craftingRecipe;
         
@@ -44,13 +45,15 @@ public class CraftingPanel : MonoBehaviour {
     }
 
     public void CraftRecipe() {
-        for (int i = 0; i < craftingRecipe.ingredients.Count; i++) {
-            if (i == 0) {
-                CalculateCrafting(i);
-            }
-
-            if (i == 1) {
-                CalculateCrafting(i);
+        
+        for (var i = 0; i < craftingRecipe.ingredients.Count; i++) {
+            switch (i) {
+                case 0:
+                    CalculateCrafting(i);
+                    break;
+                case 1:
+                    CalculateCrafting(i);
+                    break;
             }
         }
     }
@@ -73,21 +76,20 @@ public class CraftingPanel : MonoBehaviour {
                 }
         }
 
-        int itemAmount = 0;
-
-        foreach (var slot in filteredSlots) {
-            itemAmount += slot.itemObject.inventoryObject.itemAmount;
-        }
+        var itemAmount = filteredSlots.Sum(slot => slot.itemObject.inventoryObject.itemAmount);
+        
+        print("item Amount: " + itemAmount);
 
         if (itemAmount < ingredientAmount)
             return;
 
-        for (int x = 0; x < filteredSlots.Count; x++) {
-            if (ingredientAmount < filteredSlots[x].itemObject.inventoryObject.itemAmount) {
-                inventory.RemoveItem(filteredSlots[x].itemObject, ingredientAmount);
-            } else if (ingredientAmount >= filteredSlots[x].itemObject.inventoryObject.itemAmount) {
-                ingredientAmount -= filteredSlots[x].itemObject.inventoryObject.itemAmount;
-                inventory.RemoveItem(filteredSlots[x].itemObject, filteredSlots[x].itemObject.inventoryObject.itemAmount);
+        foreach (var filteredSlot in filteredSlots) {
+            if (ingredientAmount < filteredSlot.itemObject.inventoryObject.itemAmount) {
+                inventory.RemoveItem(filteredSlot.itemObject, ingredientAmount);
+                break;
+            } else if (ingredientAmount >= filteredSlot.itemObject.inventoryObject.itemAmount) {
+                ingredientAmount -= filteredSlot.itemObject.inventoryObject.itemAmount;
+                inventory.RemoveItem(filteredSlot.itemObject, filteredSlot.itemObject.inventoryObject.itemAmount);
             }
 
             if (ingredientAmount <= 0) {

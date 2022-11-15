@@ -7,10 +7,10 @@ public class CraftingUI : MonoBehaviour {
     public GameObject craftingPanel;
     CraftingPanel[] panels;
 
-    List<CraftingRecipes> craftingRecipes;
+    List<CraftingRecipe> craftingRecipes;
 
     private void Awake() {
-        craftingRecipes = CraftingRecipes.instance.craftingRecipes;
+        craftingRecipes = CraftingRecipe.instance.craftingRecipes;
     }
 
     private void Start() {
@@ -22,7 +22,7 @@ public class CraftingUI : MonoBehaviour {
         panels = gameObject.GetComponentsInChildren<CraftingPanel>();
 
         for (int i = 0; i < panels.Length; i++) {
-            panels[i].AddRecipe(CraftingRecipes.instance.craftingRecipes.FindAll(cr => !cr.needCraftingBench)[i]);
+            panels[i].AddRecipe(CraftingRecipe.instance.craftingRecipes.FindAll(cr => !cr.needCraftingBench)[i]);
         }
     }
 }
