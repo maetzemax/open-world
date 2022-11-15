@@ -60,6 +60,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
+        
+        print("InventoryOpen " + isInventoryOpen);
+        
         if (Input.GetButtonDown("Inventory")) {
             isInventoryOpen = !isInventoryOpen;
         }
@@ -130,7 +133,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
 
-            if (selectedTool != null) {
+            if (selectedTool.item != null) {
                 toolHolder.GetComponent<HarvestAnimation>().enabled = selectedTool.item.isTool;
                 if (toolHolder.transform.childCount > 0)
                     currentSelectedTool = toolHolder.transform.GetChild(0).gameObject;

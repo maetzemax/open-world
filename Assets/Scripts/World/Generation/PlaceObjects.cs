@@ -5,7 +5,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(GenerateMesh))]
 public class PlaceObjects : MonoBehaviour {
-
     public TerrainController TerrainController { get; set; }
 
     public List<PrefabItem> placeableObjects;
@@ -22,7 +21,6 @@ public class PlaceObjects : MonoBehaviour {
     }
 
     public void Place(string terrainName) {
-
         List<WorldObject> worldObjects = WorldDataManager.instance.worldObjectDB.worldObjects;
         List<WorldObject> filteredObjects = worldObjects.FindAll(e => e.terrainID == terrainName);
 
@@ -35,37 +33,63 @@ public class PlaceObjects : MonoBehaviour {
                 Vector3 startPoint = RandomPointAboveTerrain();
 
                 RaycastHit hit;
-                if (Physics.Raycast(startPoint, Vector3.down, out hit) && hit.point.y > TerrainController.Beach.transform.position.y && hit.point.y < TerrainController.Mountain.transform.position.y && hit.collider.CompareTag("Terrain")) {
+                if (Physics.Raycast(startPoint, Vector3.down, out hit) &&
+                    hit.point.y > TerrainController.Beach.transform.position.y &&
+                    hit.point.y < TerrainController.Mountain.transform.position.y &&
+                    hit.collider.CompareTag("Terrain")) {
                     Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
                     RaycastHit boxHit;
-                    if (Physics.BoxCast(startPoint, new Vector3(1, 1, 1), Vector3.down, out boxHit, orientation) && boxHit.collider.CompareTag("Terrain")) {
+                    if (Physics.BoxCast(startPoint, new Vector3(1, 1, 1), Vector3.down, out boxHit, orientation) &&
+                        boxHit.collider.CompareTag("Terrain")) {
                         GameObject grass = grassTypes[prefabType];
                         Vector3 position = new Vector3(startPoint.x, hit.point.y, startPoint.z);
                         Instantiate(grass, position, orientation, transform);
                     }
                 }
-
             }
 
-            // Between Grass and Mountain
-            for (int i = 0; i < numObjects; i++) {
-
-                var copyObjects = placeableObjects.FindAll(po => po.prefabID != "iron_ore");
+            // Between Water and Beach
+            for (int i = 0; i < Random.Range(1, 5); i++) {
+                var copyObjects = placeableObjects.FindAll(po => po.prefabID == "log" || po.prefabID == "stick");
 
                 int prefabType = Random.Range(0, copyObjects.Count);
                 Vector3 startPoint = RandomPointAboveTerrain();
 
                 RaycastHit hit;
-                if (Physics.Raycast(startPoint, Vector3.down, out hit) && hit.point.y > TerrainController.Beach.transform.position.y && hit.collider.CompareTag("Terrain")) {
+                if (Physics.Raycast(startPoint, Vector3.down, out hit) &&
+                    hit.point.y < TerrainController.Beach.transform.position.y &&
+                    hit.point.y > TerrainController.Water.transform.position.y && hit.collider.CompareTag("Terrain")) {
                     Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
                     RaycastHit boxHit;
-                    if (Physics.BoxCast(startPoint, new Vector3(1, 1, 1), Vector3.down, out boxHit, orientation) && boxHit.collider.CompareTag("Terrain") && hit.point.y < TerrainController.Mountain.transform.position.y) {
+                    if (Physics.BoxCast(startPoint, new Vector3(1, 1, 1), Vector3.down, out boxHit, orientation) &&
+                        boxHit.collider.CompareTag("Terrain")) {
+                        PrefabItem prefabItem = copyObjects[prefabType];
+                        Vector3 position = new Vector3(startPoint.x, hit.point.y + .2f, startPoint.z);
+                        Instantiate(prefabItem.prefabGameobject, position, orientation, transform);
+                    }
+                }
+            }
+
+            // Between Grass and Mountain
+            for (int i = 0; i < numObjects; i++) {
+                var copyObjects = placeableObjects.FindAll(po => po.prefabID != "iron_ore" && po.prefabID != "stick");
+
+                int prefabType = Random.Range(0, copyObjects.Count);
+                Vector3 startPoint = RandomPointAboveTerrain();
+
+                RaycastHit hit;
+                if (Physics.Raycast(startPoint, Vector3.down, out hit) &&
+                    hit.point.y > TerrainController.Beach.transform.position.y && hit.collider.CompareTag("Terrain")) {
+                    Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
+                    RaycastHit boxHit;
+                    if (Physics.BoxCast(startPoint, new Vector3(1, 1, 1), Vector3.down, out boxHit, orientation) &&
+                        boxHit.collider.CompareTag("Terrain") &&
+                        hit.point.y < TerrainController.Mountain.transform.position.y) {
                         PrefabItem prefabItem = copyObjects[prefabType];
                         Vector3 position = new Vector3(startPoint.x, hit.point.y, startPoint.z);
                         Instantiate(prefabItem.prefabGameobject, position, orientation, transform);
                     }
                 }
-
             }
 
             // Above Mountain level
@@ -74,40 +98,44 @@ public class PlaceObjects : MonoBehaviour {
                 Vector3 startPoint = RandomPointAboveTerrain();
 
                 RaycastHit hit;
-                if (Physics.Raycast(startPoint, Vector3.down, out hit) && hit.point.y > TerrainController.Mountain.transform.position.y && hit.collider.CompareTag("Terrain")) {
+                if (Physics.Raycast(startPoint, Vector3.down, out hit) &&
+                    hit.point.y > TerrainController.Mountain.transform.position.y &&
+                    hit.collider.CompareTag("Terrain")) {
                     Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
                     RaycastHit boxHit;
-                    if (Physics.BoxCast(startPoint, placeableObjectSizes[prefabType], Vector3.down, out boxHit, orientation) && boxHit.collider.CompareTag("Terrain") && hit.point.y > TerrainController.Mountain.transform.position.y) {
+                    if (Physics.BoxCast(startPoint, placeableObjectSizes[prefabType], Vector3.down, out boxHit,
+                            orientation) && boxHit.collider.CompareTag("Terrain") &&
+                        hit.point.y > TerrainController.Mountain.transform.position.y) {
                         PrefabItem prefabItem = PrefabDatabase.instance.prefabItems[prefabType];
                         Vector3 position = new Vector3(startPoint.x, hit.point.y, startPoint.z);
                         Instantiate(prefabItem.prefabGameobject, position, orientation, transform);
                     }
                 }
-
             }
-        } else {
+        }
+        else {
             foreach (var item in filteredObjects) {
-
-
-                PrefabItem prefabItem = PrefabDatabase.instance.prefabItems.Where(p => p.prefabID == item.prefabID).First();
+                PrefabItem prefabItem =
+                    PrefabDatabase.instance.prefabItems.Where(p => p.prefabID == item.prefabID).First();
 
                 RaycastHit hit;
                 Ray ray = new(item.worldPosition + new Vector3(0, 100, 0), Vector3.down);
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
-                    GameObject go = Instantiate(prefabItem.prefabGameobject, item.worldPosition, item.orientation, hit.transform);
+                    GameObject go = Instantiate(prefabItem.prefabGameobject, item.worldPosition, item.orientation,
+                        hit.transform);
                     go.name = prefabItem.prefabID;
                 }
             }
         }
-
-
     }
 
     private Vector3 RandomPointAboveTerrain() {
         return new Vector3(
-            Random.Range(transform.position.x - TerrainController.TerrainSize.x / 2, transform.position.x + TerrainController.TerrainSize.x / 2),
+            Random.Range(transform.position.x - TerrainController.TerrainSize.x / 2,
+                transform.position.x + TerrainController.TerrainSize.x / 2),
             transform.position.y + TerrainController.TerrainSize.y * 2,
-            Random.Range(transform.position.z - TerrainController.TerrainSize.z / 2, transform.position.z + TerrainController.TerrainSize.z / 2)
+            Random.Range(transform.position.z - TerrainController.TerrainSize.z / 2,
+                transform.position.z + TerrainController.TerrainSize.z / 2)
         );
     }
 }

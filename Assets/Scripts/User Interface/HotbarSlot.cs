@@ -15,6 +15,8 @@ public class HotbarSlot : MonoBehaviour {
 
         icon.sprite = itemObject.item.icon;
         icon.enabled = true;
+        
+        print("added Item to slot");
     }
 
     public void ClearSlot() {
@@ -22,5 +24,7 @@ public class HotbarSlot : MonoBehaviour {
 
         icon.sprite = null;
         icon.enabled = false;
+        
+        print("slot cleared");
     }
 }
