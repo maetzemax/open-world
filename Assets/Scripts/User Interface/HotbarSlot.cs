@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HotbarSlot : MonoBehaviour {
-
     public int identifier;
     public Image icon;
 
@@ -15,8 +14,6 @@ public class HotbarSlot : MonoBehaviour {
 
         icon.sprite = itemObject.item.icon;
         icon.enabled = true;
-        
-        print("added Item to slot");
     }
 
     public void ClearSlot() {
@@ -24,7 +21,5 @@ public class HotbarSlot : MonoBehaviour {
 
         icon.sprite = null;
         icon.enabled = false;
-        
-        print("slot cleared");
     }
 }

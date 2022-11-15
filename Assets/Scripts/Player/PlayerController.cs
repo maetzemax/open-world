@@ -60,9 +60,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        
-        print("InventoryOpen " + isInventoryOpen);
-        
         if (Input.GetButtonDown("Inventory")) {
             isInventoryOpen = !isInventoryOpen;
         }
@@ -109,7 +106,7 @@ public class PlayerController : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
                 currentLookAt = hit.collider.gameObject;
                 inventory.pickUpText.text =
-                    "Pick up " + currentLookAt.GetComponent<Interactable>().itemObject.item.name;
+                    "Collect " + currentLookAt.GetComponent<Interactable>().gameObject.name;
                 inventory.pickUpText.enabled = true;
             }
             else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
@@ -139,8 +136,8 @@ public class PlayerController : MonoBehaviour {
                     currentSelectedTool = toolHolder.transform.GetChild(0).gameObject;
 
 
-                if (currentSelectedTool != null && currentSelectedTool.gameObject.name != selectedTool.item.prefab.name + "(Clone)") {
-                    print("create new");
+                if (currentSelectedTool != null &&
+                    currentSelectedTool.gameObject.name != selectedTool.item.prefab.name + "(Clone)") {
 
                     Destroy(currentSelectedTool);
 

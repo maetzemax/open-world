@@ -72,7 +72,7 @@ public class PlaceObjects : MonoBehaviour {
 
             // Between Grass and Mountain
             for (int i = 0; i < numObjects; i++) {
-                var copyObjects = placeableObjects.FindAll(po => po.prefabID != "iron_ore" && po.prefabID != "stick");
+                var copyObjects = placeableObjects.FindAll(po => po.prefabID != "iron_ore" && po.prefabID != "stick" && po.prefabID != "log");
 
                 int prefabType = Random.Range(0, copyObjects.Count);
                 Vector3 startPoint = RandomPointAboveTerrain();

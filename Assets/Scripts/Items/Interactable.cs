@@ -2,9 +2,15 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Interactable : MonoBehaviour {
-    public ItemObject itemObject;
+    public ItemObject firstItemDrop;
+    [Range(0, 1)] [SerializeField] private float dropChanceFirstItem;
+    [SerializeField] private int amountFirstItem;
+    public ItemObject secondItemDrop;
+    [Range(0, 1)] [SerializeField] private float dropChanceSecondItem;
+    [SerializeField] private int amountSecondItem;
     InventoryManager inventory;
     WorldDataManager worldDataManager;
 
@@ -16,7 +22,6 @@ public class Interactable : MonoBehaviour {
     }
 
     public virtual void Interact() {
-
         inventory.pickUpText.text = "";
         inventory.pickUpText.enabled = false;
 
@@ -29,23 +34,21 @@ public class Interactable : MonoBehaviour {
         Destroy(gameObject);
 
         if (filteredObjects.Count == 0) {
-
             GameObject tile = gameObject.GetComponentInParent<PlaceObjects>().gameObject;
-            
-            foreach (Transform child in tile.transform) {
 
+            foreach (Transform child in tile.transform) {
                 Harvestable harvestable = child.gameObject.GetComponent<Harvestable>();
                 if (harvestable != null) {
                     SaveGameObject(child.gameObject, tile.name, harvestable.health);
-                } else if (harvestable == null) {
+                }
+                else if (harvestable == null) {
                     SaveGameObject(child.gameObject, tile.name, health);
                 }
             }
 
             worldDataManager.SaveData();
-
-        } else {
-
+        }
+        else {
             // Remove current
             WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
             worldDataManager.RemoveWorldObject(worldObject);
@@ -55,29 +58,44 @@ public class Interactable : MonoBehaviour {
             worldDataManager.SaveData();
         }
 
-        var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
-
-        Array.Sort(slots, delegate (InventorySlot slot1, InventorySlot slot2) {
-            return slot1.slotID.CompareTo(slot2.slotID);
-        });
-
-        int slotID = 1;
-
-        foreach (var slot in slots) {
-            if (!slot.isAssigned && slot.slotID != 0) {
-                slotID = slot.slotID;
-                break;
-            }
+        if (firstItemDrop != null) {
+            CheckForSlot(firstItemDrop, dropChanceFirstItem, amountFirstItem);
         }
 
-        var newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, 1, slotID));
+        if (secondItemDrop != null) {
+            CheckForSlot(secondItemDrop, dropChanceSecondItem, amountSecondItem);
+        }
+    }
 
-        inventory.AddItem(newItem);
+    private void CheckForSlot(ItemObject itemObject, float dropChance, int dropAmount) {
+        var calculatedDropChance = 100 * dropChance;
+        var randomNumber = Random.Range(0, 100);
+
+        if (randomNumber <= calculatedDropChance) {
+            var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
+
+            Array.Sort(slots,
+                delegate(InventorySlot slot1, InventorySlot slot2) { return slot1.slotID.CompareTo(slot2.slotID); });
+
+            int slotID = 1;
+
+            foreach (var slot in slots) {
+                if (!slot.isAssigned && slot.slotID != 0) {
+                    slotID = slot.slotID;
+                    break;
+                }
+            }
+
+            var newItem = new ItemObject(itemObject.item,
+                new InventoryObject(itemObject.item.id, dropAmount, slotID));
+            inventory.AddItem(newItem);
+        }
     }
 
     private void SaveGameObject(GameObject gameObject, string tileName, int health) {
         PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
-        WorldObject worldObject = new(prefabIdentifier.prefabIdentifier, tileName, gameObject.transform.position, gameObject.transform.rotation, health);
+        WorldObject worldObject = new(prefabIdentifier.prefabIdentifier, tileName, gameObject.transform.position,
+            gameObject.transform.rotation, health);
         worldDataManager.AddWorldObject(worldObject);
     }
 }

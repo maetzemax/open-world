@@ -51,13 +51,9 @@ public class HotbarBehaviour : MonoBehaviour {
         }
 
         foreach (var slot in hotbarSlots) {
-
             if (slot == hotbarSlots[selectedSlot] && slot.selectedItem != null) {
                 slot.GetComponentInChildren<Image>().sprite = selectedSlotIcon;
                 player.selectedTool = slot.selectedItem;
-
-                if (player.selectedTool.item != null)
-                    print(player.selectedTool.item.name);
             }
             else {
                 slot.GetComponentInChildren<Image>().sprite = slotIcon;

@@ -7,7 +7,6 @@ using System;
 using System.Linq;
 
 public class CraftingPanel : MonoBehaviour {
-
     public TextMeshProUGUI title;
     public Image icon;
 
@@ -26,9 +25,8 @@ public class CraftingPanel : MonoBehaviour {
     }
 
     public void AddRecipe(CraftingRecipe craftingRecipe) {
-
         this.craftingRecipe = craftingRecipe;
-        
+
         craftingItem = itemDatabase.itemList.Find(i => i.id == craftingRecipe.resultItemID);
 
         icon.sprite = craftingItem.icon;
@@ -38,14 +36,15 @@ public class CraftingPanel : MonoBehaviour {
 
         for (int i = 0; i < craftingRecipe.ingredients.Count; i++) {
             if (i == 0)
-                ingredient1.text = craftingRecipe.ingredients[i].amount + "x " + itemDatabase.itemList.Find(item => item.id == craftingRecipe.ingredients[i].itemID).name;
+                ingredient1.text = craftingRecipe.ingredients[i].amount + "x " + itemDatabase.itemList
+                    .Find(item => item.id == craftingRecipe.ingredients[i].itemID).name;
             if (i == 1)
-                ingredient2.text = craftingRecipe.ingredients[i].amount + "x " + itemDatabase.itemList.Find(item => item.id == craftingRecipe.ingredients[i].itemID).name;
+                ingredient2.text = craftingRecipe.ingredients[i].amount + "x " + itemDatabase.itemList
+                    .Find(item => item.id == craftingRecipe.ingredients[i].itemID).name;
         }
     }
 
     public void CraftRecipe() {
-        
         for (var i = 0; i < craftingRecipe.ingredients.Count; i++) {
             switch (i) {
                 case 0:
@@ -63,9 +62,8 @@ public class CraftingPanel : MonoBehaviour {
 
         var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
 
-        Array.Sort(slots, delegate (InventorySlot slot1, InventorySlot slot2) {
-            return slot1.slotID.CompareTo(slot2.slotID);
-        });
+        Array.Sort(slots,
+            delegate(InventorySlot slot1, InventorySlot slot2) { return slot1.slotID.CompareTo(slot2.slotID); });
 
         List<InventorySlot> filteredSlots = new();
 
@@ -77,8 +75,6 @@ public class CraftingPanel : MonoBehaviour {
         }
 
         var itemAmount = filteredSlots.Sum(slot => slot.itemObject.inventoryObject.itemAmount);
-        
-        print("item Amount: " + itemAmount);
 
         if (itemAmount < ingredientAmount)
             return;
@@ -87,7 +83,8 @@ public class CraftingPanel : MonoBehaviour {
             if (ingredientAmount < filteredSlot.itemObject.inventoryObject.itemAmount) {
                 inventory.RemoveItem(filteredSlot.itemObject, ingredientAmount);
                 break;
-            } else if (ingredientAmount >= filteredSlot.itemObject.inventoryObject.itemAmount) {
+            }
+            else if (ingredientAmount >= filteredSlot.itemObject.inventoryObject.itemAmount) {
                 ingredientAmount -= filteredSlot.itemObject.inventoryObject.itemAmount;
                 inventory.RemoveItem(filteredSlot.itemObject, filteredSlot.itemObject.inventoryObject.itemAmount);
             }
@@ -100,9 +97,8 @@ public class CraftingPanel : MonoBehaviour {
         if (index == craftingRecipe.ingredients.Count - 1) {
             var allSlots = Resources.FindObjectsOfTypeAll<InventorySlot>();
 
-            Array.Sort(allSlots, delegate (InventorySlot slot1, InventorySlot slot2) {
-                return slot1.slotID.CompareTo(slot2.slotID);
-            });
+            Array.Sort(allSlots,
+                delegate(InventorySlot slot1, InventorySlot slot2) { return slot1.slotID.CompareTo(slot2.slotID); });
 
             int slotID = 1;
 
@@ -113,10 +109,10 @@ public class CraftingPanel : MonoBehaviour {
                 }
             }
 
-            inventory.AddItem(new ItemObject(itemDatabase.itemList.Find(item => item.id == craftingRecipe.resultItemID), new InventoryObject(craftingRecipe.resultItemID, craftingRecipe.resultAmount, slotID)));
+            inventory.AddItem(new ItemObject(itemDatabase.itemList.Find(item => item.id == craftingRecipe.resultItemID),
+                new InventoryObject(craftingRecipe.resultItemID, craftingRecipe.resultAmount, slotID)));
 
             WorldDataManager.instance.SaveData();
         }
-
     }
 }
