@@ -2,28 +2,28 @@
 <InventoryDatabase xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <inventoryObjects>
     <InventoryObject>
-      <itemID>2</itemID>
-      <itemGUID>7b5c62bd-76e2-4fe1-bd02-e4eade081a03</itemGUID>
-      <slotId>2</slotId>
-      <itemAmount>4</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>5</itemID>
-      <itemGUID>21875b21-650a-4832-9b69-ad893c104a7b</itemGUID>
+      <itemID>7</itemID>
+      <itemGUID>33801e62-c92d-4d26-9552-f272d710d965</itemGUID>
       <slotId>1</slotId>
       <itemAmount>1</itemAmount>
     </InventoryObject>
     <InventoryObject>
       <itemID>1</itemID>
-      <itemGUID>96fa19d4-d8a8-4287-bfdf-c9a541d4abf6</itemGUID>
+      <itemGUID>bb34e627-21bb-4c39-9984-6675dffdbc53</itemGUID>
+      <slotId>2</slotId>
+      <itemAmount>4</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>2</itemID>
+      <itemGUID>f7a03f0a-d633-4217-ba9e-020d5be3773c</itemGUID>
       <slotId>3</slotId>
-      <itemAmount>8</itemAmount>
+      <itemAmount>5</itemAmount>
     </InventoryObject>
     <InventoryObject>
       <itemID>1</itemID>
-      <itemGUID>e1a300b9-82a0-4970-a41a-5b330b4cb2f1</itemGUID>
+      <itemGUID>57c743db-225e-481b-8ba1-165e71c01638</itemGUID>
       <slotId>4</slotId>
-      <itemAmount>8</itemAmount>
+      <itemAmount>2</itemAmount>
     </InventoryObject>
   </inventoryObjects>
 </InventoryDatabase>

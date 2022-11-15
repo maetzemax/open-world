@@ -27,6 +27,7 @@ public class CraftingPanel : MonoBehaviour {
     public void AddRecipe(CraftingRecipes craftingRecipe) {
 
         this.craftingRecipe = craftingRecipe;
+        
         craftingItem = itemDatabase.itemList.Find(i => i.id == craftingRecipe.resultItemID);
 
         icon.sprite = craftingItem.icon;

@@ -14,7 +14,7 @@ public class CraftingUI : MonoBehaviour {
     }
 
     private void Start() {
-
+        
         for (int i = 0; i < craftingRecipes.FindAll(cr => !cr.needCraftingBench).Count; i++) {
             Instantiate(craftingPanel, gameObject.transform);
         }
