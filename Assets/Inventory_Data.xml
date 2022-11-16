@@ -2,58 +2,112 @@
 <InventoryDatabase xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <inventoryObjects>
     <InventoryObject>
-      <itemID>2</itemID>
-      <itemGUID>4f610e63-2d6b-44c5-9da9-586c99297f41</itemGUID>
-      <slotId>1</slotId>
-      <itemAmount>2</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>10</itemID>
-      <itemGUID>6eb48a79-b098-4782-8419-53d8bae53951</itemGUID>
-      <slotId>2</slotId>
-      <itemAmount>5</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>2</itemID>
-      <itemGUID>00b67ae3-ab4a-4961-b5c6-6ab5535ade74</itemGUID>
+      <itemID>1</itemID>
+      <itemGUID>fb29aff4-b407-44de-a0fc-3b1f31e71fed</itemGUID>
       <slotId>4</slotId>
-      <itemAmount>1</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>7</itemID>
-      <itemGUID>236ff6f1-a838-4158-805e-f1bf936b348c</itemGUID>
-      <slotId>3</slotId>
-      <itemAmount>1</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>1</itemID>
-      <itemGUID>99512498-30cf-468d-a99d-d73f86dc9e03</itemGUID>
-      <slotId>5</slotId>
-      <itemAmount>8</itemAmount>
-    </InventoryObject>
-    <InventoryObject>
-      <itemID>1</itemID>
-      <itemGUID>e05bfdc8-3b14-4101-8462-45b0d431d451</itemGUID>
-      <slotId>6</slotId>
       <itemAmount>8</itemAmount>
     </InventoryObject>
     <InventoryObject>
       <itemID>5</itemID>
-      <itemGUID>a71ecab1-1e73-4e9e-be40-d1e04fd91267</itemGUID>
+      <itemGUID>908256f2-ed84-4a26-86cf-6869da946448</itemGUID>
+      <slotId>2</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>4</itemID>
+      <itemGUID>0834f9f7-ca44-4429-bfed-908e9c8f9bcd</itemGUID>
       <slotId>1</slotId>
       <itemAmount>1</itemAmount>
     </InventoryObject>
     <InventoryObject>
-      <itemID>3</itemID>
-      <itemGUID>8b1a3b38-100d-43c7-9cb5-824cd4c6d0a7</itemGUID>
-      <slotId>7</slotId>
-      <itemAmount>4</itemAmount>
+      <itemID>10</itemID>
+      <itemGUID>77f7b933-8bfd-4da6-b4ab-6b2d42c5843b</itemGUID>
+      <slotId>5</slotId>
+      <itemAmount>13</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>6</itemID>
+      <itemGUID>3fad03fd-a6ab-4bf7-be3f-948aa2123f04</itemGUID>
+      <slotId>10</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>13</itemID>
+      <itemGUID>04b98f45-d6c0-4d19-9b44-648563bc1eab</itemGUID>
+      <slotId>4</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>12</itemID>
+      <itemGUID>3b3fdaa8-ac51-4672-8be3-97353eaa6998</itemGUID>
+      <slotId>2</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>8</itemID>
+      <itemGUID>324a91bc-d1fa-4262-92ad-db0269bbeb04</itemGUID>
+      <slotId>3</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>7</itemID>
+      <itemGUID>5e1a7275-bc1b-44c3-a352-c54558ce5bbe</itemGUID>
+      <slotId>5</slotId>
+      <itemAmount>1</itemAmount>
     </InventoryObject>
     <InventoryObject>
       <itemID>1</itemID>
-      <itemGUID>6ed61265-096f-4e91-878a-a694f24f55de</itemGUID>
+      <itemGUID>549afd46-e1d9-42e2-bdb0-585fc3b18038</itemGUID>
+      <slotId>13</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>2</itemID>
+      <itemGUID>e1643a8e-6c0a-4977-905b-ec689d1cfc03</itemGUID>
+      <slotId>14</slotId>
+      <itemAmount>7</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>8</itemID>
+      <itemGUID>76ea2f1a-d97b-4055-884b-784a38ee7121</itemGUID>
       <slotId>8</slotId>
-      <itemAmount>4</itemAmount>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>8</itemID>
+      <itemGUID>88832857-5004-43cd-bb46-3c6ef171080c</itemGUID>
+      <slotId>6</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>8</itemID>
+      <itemGUID>65105c08-7b7d-459c-952a-66b0fbdc6c87</itemGUID>
+      <slotId>9</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>7</itemID>
+      <itemGUID>29920092-aab9-41e9-8740-dd0fc339fc4a</itemGUID>
+      <slotId>7</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>7</itemID>
+      <itemGUID>fddf8ffa-d7ad-4e67-8cd7-a41316b28442</itemGUID>
+      <slotId>11</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>7</itemID>
+      <itemGUID>77c7ff94-013c-4c8f-a0f2-930a22dd0a65</itemGUID>
+      <slotId>12</slotId>
+      <itemAmount>1</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>7</itemID>
+      <itemGUID>f531517a-52f5-4c5e-b41b-18b1b77c71d8</itemGUID>
+      <slotId>15</slotId>
+      <itemAmount>1</itemAmount>
     </InventoryObject>
   </inventoryObjects>
 </InventoryDatabase>

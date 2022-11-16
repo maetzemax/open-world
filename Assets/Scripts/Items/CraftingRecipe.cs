@@ -37,13 +37,15 @@ public class CraftingRecipe: MonoBehaviour {
 
     private void Start() {
         craftingRecipes = new() {
-            new(ingredients: new List<Ingredients>() { new(itemID: 2, amount: 8), new(itemID: 3, amount: 4) }, resultItemID: 4, needCraftingBench: false, resultAmount: 9), // Stone Pickaxe
+            new(ingredients: new List<Ingredients>() { new(itemID: 2, amount: 8), new(itemID: 3, amount: 4) }, resultItemID: 4, needCraftingBench: false, resultAmount: 1), // Stone Pickaxe
             new(new List<Ingredients>() { new(2, 8), new(1, 4) }, 5, false, 1), // Wood Pickaxe
+            new(new List<Ingredients>() { new(2, 8), new(6, 4) }, 12, false, 1), // Iron Pickaxe
             new(new List<Ingredients>() { new(2, 8), new(1, 4) }, 7, false, 1), // Wood Axe
             new(new List<Ingredients>() { new(2, 8), new(3, 4) }, 8, false, 1), // Stone Axe
             new(new List<Ingredients>() { new(2, 8), new(6, 4) }, 9, false, 1), // Iron Axe
             new(new List<Ingredients>() { new(1, 1) }, 2, false, 1), // Stick
             new(new List<Ingredients>() { new(10, 4) }, 11, false, 1), // Cloth
+            new(new List<Ingredients>() { new(2, 8), new(11, 4) }, 13, false, 1), // Torch
         };
     }
 }
