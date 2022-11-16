@@ -114,6 +114,27 @@ public class PlaceObjects : MonoBehaviour {
             }
         }
         else {
+            
+            for (int i = 0; i < 20; i++) {
+                int prefabType = Random.Range(0, grassTypes.Count);
+                Vector3 startPoint = RandomPointAboveTerrain();
+
+                RaycastHit hit;
+                if (Physics.Raycast(startPoint, Vector3.down, out hit) &&
+                    hit.point.y > TerrainController.Beach.transform.position.y &&
+                    hit.point.y < TerrainController.Mountain.transform.position.y &&
+                    hit.collider.CompareTag("Terrain")) {
+                    Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
+                    RaycastHit boxHit;
+                    if (Physics.BoxCast(startPoint, new Vector3(1, 1, 1), Vector3.down, out boxHit, orientation) &&
+                        boxHit.collider.CompareTag("Terrain")) {
+                        GameObject grass = grassTypes[prefabType];
+                        Vector3 position = new Vector3(startPoint.x, hit.point.y, startPoint.z);
+                        Instantiate(grass, position, orientation, transform);
+                    }
+                }
+            }
+            
             foreach (var item in filteredObjects) {
                 PrefabItem prefabItem =
                     PrefabDatabase.instance.prefabItems.Where(p => p.prefabID == item.prefabID).First();

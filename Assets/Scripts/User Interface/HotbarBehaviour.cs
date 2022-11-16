@@ -30,7 +30,7 @@ public class HotbarBehaviour : MonoBehaviour {
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
-            mouseWheelPosition += 1;
+            mouseWheelPosition -= 1;
             selectedSlot = (mouseWheelPosition % 5);
         }
 

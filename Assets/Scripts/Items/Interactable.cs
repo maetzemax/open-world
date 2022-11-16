@@ -38,10 +38,11 @@ public class Interactable : MonoBehaviour {
 
             foreach (Transform child in tile.transform) {
                 Harvestable harvestable = child.gameObject.GetComponent<Harvestable>();
+                Interactable interactable = child.gameObject.GetComponent<Interactable>();
                 if (harvestable != null) {
                     SaveGameObject(child.gameObject, tile.name, harvestable.health);
                 }
-                else if (harvestable == null) {
+                else if (interactable != null) {
                     SaveGameObject(child.gameObject, tile.name, health);
                 }
             }

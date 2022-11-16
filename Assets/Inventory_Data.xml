@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<InventoryDatabase xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <inventoryObjects>
+    <InventoryObject>
+      <itemID>2</itemID>
+      <itemGUID>99ff442a-2ed9-4cea-8aa1-32c00aac06f8</itemGUID>
+      <slotId>1</slotId>
+      <itemAmount>16</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>10</itemID>
+      <itemGUID>8f6b1b74-c255-4f61-a3b6-c62ea5535245</itemGUID>
+      <slotId>2</slotId>
+      <itemAmount>5</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>1</itemID>
+      <itemGUID>082fd765-5b30-4053-9882-c41bf7bc8c9a</itemGUID>
+      <slotId>3</slotId>
+      <itemAmount>3</itemAmount>
+    </InventoryObject>
+    <InventoryObject>
+      <itemID>2</itemID>
+      <itemGUID>a12eb8f3-97e5-4023-bb0a-782a1a49a16c</itemGUID>
+      <slotId>4</slotId>
+      <itemAmount>3</itemAmount>
+    </InventoryObject>
+  </inventoryObjects>
+</InventoryDatabase>
