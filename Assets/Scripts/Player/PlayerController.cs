@@ -142,9 +142,7 @@ public class PlayerController : MonoBehaviour {
                     Destroy(currentSelectedTool);
 
                     if (selectedTool.item.isTool)
-                        Instantiate(selectedTool.item.prefab,
-                            toolHolder.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity,
-                            toolHolder.transform);
+                        Instantiate(selectedTool.item.prefab, toolHolder.transform);
                 }
                 else if (currentSelectedTool == null) {
                     if (selectedTool.item.isTool)

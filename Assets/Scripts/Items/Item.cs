@@ -9,6 +9,7 @@ public class Item : ScriptableObject {
     public Sprite icon;
     public bool isTool;
     public GameObject prefab;
+    public Category category;
 
     public int stackSize = 1;
 
@@ -17,4 +18,11 @@ public class Item : ScriptableObject {
         // SOMETHING SHOULD HAPPEND
         Debug.Log("Use item");
     }
+}
+
+public enum Category {
+    PICKAXE,
+    AXE,
+    SWORD,
+    ITEM
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HarvestAnimation : MonoBehaviour {
@@ -40,7 +41,11 @@ public class HarvestAnimation : MonoBehaviour {
 
             yield return new WaitForSeconds(0.7f);
 
-            harvestable.Harvest();
+            PlayerController player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+
+            if (player.selectedTool.item.category == harvestable.destrutable) {
+                harvestable.Harvest();
+            }
         }
         else {
             isHarvesting = true;

@@ -8,6 +8,8 @@ public class Harvestable : MonoBehaviour {
     public ItemObject drop;
     public int health = 5;
 
+    public Category destrutable;
+
     InventoryManager inventory;
 
     private void Start() {
