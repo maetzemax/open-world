@@ -28,9 +28,11 @@ public class LightingManager : MonoBehaviour {
         if (Application.isPlaying) {
 
             if (timeOfDay < 5 || timeOfDay > 19) {
-                timeOfDay += Time.deltaTime * 0.33f;
+                timeOfDay += Time.deltaTime * 0.2f;
+                directionLight.intensity = 0.5f;
             } else {
                 timeOfDay += Time.deltaTime * 0.075f;
+                directionLight.intensity = 1;
             }
 
             timeOfDay %= 24;
