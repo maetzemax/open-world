@@ -20,13 +20,9 @@ public class Interactable : MonoBehaviour {
         worldDataManager = WorldDataManager.instance;
     }
 
-    private void Update() {
-        if (health <= 0) {
-            Destroy(gameObject);
-        }
-    }
-
     public void Interact() {
+        health = 0;
+
         inventory.pickUpText.text = "";
         inventory.pickUpText.enabled = false;
 
@@ -35,47 +31,42 @@ public class Interactable : MonoBehaviour {
         List<WorldObject> worldObjects = worldDataManager.worldObjectDB.worldObjects;
         List<WorldObject> filteredObjects = worldObjects.FindAll(e => e.terrainID == terrainTile.name);
 
-        health--;
-        
         if (filteredObjects.Count == 0) {
             var tile = gameObject.GetComponentInParent<PlaceObjects>().gameObject;
 
             foreach (Transform child in tile.transform) {
-
                 var prefabIdentifier = child.gameObject.GetComponent<PrefabIdentifier>();
 
                 if (prefabIdentifier != null) {
-                    Harvestable harvestable = child.gameObject.GetComponent<Harvestable>();
+                    Harvestable harvestable = prefabIdentifier.gameObject.GetComponentInChildren<Harvestable>();
                     Interactable interactable = prefabIdentifier.gameObject.GetComponentInChildren<Interactable>();
 
                     if (harvestable != null) {
-                        SaveGameObject(child.gameObject, tile.name, harvestable.health);
-                        break;
+                        SaveGameObject(prefabIdentifier.gameObject, tile.name, harvestable.health, prefabIdentifier.transform.position);
                     }
-
-                    if (interactable != null) {
-                        print(interactable.gameObject.name + " with health " + interactable.health);
-                        SaveGameObject(child.gameObject, tile.name, interactable.health);
-                        break;
+                    else if (interactable != null) {
+                        SaveGameObject(prefabIdentifier.gameObject, tile.name, interactable.health, prefabIdentifier.transform.position);
                     }
-                    
-                    SaveGameObject(child.gameObject, tile.name, 1);
-                    break;
+                    else {
+                        SaveGameObject(prefabIdentifier.gameObject, tile.name, 1, prefabIdentifier.transform.position);
+                    }
                 }
             }
-            
+
             worldDataManager.SaveData();
         }
         else {
             // Remove current
-            WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
+            WorldObject worldObject = worldObjects.Find(p => p.worldPosition == gameObject.GetComponentInParent<PrefabIdentifier>().gameObject.transform.position);
             worldDataManager.RemoveWorldObject(worldObject);
             Destroy(gameObject);
 
             // Save
             worldDataManager.SaveData();
         }
-
+        
+        Destroy(gameObject);
+        
         if (firstItemDrop != null) {
             CheckForSlot(firstItemDrop, dropChanceFirstItem, amountFirstItem);
         }
@@ -109,9 +100,9 @@ public class Interactable : MonoBehaviour {
         }
     }
 
-    private void SaveGameObject(GameObject gameObject, string tileName, int health) {
+    private void SaveGameObject(GameObject gameObject, string tileName, int health, Vector3 position) {
         PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
-        WorldObject worldObject = new(prefabIdentifier.prefabIdentifier, tileName, gameObject.transform.position,
+        WorldObject worldObject = new(prefabIdentifier.prefabIdentifier, tileName, position,
             gameObject.transform.rotation, health);
         worldDataManager.AddWorldObject(worldObject);
     }
