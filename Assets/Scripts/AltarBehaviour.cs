@@ -14,6 +14,7 @@ public class AltarBehaviour : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
+        shardHolder.transform.Rotate(0, 3f, 0);
     }
 }

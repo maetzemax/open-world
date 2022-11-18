@@ -23,8 +23,8 @@ public class CraftingRecipe: MonoBehaviour {
 
     public readonly List<Ingredients> ingredients;
     public readonly int resultItemID;
-    public readonly bool needCraftingBench = true;
-    public readonly int resultAmount = 1;
+    public readonly bool needCraftingBench;
+    public readonly int resultAmount;
 
     public CraftingRecipe(List<Ingredients> ingredients, int resultItemID, bool needCraftingBench, int resultAmount) {
         this.ingredients = ingredients;

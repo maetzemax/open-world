@@ -37,17 +37,20 @@ public class Interactable : MonoBehaviour {
             GameObject tile = gameObject.GetComponentInParent<PlaceObjects>().gameObject;
 
             foreach (Transform child in tile.transform) {
-                Harvestable harvestable = child.gameObject.GetComponent<Harvestable>();
-                Interactable interactable = child.gameObject.GetComponent<Interactable>();
-                if (harvestable != null) {
-                    SaveGameObject(child.gameObject, tile.name, harvestable.health);
-                }
-                else if (interactable != null) {
-                    SaveGameObject(child.gameObject, tile.name, health);
+                var prefabIdentifier = child.gameObject.GetComponent<PrefabIdentifier>();
+
+                if (prefabIdentifier != null) {
+                    Harvestable harvestable = child.gameObject.GetComponent<Harvestable>();
+                    if (harvestable != null) {
+                        SaveGameObject(child.gameObject, tile.name, harvestable.health);
+                    }
+                    else {
+                        SaveGameObject(child.gameObject, tile.name, health);
+                    }
+
+                    worldDataManager.SaveData();
                 }
             }
-
-            worldDataManager.SaveData();
         }
         else {
             // Remove current
@@ -87,8 +90,7 @@ public class Interactable : MonoBehaviour {
                 }
             }
 
-            var newItem = new ItemObject(itemObject.item,
-                new InventoryObject(itemObject.item.id, dropAmount, slotID));
+            var newItem = new ItemObject(itemObject.item, new InventoryObject(itemObject.item.id, dropAmount, slotID));
             inventory.AddItem(newItem);
         }
     }

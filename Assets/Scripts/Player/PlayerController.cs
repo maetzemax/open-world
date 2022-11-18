@@ -2,35 +2,19 @@
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
-    [Header("Camera")] public Camera cam;
-    public bool lockCursor;
+    public float walkingSpeed = 7.5f;
+    public float runningSpeed = 11.5f;
+    public float jumpSpeed = 8.0f;
+    public float gravity = 20.0f;
+    public Camera playerCamera;
+    public float lookSpeed = 2.0f;
+    public float lookXLimit = 45.0f;
 
-    [Range(0.1f, 10)] public float lookSensitivity;
+    CharacterController characterController;
+    Vector3 moveDirection = Vector3.zero;
+    float rotationX = 0;
 
-    public float maxUpRotation;
-    public float maxDownRotation;
-
-    private float xRotation = 0;
-
-    [Header("Movement")] public CharacterController controller;
-
-    // Speed of forwards and backwards movement
-    [Range(0.5f, 20)] public float walkSpeed;
-
-    // Speed of sideways (left and right) movement
-    [Range(0.5f, 15)] public float strafeSpeed;
-
-    public KeyCode sKey;
-
-    // How many times faster movement along the X and Z axes
-    // is when sing
-    [Range(1, 3)] public float sFactor;
-
-    [Range(0.5f, 10)] public float jumpHeight;
-    public int maxJumps;
-
-    private Vector3 velocity = Vector3.zero;
-    private int jumpsSinceLastLand = 0;
+    [HideInInspector] public bool canMove = true;
 
     private GameObject currentLookAt;
 
@@ -43,8 +27,14 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         inventory = InventoryManager.instance;
-    }
+        
+        characterController = GetComponent<CharacterController>();
 
+        // Lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    
     void Awake() {
         if (PlayerPrefs.HasKey("y")) {
             var playerRotation = Quaternion.Euler(0, PlayerPrefs.GetFloat("y_rotation"), 0);
@@ -54,8 +44,8 @@ public class PlayerController : MonoBehaviour {
             gameObject.transform.position = playerPosition;
 
             var camRotation = Quaternion.Euler(PlayerPrefs.GetFloat("x_rotation"), 0, 0);
-            cam.transform.rotation = camRotation;
-            xRotation = PlayerPrefs.GetFloat("x_rotation");
+            playerCamera.transform.rotation = camRotation;
+            rotationX = PlayerPrefs.GetFloat("x_rotation");
         }
     }
 
@@ -68,39 +58,49 @@ public class PlayerController : MonoBehaviour {
 
         if (isInventoryOpen) {
             Cursor.lockState = CursorLockMode.None;
-
-            velocity.z = 0;
-            velocity.x = 0;
+            canMove = false;
         }
         else {
+            canMove = true;
             Cursor.lockState = CursorLockMode.Locked;
 
-            transform.Rotate(0, Input.GetAxis("Mouse X") * lookSensitivity, 0);
-            xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
-            xRotation = Mathf.Clamp(xRotation, -maxUpRotation, maxDownRotation);
-            cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            // We are grounded, so recalculate move direction based on axes
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
 
-            velocity.z = Input.GetAxis("Vertical") * walkSpeed;
-            velocity.x = Input.GetAxis("Horizontal") * strafeSpeed;
-            velocity = transform.TransformDirection(velocity);
+            // Press Left Shift to run
+            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
+            float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+            float movementDirectionY = moveDirection.y;
+            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-            // Apply manual gravity
-            if (Input.GetKey(sKey)) {
-                S();
+            if (Input.GetButton("Jump") && canMove && characterController.isGrounded) {
+                moveDirection.y = jumpSpeed;
+            }
+            else {
+                moveDirection.y = movementDirectionY;
             }
 
-            if (Input.GetButtonDown("Jump")) {
-                if (controller.isGrounded) {
-                    Jump();
-                }
-                else if (jumpsSinceLastLand < maxJumps) {
-                    Jump();
-                }
+            // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
+            // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
+            // as an acceleration (ms^-2)
+            if (!characterController.isGrounded) {
+                moveDirection.y -= gravity * Time.deltaTime;
             }
 
-            // let item glow when look at it
+            // Move the controller
+            characterController.Move(moveDirection * Time.deltaTime);
 
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            // Player and Camera rotation
+            if (canMove) {
+                rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+                rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+                playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+                transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+            }
+
+            Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
@@ -138,7 +138,6 @@ public class PlayerController : MonoBehaviour {
 
                 if (currentSelectedTool != null &&
                     currentSelectedTool.gameObject.name != selectedTool.item.prefab.name + "(Clone)") {
-
                     Destroy(currentSelectedTool);
 
                     if (selectedTool.item.isTool)
@@ -151,40 +150,17 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        velocity.y += Physics.gravity.y * Time.deltaTime;
-
-        if (controller.isGrounded && velocity.y < 0) {
-            Land();
-        }
-
         PlayerPrefs.SetFloat("y_rotation", gameObject.transform.rotation.eulerAngles.y);
-        PlayerPrefs.SetFloat("x_rotation", cam.transform.rotation.eulerAngles.x);
+        PlayerPrefs.SetFloat("x_rotation", playerCamera.transform.rotation.eulerAngles.x);
         PlayerPrefs.SetFloat("x", gameObject.transform.position.x);
         PlayerPrefs.SetFloat("y", gameObject.transform.position.y);
         PlayerPrefs.SetFloat("z", gameObject.transform.position.z);
 
         PlayerPrefs.Save();
-
-        controller.Move(velocity * Time.deltaTime);
-    }
-
-    private void S() {
-        velocity.z *= sFactor;
-        velocity.x *= sFactor;
-    }
-
-    private void Jump() {
-        velocity.y = Mathf.Sqrt(jumpHeight * -2 * Physics.gravity.y);
-        jumpsSinceLastLand++;
-    }
-
-    private void Land() {
-        velocity.y = 0;
-        jumpsSinceLastLand = 0;
     }
 
     private void Interact() {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
