@@ -58,6 +58,9 @@ public class Interactable : MonoBehaviour {
                         SaveGameObject(child.gameObject, tile.name, interactable.health);
                         break;
                     }
+                    
+                    SaveGameObject(child.gameObject, tile.name, 1);
+                    break;
                 }
             }
             
