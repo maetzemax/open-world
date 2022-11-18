@@ -5,52 +5,63 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Interactable : MonoBehaviour {
+    public int health = 1;
     public ItemObject firstItemDrop;
     [Range(0, 1)] [SerializeField] private float dropChanceFirstItem;
     [SerializeField] private int amountFirstItem;
     public ItemObject secondItemDrop;
     [Range(0, 1)] [SerializeField] private float dropChanceSecondItem;
     [SerializeField] private int amountSecondItem;
-    InventoryManager inventory;
-    WorldDataManager worldDataManager;
-
-    private int health = 1;
+    private InventoryManager inventory;
+    private WorldDataManager worldDataManager;
 
     private void Awake() {
         inventory = InventoryManager.instance;
         worldDataManager = WorldDataManager.instance;
     }
 
-    public virtual void Interact() {
+    private void Update() {
+        if (health <= 0) {
+            Destroy(gameObject);
+        }
+    }
+
+    public void Interact() {
         inventory.pickUpText.text = "";
         inventory.pickUpText.enabled = false;
 
-        GameObject terrainTile = GetComponentInParent<GenerateMesh>().gameObject;
+        var terrainTile = GetComponentInParent<GenerateMesh>().gameObject;
 
         List<WorldObject> worldObjects = worldDataManager.worldObjectDB.worldObjects;
         List<WorldObject> filteredObjects = worldObjects.FindAll(e => e.terrainID == terrainTile.name);
 
         health--;
-        Destroy(gameObject);
-
+        
         if (filteredObjects.Count == 0) {
-            GameObject tile = gameObject.GetComponentInParent<PlaceObjects>().gameObject;
+            var tile = gameObject.GetComponentInParent<PlaceObjects>().gameObject;
 
             foreach (Transform child in tile.transform) {
+
                 var prefabIdentifier = child.gameObject.GetComponent<PrefabIdentifier>();
 
                 if (prefabIdentifier != null) {
                     Harvestable harvestable = child.gameObject.GetComponent<Harvestable>();
+                    Interactable interactable = prefabIdentifier.gameObject.GetComponentInChildren<Interactable>();
+
                     if (harvestable != null) {
                         SaveGameObject(child.gameObject, tile.name, harvestable.health);
-                    }
-                    else {
-                        SaveGameObject(child.gameObject, tile.name, health);
+                        break;
                     }
 
-                    worldDataManager.SaveData();
+                    if (interactable != null) {
+                        print(interactable.gameObject.name + " with health " + interactable.health);
+                        SaveGameObject(child.gameObject, tile.name, interactable.health);
+                        break;
+                    }
                 }
             }
+            
+            worldDataManager.SaveData();
         }
         else {
             // Remove current
