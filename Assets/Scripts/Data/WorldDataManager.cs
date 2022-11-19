@@ -67,6 +67,7 @@ public class WorldObject {
     public Vector3 worldPosition;
     public Quaternion orientation;
     public int health;
+    public bool isCollected;
 
     public WorldObject(string prefabID, string terrainID, Vector3 worldPosition, Quaternion orientation, int health) {
         this.prefabID = prefabID;
@@ -74,6 +75,16 @@ public class WorldObject {
         this.worldPosition = worldPosition;
         this.orientation = orientation;
         this.health = health;
+        isCollected = false;
+    }
+
+    public WorldObject(string prefabID, string terrainID, Vector3 worldPosition, Quaternion orientation, int health, bool isCollected) {
+        this.prefabID = prefabID;
+        this.terrainID = terrainID;
+        this.worldPosition = worldPosition;
+        this.orientation = orientation;
+        this.health = health;
+        this.isCollected = isCollected;
     }
 
     public WorldObject() { }

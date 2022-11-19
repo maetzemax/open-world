@@ -93,9 +93,39 @@ public class PlaceObjects : MonoBehaviour {
             }
 
             // Above Mountain level
-            for (int i = 0; i < Random.Range(0, 2); i++) {
+            for (int i = 0; i < Random.Range(1, 2); i++) {
                 
-                var copyObjects = placeableObjects.FindAll(po => po.prefabID == "iron_ore" || po.prefabID == "altar");
+                var copyObjects = placeableObjects.FindAll(po => po.prefabID == "iron_ore");
+
+                int prefabType = Random.Range(0, copyObjects.Count);
+                Vector3 startPoint = RandomPointAboveTerrain();
+
+                RaycastHit hit;
+                if (Physics.Raycast(startPoint, Vector3.down, out hit) &&
+                    hit.point.y > TerrainController.Mountain.transform.position.y &&
+                    hit.collider.CompareTag("Terrain")) {
+                    Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
+                    RaycastHit boxHit;
+                    if (Physics.BoxCast(startPoint, placeableObjectSizes[prefabType], Vector3.down, out boxHit,
+                            orientation) && boxHit.collider.CompareTag("Terrain") &&
+                        hit.point.y > TerrainController.Mountain.transform.position.y) {
+                        PrefabItem prefabItem = copyObjects[prefabType];
+                        Vector3 position = new Vector3(startPoint.x, hit.point.y, startPoint.z);
+                        Instantiate(prefabItem.prefabGameobject, position, orientation, transform);
+                    }
+                }
+            }
+            
+            // ALTAR
+            for (int i = 0; i < 1; i++) {
+
+                var randomNumber = Random.Range(0, 100);
+
+                if (randomNumber > 15) {
+                    break;
+                }
+                
+                var copyObjects = placeableObjects.FindAll(po => po.prefabID == "altar");
 
                 int prefabType = Random.Range(0, copyObjects.Count);
                 Vector3 startPoint = RandomPointAboveTerrain();
@@ -128,6 +158,11 @@ public class PlaceObjects : MonoBehaviour {
                     GameObject go = Instantiate(prefabItem.prefabGameobject, item.worldPosition, item.orientation,
                         hit.transform);
                     go.name = prefabItem.prefabID;
+                    
+                    if (item.prefabID == "altar" && item.isCollected) {
+                        Destroy(go.GetComponent<AltarBehaviour>().shardHolder);    
+                    }
+                    
                 }
             }
         }
