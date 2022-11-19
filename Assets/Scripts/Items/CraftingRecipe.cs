@@ -21,10 +21,10 @@ public class CraftingRecipe: MonoBehaviour {
 
     #endregion
 
-    public readonly List<Ingredients> ingredients;
-    public readonly int resultItemID;
-    public readonly bool needCraftingBench;
-    public readonly int resultAmount;
+    [HideInInspector] public List<Ingredients> ingredients;
+    [HideInInspector] public int resultItemID;
+    [HideInInspector] public bool needCraftingBench;
+    [HideInInspector] public int resultAmount;
 
     public CraftingRecipe(List<Ingredients> ingredients, int resultItemID, bool needCraftingBench, int resultAmount) {
         this.ingredients = ingredients;
