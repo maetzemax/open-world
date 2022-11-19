@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ProceduralToolkit;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour {
@@ -30,13 +31,20 @@ public class PlayerController : MonoBehaviour {
         
         characterController = GetComponent<CharacterController>();
 
+        if (!characterController.isGrounded) {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit) || Physics.Raycast(transform.position, Vector3.up, out hit) && hit.collider.CompareTag("Terrain")) {
+                gameObject.transform.position = new Vector3(transform.position.x, hit.point.y + 0.2f, transform.position.z);
+            }
+        }
+        
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     
     void Awake() {
-        if (PlayerPrefs.HasKey("y")) {
+        if (PlayerPrefs.HasKey("x")) {
             var playerRotation = Quaternion.Euler(0, PlayerPrefs.GetFloat("y_rotation"), 0);
             var playerPosition = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"),
                 PlayerPrefs.GetFloat("z"));
