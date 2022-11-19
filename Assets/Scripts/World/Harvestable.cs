@@ -62,7 +62,13 @@ public class Harvestable : MonoBehaviour {
         } else {
 
             // Remove current
-            WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
+            PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
+
+            if (prefabIdentifier == null) {
+                prefabIdentifier = gameObject.GetComponent<PrefabIdentifier>();
+            }
+            
+            WorldObject worldObject = worldObjects.Find(p => p.worldPosition == prefabIdentifier.gameObject.transform.position);
             worldObject.health = health;
 
             var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
@@ -99,15 +105,15 @@ public class Harvestable : MonoBehaviour {
         }
     }
 
-    void SaveGameObject(GameObject gameObject) {
+    void SaveGameObject(GameObject harvestGameObject) {
         PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
 
         if (prefabIdentifier == null) {
             prefabIdentifier = gameObject.GetComponent<PrefabIdentifier>();
         }
 
-        GameObject terrainTile = gameObject.GetComponentInParent<GenerateMesh>().gameObject;
+        GameObject terrainTile = harvestGameObject.GetComponentInParent<GenerateMesh>().gameObject;
 
-        WorldDataManager.instance.AddWorldObject(new WorldObject(prefabIdentifier.prefabIdentifier, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, health));
+        WorldDataManager.instance.AddWorldObject(new WorldObject(prefabIdentifier.prefabIdentifier, terrainTile.name, prefabIdentifier.transform.position, prefabIdentifier.transform.rotation, health));
     }
 }

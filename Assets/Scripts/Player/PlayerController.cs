@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
+    public int health = 20;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -58,6 +59,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
+
+        if (health <= 0) {
+            Destroy(gameObject);
+        }
+        
         if (Input.GetButtonDown("Inventory")) {
             isInventoryOpen = !isInventoryOpen;
         }
