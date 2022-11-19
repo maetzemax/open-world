@@ -102,7 +102,7 @@ public class TerrainController : MonoBehaviour {
         foreach (Transform t in gameTransforms)
             t.parent = Level;
 
-        float waterSideLength = radiusToRender + 1;
+        float waterSideLength = radiusToRender * 2 + 1;
         water.localScale = new Vector3(terrainSize.x / 10 * waterSideLength, 1, terrainSize.z / 10 * waterSideLength);
         
         //choose a random place on perlin noise
