@@ -43,6 +43,9 @@ public class CraftingRecipe: MonoBehaviour {
             new(new List<Ingredients>() { new(2, 8), new(1, 4) }, 7, false, 1), // Wood Axe
             new(new List<Ingredients>() { new(2, 8), new(3, 4) }, 8, false, 1), // Stone Axe
             new(new List<Ingredients>() { new(2, 8), new(6, 4) }, 9, false, 1), // Iron Axe
+            new(new List<Ingredients>() { new(2, 8), new(1, 4) }, 18, false, 1), // Wood Sword
+            new(new List<Ingredients>() { new(2, 8), new(3, 4) }, 19, false, 1), // Stone Sword
+            new(new List<Ingredients>() { new(2, 8), new(6, 4) }, 20, false, 1), // Iron Sword
             new(new List<Ingredients>() { new(1, 1) }, 2, false, 1), // Stick
             new(new List<Ingredients>() { new(10, 4) }, 11, false, 1), // Cloth
             new(new List<Ingredients>() { new(2, 8), new(11, 4) }, 13, false, 1), // Torch

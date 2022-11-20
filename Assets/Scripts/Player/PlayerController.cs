@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject currentLookAt;
 
     [HideInInspector] public bool isInventoryOpen = false;
-    [HideInInspector] public ItemObject selectedTool = null;
+    public ItemObject selectedTool = null;
 
     public GameObject toolHolder;
     public GameObject slider;

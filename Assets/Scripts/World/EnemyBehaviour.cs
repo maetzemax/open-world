@@ -19,6 +19,11 @@ public class EnemyBehaviour : MonoBehaviour {
     private float journeyLength;
 
     void FixedUpdate() {
+
+        if (health <= 0) {
+            Destroy(gameObject);
+        }
+        
         var step = movementSpeed * Time.deltaTime;
 
         if (timer >= attackRate && Vector3.Distance(player.transform.position, transform.position) < attackRange) {
