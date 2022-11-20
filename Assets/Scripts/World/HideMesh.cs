@@ -16,6 +16,10 @@ public class HideMesh : MonoBehaviour {
 
     void FixedUpdate() {
 
+        if (player == null) {
+            return;
+        }
+        
         // Get the absolute distance between the object and the player
         var distanceToPlayer = Mathf.Abs(Vector3.Distance(transform.position, player.transform.position));
         // If greater than threshold, goodbye

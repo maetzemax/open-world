@@ -1,6 +1,5 @@
-﻿using ProceduralToolkit;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
+using System.IO;
 
 public class PlayerController : MonoBehaviour {
     public float walkingSpeed = 7.5f;
@@ -24,27 +23,32 @@ public class PlayerController : MonoBehaviour {
     public ItemObject selectedTool = null;
 
     public GameObject toolHolder;
-    public GameObject slider;
-    
+    public GameObject healthSliderPlayer;
+    public GameObject healthSliderEnemy;
+    public GameObject deathScreen;
+    public GameObject newCamera;
+
     private InventoryManager inventory;
 
     private void Start() {
         inventory = InventoryManager.instance;
-        
+
         characterController = GetComponent<CharacterController>();
 
         if (!characterController.isGrounded) {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit) || Physics.Raycast(transform.position, Vector3.up, out hit) && hit.collider.CompareTag("Terrain")) {
-                gameObject.transform.position = new Vector3(transform.position.x, hit.point.y + 0.2f, transform.position.z);
+            if (Physics.Raycast(transform.position, Vector3.down, out hit) ||
+                Physics.Raycast(transform.position, Vector3.up, out hit) && hit.collider.CompareTag("Terrain")) {
+                gameObject.transform.position =
+                    new Vector3(transform.position.x, hit.point.y + 0.2f, transform.position.z);
             }
         }
-        
+
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    
+
     void Awake() {
         if (PlayerPrefs.HasKey("x")) {
             var playerRotation = Quaternion.Euler(0, PlayerPrefs.GetFloat("y_rotation"), 0);
@@ -60,11 +64,24 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-
         if (health <= 0) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            Instantiate(newCamera);
+
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+
+            File.Delete(Application.dataPath + "/Inventory_Data.xml");
+            File.Delete(Application.dataPath + "/World_Data.xml");
+
+            deathScreen.SetActive(true);
             Destroy(gameObject);
+
+            return;
         }
-        
+
         if (Input.GetButtonDown("Inventory")) {
             isInventoryOpen = !isInventoryOpen;
         }
@@ -97,17 +114,12 @@ public class PlayerController : MonoBehaviour {
                 moveDirection.y = movementDirectionY;
             }
 
-            // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-            // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-            // as an acceleration (ms^-2)
             if (!characterController.isGrounded) {
                 moveDirection.y -= gravity * Time.deltaTime;
             }
 
-            // Move the controller
             characterController.Move(moveDirection * Time.deltaTime);
 
-            // Player and Camera rotation
             if (canMove) {
                 rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
                 rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);

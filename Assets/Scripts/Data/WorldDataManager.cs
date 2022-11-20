@@ -1,18 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using System.Xml.Serialization;
 using System.IO;
 
 public class WorldDataManager : MonoBehaviour {
-
     #region Singleton
 
     public static WorldDataManager instance;
 
     void Awake() {
-
         if (instance != null) {
             Debug.LogWarning("More than one instance WorldDataManager found");
             return;
@@ -45,7 +41,10 @@ public class WorldDataManager : MonoBehaviour {
     }
 
     void LoadData() {
-        if (!File.Exists(Application.dataPath + "/World_Data.xml")) { return; }
+        if (!File.Exists(Application.dataPath + "/World_Data.xml")) {
+            return;
+        }
+
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(WorldObjectDatabase));
         FileStream stream = new FileStream(Application.dataPath + "/World_Data.xml", FileMode.Open);
         worldObjectDB = xmlSerializer.Deserialize(stream) as WorldObjectDatabase;
@@ -55,13 +54,11 @@ public class WorldDataManager : MonoBehaviour {
 
 [System.Serializable]
 public class WorldObjectDatabase {
-
     public List<WorldObject> worldObjects = new List<WorldObject>();
 }
 
 [System.Serializable]
 public class WorldObject {
-
     public string prefabID;
     public string terrainID;
     public Vector3 worldPosition;
@@ -78,7 +75,8 @@ public class WorldObject {
         isCollected = false;
     }
 
-    public WorldObject(string prefabID, string terrainID, Vector3 worldPosition, Quaternion orientation, int health, bool isCollected) {
+    public WorldObject(string prefabID, string terrainID, Vector3 worldPosition, Quaternion orientation, int health,
+        bool isCollected) {
         this.prefabID = prefabID;
         this.terrainID = terrainID;
         this.worldPosition = worldPosition;
@@ -87,5 +85,6 @@ public class WorldObject {
         this.isCollected = isCollected;
     }
 
-    public WorldObject() { }
+    public WorldObject() {
+    }
 }

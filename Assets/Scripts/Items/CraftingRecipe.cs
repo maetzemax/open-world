@@ -1,16 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CraftingRecipe: MonoBehaviour {
-
+public class CraftingRecipe : MonoBehaviour {
     #region Singleton
 
     public static CraftingRecipe instance;
 
     void Awake() {
-
         if (instance != null) {
             Debug.LogWarning("More than one instance CraftingRecipes found");
             return;
@@ -37,7 +34,8 @@ public class CraftingRecipe: MonoBehaviour {
 
     private void Start() {
         craftingRecipes = new() {
-            new(ingredients: new List<Ingredients>() { new(itemID: 2, amount: 8), new(itemID: 3, amount: 4) }, resultItemID: 4, needCraftingBench: false, resultAmount: 1), // Stone Pickaxe
+            new(ingredients: new List<Ingredients>() { new(itemID: 2, amount: 8), new(itemID: 3, amount: 4) },
+                resultItemID: 4, needCraftingBench: false, resultAmount: 1), // Stone Pickaxe
             new(new List<Ingredients>() { new(2, 8), new(1, 4) }, 5, false, 1), // Wood Pickaxe
             new(new List<Ingredients>() { new(2, 8), new(6, 4) }, 12, false, 1), // Iron Pickaxe
             new(new List<Ingredients>() { new(2, 8), new(1, 4) }, 7, false, 1), // Wood Axe

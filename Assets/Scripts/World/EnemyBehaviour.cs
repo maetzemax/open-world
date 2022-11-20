@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour {
     private GameObject player;
@@ -17,11 +19,18 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public float movementSpeed;
     private float journeyLength;
+    private Slider healthBar;
 
     void FixedUpdate() {
 
+        healthBar.value = health;
+        
         if (health <= 0) {
             Destroy(gameObject);
+        }
+
+        if (playerController == null) {
+            return;
         }
         
         var step = movementSpeed * Time.deltaTime;
@@ -46,11 +55,20 @@ public class EnemyBehaviour : MonoBehaviour {
         timer += Time.fixedDeltaTime;
     }
 
+    private void OnDestroy() {
+        healthBar.gameObject.SetActive(false);
+        playerController.healthSliderPlayer.SetActive(false);
+        
+        // SPAWN PAPER
+    }
+
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
         rb = gameObject.GetComponentInChildren<Rigidbody>();
         animator = gameObject.GetComponentInChildren<Animator>();
-        playerController.slider.SetActive(true);
+        playerController.healthSliderPlayer.SetActive(true);
+        healthBar = playerController.healthSliderEnemy.GetComponent<Slider>();
+        healthBar.gameObject.SetActive(true);
     }
 }

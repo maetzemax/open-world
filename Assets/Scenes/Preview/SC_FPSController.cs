@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-
-public class SC_FPSController : MonoBehaviour
-{
+public class SC_FPSController : MonoBehaviour {
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
     public float jumpSpeed = 8.0f;
@@ -18,11 +16,9 @@ public class SC_FPSController : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
-    [HideInInspector]
-    public bool canMove = true;
+    [HideInInspector] public bool canMove = true;
 
-    void Start()
-    {
+    void Start() {
         characterController = GetComponent<CharacterController>();
 
         // Lock cursor
@@ -30,8 +26,7 @@ public class SC_FPSController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void Update()
-    {
+    void Update() {
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -42,20 +37,17 @@ public class SC_FPSController : MonoBehaviour
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
-        {
+        if (Input.GetButton("Jump") && canMove && characterController.isGrounded) {
             moveDirection.y = jumpSpeed;
         }
-        else
-        {
+        else {
             moveDirection.y = movementDirectionY;
         }
 
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
         // as an acceleration (ms^-2)
-        if (!characterController.isGrounded)
-        {
+        if (!characterController.isGrounded) {
             moveDirection.y -= gravity * Time.deltaTime;
         }
 
@@ -63,8 +55,7 @@ public class SC_FPSController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
 
         // Player and Camera rotation
-        if (canMove)
-        {
+        if (canMove) {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);

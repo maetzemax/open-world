@@ -4,10 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 using TMPro;
-using Unity.VisualScripting;
 
 public class InventorySlot : MonoBehaviour, IDropHandler {
-
     public Image icon;
     public Button removeButton;
     public TextMeshProUGUI itemAmount;
@@ -27,12 +25,10 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     }
 
     public void AddItem(ItemObject itemObject) {
-
         var slots = Resources.FindObjectsOfTypeAll<HotbarSlot>();
 
-        Array.Sort(slots, delegate (HotbarSlot slot1, HotbarSlot slot2) {
-            return slot1.identifier.CompareTo(slot2.identifier);
-        });
+        Array.Sort(slots,
+            delegate(HotbarSlot slot1, HotbarSlot slot2) { return slot1.identifier.CompareTo(slot2.identifier); });
 
         foreach (var slot in slots) {
             if (slot.identifier == slotID) {
@@ -50,12 +46,10 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     }
 
     public void ClearSlot() {
-
         var slots = Resources.FindObjectsOfTypeAll<HotbarSlot>();
 
-        Array.Sort(slots, delegate (HotbarSlot slot1, HotbarSlot slot2) {
-            return slot1.identifier.CompareTo(slot2.identifier);
-        });
+        Array.Sort(slots,
+            delegate(HotbarSlot slot1, HotbarSlot slot2) { return slot1.identifier.CompareTo(slot2.identifier); });
 
         foreach (var slot in slots) {
             if (slot.identifier == slotID) {
@@ -93,7 +87,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     public void OnRemoveButton() {
         InventoryManager.instance.RemoveItem(itemObject, 1);
     }
-    
+
     public void UseItem() {
         if (itemObject.item != null) {
             itemObject.item.Use();
@@ -103,17 +97,15 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
             var shardSlots = new List<InventoryObject>();
 
             if (id == 14 || id == 15 || id == 16 || id == 17) {
-                
                 // CHECK IF ALL SHARDS ARE COLLECTED
                 foreach (var slot in slots) {
-                    
                     var currentID = slot.itemID;
 
                     if (currentID == 14 || currentID == 15 || currentID == 16 || currentID == 17) {
                         shardSlots.Add(slot);
                     }
                 }
-                
+
                 var earthShard = shardSlots.Find(p => p.itemID == 14);
                 var waterShard = shardSlots.Find(p => p.itemID == 15);
                 var fireShard = shardSlots.Find(p => p.itemID == 16);
@@ -122,7 +114,9 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
                 if (earthShard != null && waterShard != null && fireShard != null && airShard != null) {
                     // TODO: Instantiate BOSS
                     print("Summon Boss");
-                    Instantiate(endBoss,  GameObject.FindGameObjectWithTag("Player").transform.position + Vector3.forward + Vector3.up, Quaternion.identity);
+                    Instantiate(endBoss,
+                        GameObject.FindGameObjectWithTag("Player").transform.position + Vector3.forward + Vector3.up,
+                        Quaternion.identity);
                 }
                 else {
                     print("NOT ALL SHARDS COLLECTED");

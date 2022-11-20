@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour {
     public Transform itemParent;
     public GameObject inventoryUI;
-    public Slider slider; 
+    public Slider slider;
 
     private PlayerController playerController;
 
@@ -28,14 +26,14 @@ public class InventoryUI : MonoBehaviour {
         }
 
         slider.value = playerController.health;
-
     }
 
     void UpdateUI() {
         for (int i = 0; i < slots.Length; i++) {
             if (i < inventory.itemList.Count) {
                 slots[inventory.itemList[i].inventoryObject.slotId - 1].AddItem(inventory.itemList[i]);
-            } else {
+            }
+            else {
                 if (!slots[i].isAssigned)
                     slots[i].ClearSlot();
             }

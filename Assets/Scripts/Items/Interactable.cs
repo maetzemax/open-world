@@ -1,4 +1,3 @@
-using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,17 +39,22 @@ public class Interactable : MonoBehaviour {
                 if (prefabIdentifier != null) {
                     Harvestable harvestable = prefabIdentifier.gameObject.GetComponentInChildren<Harvestable>();
                     Interactable interactable = prefabIdentifier.gameObject.GetComponentInChildren<Interactable>();
-                    
+
                     if (harvestable != null) {
-                        SaveGameObject(prefabIdentifier.gameObject, tile.name, harvestable.health, prefabIdentifier.transform.position, false);
+                        SaveGameObject(prefabIdentifier.gameObject, tile.name, harvestable.health,
+                            prefabIdentifier.transform.position, false);
                     }
                     else if (interactable != null && prefabIdentifier.prefabIdentifier != "altar") {
-                        SaveGameObject(prefabIdentifier.gameObject, tile.name, interactable.health, prefabIdentifier.transform.position, false);
-                    } else if (prefabIdentifier.prefabIdentifier == "altar" && interactable.health <= 0) {
-                        SaveGameObject(prefabIdentifier.gameObject, tile.name, 1, prefabIdentifier.transform.position, true);
+                        SaveGameObject(prefabIdentifier.gameObject, tile.name, interactable.health,
+                            prefabIdentifier.transform.position, false);
+                    }
+                    else if (prefabIdentifier.prefabIdentifier == "altar" && interactable.health <= 0) {
+                        SaveGameObject(prefabIdentifier.gameObject, tile.name, 1, prefabIdentifier.transform.position,
+                            true);
                     }
                     else {
-                        SaveGameObject(prefabIdentifier.gameObject, tile.name, 1, prefabIdentifier.transform.position, false);
+                        SaveGameObject(prefabIdentifier.gameObject, tile.name, 1, prefabIdentifier.transform.position,
+                            false);
                     }
                 }
             }
@@ -59,16 +63,17 @@ public class Interactable : MonoBehaviour {
         }
         else {
             // Remove current
-            WorldObject worldObject = worldObjects.Find(p => p.worldPosition == gameObject.GetComponentInParent<PrefabIdentifier>().gameObject.transform.position);
+            WorldObject worldObject = worldObjects.Find(p =>
+                p.worldPosition == gameObject.GetComponentInParent<PrefabIdentifier>().gameObject.transform.position);
             worldDataManager.RemoveWorldObject(worldObject);
             Destroy(gameObject);
 
             // Save
             worldDataManager.SaveData();
         }
-        
+
         Destroy(gameObject);
-        
+
         if (firstItemDrop != null) {
             CheckForSlot(firstItemDrop, dropChanceFirstItem, amountFirstItem);
         }
@@ -102,7 +107,8 @@ public class Interactable : MonoBehaviour {
         }
     }
 
-    private void SaveGameObject(GameObject gameObject, string tileName, int health, Vector3 position, bool isCollected) {
+    private void SaveGameObject(GameObject gameObject, string tileName, int health, Vector3 position,
+        bool isCollected) {
         PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
         WorldObject worldObject = new(prefabIdentifier.prefabIdentifier, tileName, position,
             gameObject.transform.rotation, health, isCollected);

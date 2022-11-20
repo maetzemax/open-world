@@ -120,6 +120,11 @@ public class TerrainController : MonoBehaviour {
     }
 
     private void Update() {
+
+        if (playerTransform == null) {
+            return;
+        }
+        
         //save the tile the player is on
         Vector2 playerTile = TileFromPosition(playerTransform.localPosition);
         //save the tiles of all tracked objects in gameTransforms (including the player)

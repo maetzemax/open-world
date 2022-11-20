@@ -1,18 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using System.Xml.Serialization;
 using System.IO;
 
 public class InventoryDataManager : MonoBehaviour {
-
     #region Singleton
 
     public static InventoryDataManager instance;
 
     void Awake() {
-
         if (instance != null) {
             Debug.LogWarning("More than one instance InventoryDataManager found");
             return;
@@ -49,7 +45,10 @@ public class InventoryDataManager : MonoBehaviour {
     }
 
     void LoadData() {
-        if (!File.Exists(Application.dataPath + "/Inventory_Data.xml")) { return; }
+        if (!File.Exists(Application.dataPath + "/Inventory_Data.xml")) {
+            return;
+        }
+
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(InventoryDatabase));
         FileStream stream = new FileStream(Application.dataPath + "/Inventory_Data.xml", FileMode.Open);
         inventoryObjectDB = xmlSerializer.Deserialize(stream) as InventoryDatabase;
@@ -59,13 +58,11 @@ public class InventoryDataManager : MonoBehaviour {
 
 [System.Serializable]
 public class InventoryDatabase {
-
     public List<InventoryObject> inventoryObjects = new List<InventoryObject>();
 }
 
 [System.Serializable]
 public class InventoryObject {
-
     public int itemID;
     public string itemGUID;
     public int slotId;
@@ -97,5 +94,6 @@ public class InventoryObject {
         this.itemAmount = itemAmount;
     }
 
-    public InventoryObject() { }
+    public InventoryObject() {
+    }
 }
