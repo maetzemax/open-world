@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HideMesh : MonoBehaviour {
-    const float Threshold = 50f; // Some distance away from the player
+    const float threshold = 50f; // Some distance away from the player
     private GameObject player; // Drop the player on here from the editor, or find using a tag, name, etc.
-    Renderer renderer;
+    private new Renderer renderer;
 
     private void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -16,11 +16,15 @@ public class HideMesh : MonoBehaviour {
 
     void FixedUpdate() {
 
+        if (player == null) {
+            return;
+        }
+        
         // Get the absolute distance between the object and the player
         var distanceToPlayer = Mathf.Abs(Vector3.Distance(transform.position, player.transform.position));
         // If greater than threshold, goodbye
 
-        if (distanceToPlayer > Threshold) {
+        if (distanceToPlayer > threshold) {
 
             renderer.enabled = false;
 

@@ -4,13 +4,11 @@ using System.Linq;
 using UnityEngine;
 
 public class TerrainController : MonoBehaviour {
-
     #region Singleton
 
     public static TerrainController instance;
 
     void Awake() {
-
         if (instance != null) {
             Debug.LogWarning("More than one instance TerrainController found");
             return;
@@ -26,44 +24,52 @@ public class TerrainController : MonoBehaviour {
 
     #endregion
 
-    [SerializeField]
-    private GameObject terrainTilePrefab = null;
-    [SerializeField]
-    private Vector3 terrainSize = new Vector3(20, 1, 20);
-    public Vector3 TerrainSize { get { return terrainSize; } }
-    [SerializeField]
-    private Gradient gradient;
-    [SerializeField]
-    private float noiseScale = 3, cellSize = 1;
-    [SerializeField]
-    private int radiusToRender = 5;
-    [SerializeField]
-    private List<Transform> gameTransforms;
-    [SerializeField]
-    private Transform playerTransform;
+    [SerializeField] private GameObject terrainTilePrefab = null;
+    [SerializeField] private Vector3 terrainSize = new Vector3(20, 1, 20);
+
+    public Vector3 TerrainSize {
+        get { return terrainSize; }
+    }
+
+    [SerializeField] private Gradient gradient;
+    [SerializeField] private float noiseScale = 3, cellSize = 1;
+    [SerializeField] private int radiusToRender = 5;
+    [SerializeField] private List<Transform> gameTransforms;
+    [SerializeField] private Transform playerTransform;
 
 
-    [SerializeField]
-    private Transform water;
-    public Transform Water { get { return water; } }
-    [SerializeField]
-    private Transform beach;
-    public Transform Beach { get { return beach; } }
-    [SerializeField]
-    private Transform mountain;
-    public Transform Mountain { get { return mountain; } }
+    [SerializeField] private Transform water;
+
+    public Transform Water {
+        get { return water; }
+    }
+
+    [SerializeField] private Transform beach;
+
+    public Transform Beach {
+        get { return beach; }
+    }
+
+    [SerializeField] private Transform mountain;
+
+    public Transform Mountain {
+        get { return mountain; }
+    }
 
     private int seed;
-    [SerializeField]
-    private int minObjectsPerTile = 0, maxObjectsPerTile = 20;
-    public int MinObjectsPerTile { get { return minObjectsPerTile; } }
-    public int MaxObjectsPerTile { get { return maxObjectsPerTile; } }
-    [SerializeField]
-    private float destroyDistance = 1000;
-    [SerializeField]
-    private bool usePerlinNoise = true;
-    [SerializeField]
-    private Texture2D noise;
+    [SerializeField] private int minObjectsPerTile = 0, maxObjectsPerTile = 20;
+
+    public int MinObjectsPerTile {
+        get { return minObjectsPerTile; }
+    }
+
+    public int MaxObjectsPerTile {
+        get { return maxObjectsPerTile; }
+    }
+
+    [SerializeField] private float destroyDistance = 1000;
+    [SerializeField] private bool usePerlinNoise = true;
+    [SerializeField] private Texture2D noise;
     public static float[][] noisePixels;
 
     public Camera cam;
@@ -71,7 +77,10 @@ public class TerrainController : MonoBehaviour {
     private Vector2 startOffset;
 
     private Dictionary<Vector2, GameObject> terrainTiles = new Dictionary<Vector2, GameObject>();
-    public Dictionary<Vector2, GameObject> TerrainTiles { get { return terrainTiles; } }
+
+    public Dictionary<Vector2, GameObject> TerrainTiles {
+        get { return terrainTiles; }
+    }
 
     private Vector2[] previousCenterTiles;
     private List<GameObject> previousTileObjects = new List<GameObject>();
@@ -79,11 +88,11 @@ public class TerrainController : MonoBehaviour {
     private Vector2 noiseRange;
 
     private void Start() {
-
         if (PlayerPrefs.HasKey("seed")) {
             seed = PlayerPrefs.GetInt("seed");
             Random.InitState(seed);
-        } else {
+        }
+        else {
             seed = Random.Range(1, 10000);
             Random.InitState(seed);
             PlayerPrefs.SetInt("seed", seed);
@@ -102,9 +111,9 @@ public class TerrainController : MonoBehaviour {
         foreach (Transform t in gameTransforms)
             t.parent = Level;
 
-        float waterSideLength = radiusToRender * 4 + 1;
+        float waterSideLength = radiusToRender * 2 + 1;
         water.localScale = new Vector3(terrainSize.x / 10 * waterSideLength, 1, terrainSize.z / 10 * waterSideLength);
-        
+
         //choose a random place on perlin noise
         startOffset = new Vector2(Random.Range(0f, noiseRange.x), Random.Range(0f, noiseRange.y));
         RandomizeInitState();
@@ -112,18 +121,10 @@ public class TerrainController : MonoBehaviour {
 
     private void Update() {
 
-        if (Input.GetKeyDown(KeyCode.T)) {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 10) && hit.collider.CompareTag("Terrain")) {
-                Quaternion orientation = Quaternion.Euler(Vector3.up * Random.Range(0f, 360f));
-                Instantiate(PrefabDatabase.instance.prefabItems.First().prefabGameobject, hit.point, orientation, hit.collider.transform);
-                WorldDataManager.instance.AddWorldObject(new WorldObject(PrefabDatabase.instance.prefabItems.First().prefabID, hit.collider.gameObject.name, hit.point, orientation, PrefabDatabase.instance.prefabItems.First().prefabGameobject.GetComponent<Harvestable>().health));
-                WorldDataManager.instance.SaveData();
-            }
+        if (playerTransform == null) {
+            return;
         }
-
+        
         //save the tile the player is on
         Vector2 playerTile = TileFromPosition(playerTransform.localPosition);
         //save the tiles of all tracked objects in gameTransforms (including the player)
@@ -140,24 +141,28 @@ public class TerrainController : MonoBehaviour {
                 bool isPlayerTile = tile == playerTile;
                 int radius = isPlayerTile ? radiusToRender : 1;
                 for (int i = -radius; i <= radius; i++)
-                    for (int j = -radius; j <= radius; j++)
-                        ActivateOrCreateTile((int)tile.x + i, (int)tile.y + j, tileObjects);
+                for (int j = -radius; j <= radius; j++)
+                    ActivateOrCreateTile((int)tile.x + i, (int)tile.y + j, tileObjects);
                 if (isPlayerTile)
-                    water.localPosition = new Vector3(tile.x * terrainSize.x, water.localPosition.y, tile.y * terrainSize.z);
+                    water.localPosition = new Vector3(tile.x * terrainSize.x, water.localPosition.y,
+                        tile.y * terrainSize.z);
             }
+
             //deactivate old tiles
             foreach (GameObject g in previousTileObjects)
                 if (!tileObjects.Contains(g))
                     g.SetActive(false);
 
             //destroy inactive tiles if they're too far away
-            List<Vector2> keysToRemove = new List<Vector2>();//can't remove item when inside a foreach loop
+            List<Vector2> keysToRemove = new List<Vector2>(); //can't remove item when inside a foreach loop
             foreach (KeyValuePair<Vector2, GameObject> kv in terrainTiles) {
-                if (Vector3.Distance(playerTransform.position, kv.Value.transform.position) > destroyDistance && !kv.Value.activeSelf) {
+                if (Vector3.Distance(playerTransform.position, kv.Value.transform.position) > destroyDistance &&
+                    !kv.Value.activeSelf) {
                     keysToRemove.Add(kv.Key);
                     Destroy(kv.Value);
                 }
             }
+
             foreach (Vector2 key in keysToRemove)
                 terrainTiles.Remove(key);
 
@@ -172,7 +177,8 @@ public class TerrainController : MonoBehaviour {
     private void ActivateOrCreateTile(int xIndex, int yIndex, List<GameObject> tileObjects) {
         if (!terrainTiles.ContainsKey(new Vector2(xIndex, yIndex))) {
             tileObjects.Add(CreateTile(xIndex, yIndex));
-        } else {
+        }
+        else {
             GameObject t = terrainTiles[new Vector2(xIndex, yIndex)];
             tileObjects.Add(t);
             if (!t.activeSelf)
@@ -201,7 +207,8 @@ public class TerrainController : MonoBehaviour {
         gm.NoiseOffset = NoiseOffset(xIndex, yIndex);
         gm.Generate();
 
-        Random.InitState((int)(seed + (long)xIndex * 100 + yIndex));//so it doesn't form a (noticable) pattern of similar tiles
+        Random.InitState((int)(seed + (long)xIndex * 100 +
+                               yIndex)); //so it doesn't form a (noticable) pattern of similar tiles
         PlaceObjects po = gm.GetComponent<PlaceObjects>();
         po.TerrainController = this;
         po.Place(gm.name);
@@ -224,11 +231,12 @@ public class TerrainController : MonoBehaviour {
     }
 
     private Vector2 TileFromPosition(Vector3 position) {
-        return new Vector2(Mathf.FloorToInt(position.x / terrainSize.x + .5f), Mathf.FloorToInt(position.z / terrainSize.z + .5f));
+        return new Vector2(Mathf.FloorToInt(position.x / terrainSize.x + .5f),
+            Mathf.FloorToInt(position.z / terrainSize.z + .5f));
     }
 
     private void RandomizeInitState() {
-        Random.InitState((int)System.DateTime.UtcNow.Ticks);//casting a long to an int "loops" it (like modulo)
+        Random.InitState((int)System.DateTime.UtcNow.Ticks); //casting a long to an int "loops" it (like modulo)
     }
 
     private bool HaveTilesChanged(List<Vector2> centerTiles) {
@@ -264,5 +272,4 @@ public class TerrainController : MonoBehaviour {
 
         return grayscale2d.Select(a => a.ToArray()).ToArray();
     }
-
 }

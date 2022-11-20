@@ -4,24 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Harvestable : MonoBehaviour {
-
     public ItemObject drop;
     public int health = 5;
+
+    public Category destrutable;
 
     InventoryManager inventory;
 
     private void Start() {
         inventory = InventoryManager.instance;
 
-        WorldObject worldObject = WorldDataManager.instance.worldObjectDB.worldObjects.Find(p => p.worldPosition == transform.position);
+        WorldObject worldObject =
+            WorldDataManager.instance.worldObjectDB.worldObjects.Find(p => p.worldPosition == transform.position);
 
-        if(worldObject != null)
+        if (worldObject != null)
             health = worldObject.health;
     }
 
-    public virtual void Harvest() {
-
-
+    public void Harvest() {
         // TODO: Drop Item on the Ground if Inventory is full
 
         health--;
@@ -32,7 +32,6 @@ public class Harvestable : MonoBehaviour {
         List<WorldObject> filteredObjects = worldObjects.FindAll(e => e.terrainID == terrainTile.name);
 
         if (filteredObjects.Count == 0) {
-
             GameObject tile = gameObject.GetComponentInParent<PlaceObjects>().gameObject;
 
             foreach (Transform child in tile.transform)
@@ -40,9 +39,8 @@ public class Harvestable : MonoBehaviour {
 
             var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
 
-            Array.Sort(slots, delegate (InventorySlot slot1, InventorySlot slot2) {
-                return slot1.slotID.CompareTo(slot2.slotID);
-            });
+            Array.Sort(slots,
+                delegate(InventorySlot slot1, InventorySlot slot2) { return slot1.slotID.CompareTo(slot2.slotID); });
 
             int slotID = 1;
 
@@ -56,18 +54,23 @@ public class Harvestable : MonoBehaviour {
             inventory.AddItem(new ItemObject(drop.item, new InventoryObject(drop.item.id, 1, slotID)));
 
             WorldDataManager.instance.SaveData();
-
-        } else {
-
+        }
+        else {
             // Remove current
-            WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
+            PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
+
+            if (prefabIdentifier == null) {
+                prefabIdentifier = gameObject.GetComponent<PrefabIdentifier>();
+            }
+
+            WorldObject worldObject =
+                worldObjects.Find(p => p.worldPosition == prefabIdentifier.gameObject.transform.position);
             worldObject.health = health;
 
             var slots = Resources.FindObjectsOfTypeAll<InventorySlot>();
 
-            Array.Sort(slots, delegate (InventorySlot slot1, InventorySlot slot2) {
-                return slot1.slotID.CompareTo(slot2.slotID);
-            });
+            Array.Sort(slots,
+                delegate(InventorySlot slot1, InventorySlot slot2) { return slot1.slotID.CompareTo(slot2.slotID); });
 
             int slotID = 1;
 
@@ -85,7 +88,6 @@ public class Harvestable : MonoBehaviour {
         }
 
         if (health == 0) {
-
             // Remove current destroyed one
             WorldObject worldObject = worldObjects.Find(p => p.worldPosition == transform.position);
             WorldDataManager.instance.RemoveWorldObject(worldObject);
@@ -97,15 +99,16 @@ public class Harvestable : MonoBehaviour {
         }
     }
 
-    void SaveGameObject(GameObject gameObject) {
-        PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
+    void SaveGameObject(GameObject harvestGameObject) {
+        PrefabIdentifier prefabIdentifier = harvestGameObject.GetComponentInParent<PrefabIdentifier>();
 
         if (prefabIdentifier == null) {
-            prefabIdentifier = gameObject.GetComponent<PrefabIdentifier>();
+            prefabIdentifier = harvestGameObject.GetComponent<PrefabIdentifier>();
         }
 
-        GameObject terrainTile = gameObject.GetComponentInParent<GenerateMesh>().gameObject;
+        GameObject terrainTile = harvestGameObject.GetComponentInParent<GenerateMesh>().gameObject;
 
-        WorldDataManager.instance.AddWorldObject(new WorldObject(prefabIdentifier.prefabIdentifier, terrainTile.name, gameObject.transform.position, gameObject.transform.rotation, health));
+        WorldDataManager.instance.AddWorldObject(new WorldObject(prefabIdentifier.prefabIdentifier, terrainTile.name,
+            prefabIdentifier.transform.position, prefabIdentifier.transform.rotation, health));
     }
 }

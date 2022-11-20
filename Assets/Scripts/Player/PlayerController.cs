@@ -1,121 +1,142 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
+using System.IO;
 
 public class PlayerController : MonoBehaviour {
-    [Header("Camera")]
-    public Camera cam;
-    public bool lockCursor;
+    public float walkingSpeed = 7.5f;
+    public float runningSpeed = 11.5f;
+    public float jumpSpeed = 8.0f;
+    public float gravity = 20.0f;
+    public Camera playerCamera;
+    public float lookSpeed = 2.0f;
+    public float lookXLimit = 45.0f;
+    public int health = 20;
 
-    [Range(0.1f, 10)] public float lookSensitivity;
+    CharacterController characterController;
+    Vector3 moveDirection = Vector3.zero;
+    float rotationX = 0;
 
-    public float maxUpRotation;
-    public float maxDownRotation;
-
-    private float xRotation = 0;
-
-    [Header("Movement")]
-    public CharacterController controller;
-
-    // Speed of forwards and backwards movement
-    [Range(0.5f, 20)] public float walkSpeed;
-
-    // Speed of sideways (left and right) movement
-    [Range(0.5f, 15)] public float strafeSpeed;
-
-    public KeyCode sKey;
-
-    // How many times faster movement along the X and Z axes
-    // is when sing
-    [Range(1, 3)] public float sFactor;
-
-    [Range(0.5f, 10)] public float jumpHeight;
-    public int maxJumps;
-
-    private Vector3 velocity = Vector3.zero;
-    private int jumpsSinceLastLand = 0;
+    [HideInInspector] public bool canMove = true;
 
     private GameObject currentLookAt;
-    private bool isInvetoryOpen = false;
 
-    InventoryManager inventory;
+    [HideInInspector] public bool isInventoryOpen = false;
+    public ItemObject selectedTool = null;
 
-    public GameObject pickAxe;
-    public GameObject torch;
-    private bool isTorchActive = false;
+    public GameObject toolHolder;
+    public GameObject healthSliderPlayer;
+    public GameObject healthSliderEnemy;
+    public GameObject deathScreen;
+    public GameObject newCamera;
+
+    private InventoryManager inventory;
 
     private void Start() {
         inventory = InventoryManager.instance;
+
+        characterController = GetComponent<CharacterController>();
+
+        if (!characterController.isGrounded) {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit) ||
+                Physics.Raycast(transform.position, Vector3.up, out hit) && hit.collider.CompareTag("Terrain")) {
+                gameObject.transform.position =
+                    new Vector3(transform.position.x, hit.point.y + 0.2f, transform.position.z);
+            }
+        }
+
+        // Lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Awake() {
-        if (PlayerPrefs.HasKey("y")) {
+        if (PlayerPrefs.HasKey("x")) {
             var playerRotation = Quaternion.Euler(0, PlayerPrefs.GetFloat("y_rotation"), 0);
-            var playerPosition = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"), PlayerPrefs.GetFloat("z"));
+            var playerPosition = new Vector3(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"),
+                PlayerPrefs.GetFloat("z"));
             gameObject.transform.rotation = playerRotation;
             gameObject.transform.position = playerPosition;
 
             var camRotation = Quaternion.Euler(PlayerPrefs.GetFloat("x_rotation"), 0, 0);
-            cam.transform.rotation = camRotation;
-            xRotation = PlayerPrefs.GetFloat("x_rotation");
+            playerCamera.transform.rotation = camRotation;
+            rotationX = PlayerPrefs.GetFloat("x_rotation");
         }
     }
 
     void Update() {
+        if (health <= 0) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
-        if (Input.GetButtonDown("Inventory")) {
-            isInvetoryOpen = !isInvetoryOpen;
+            Instantiate(newCamera);
+
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+
+            File.Delete(Application.dataPath + "/Inventory_Data.xml");
+            File.Delete(Application.dataPath + "/World_Data.xml");
+
+            deathScreen.SetActive(true);
+            Destroy(gameObject);
+
+            return;
         }
 
-        Cursor.visible = isInvetoryOpen;
+        if (Input.GetButtonDown("Inventory")) {
+            isInventoryOpen = !isInventoryOpen;
+        }
 
-        if (isInvetoryOpen) {
+        Cursor.visible = isInventoryOpen;
+
+        if (isInventoryOpen) {
             Cursor.lockState = CursorLockMode.None;
-
-            velocity.z = 0;
-            velocity.x = 0;
-
-        } else {
-
+            canMove = false;
+        }
+        else {
+            canMove = true;
             Cursor.lockState = CursorLockMode.Locked;
 
-            transform.Rotate(0, Input.GetAxis("Mouse X") * lookSensitivity, 0);
-            xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
-            xRotation = Mathf.Clamp(xRotation, -maxUpRotation, maxDownRotation);
-            cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            // We are grounded, so recalculate move direction based on axes
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
 
-            velocity.z = Input.GetAxis("Vertical") * walkSpeed;
-            velocity.x = Input.GetAxis("Horizontal") * strafeSpeed;
-            velocity = transform.TransformDirection(velocity);
+            // Press Left Shift to run
+            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
+            float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+            float movementDirectionY = moveDirection.y;
+            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-            // Apply manual gravity
-            if (isTorchActive) {
-                torch.SetActive(true);
-                pickAxe.SetActive(false);
-            } else if (!isTorchActive) {
-                torch.SetActive(false);
-                pickAxe.SetActive(true);
+            if (Input.GetButton("Jump") && canMove && characterController.isGrounded) {
+                moveDirection.y = jumpSpeed;
+            }
+            else {
+                moveDirection.y = movementDirectionY;
             }
 
-            if (Input.GetKey(sKey)) { S(); }
-
-            if (Input.GetButtonDown("Jump")) {
-                if (controller.isGrounded) {
-                    Jump();
-                } else if (jumpsSinceLastLand < maxJumps) {
-                    Jump();
-                }
+            if (!characterController.isGrounded) {
+                moveDirection.y -= gravity * Time.deltaTime;
             }
 
-            // let item glow when look at it
+            characterController.Move(moveDirection * Time.deltaTime);
 
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (canMove) {
+                rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+                rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+                playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+                transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+            }
+
+            Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {
                 currentLookAt = hit.collider.gameObject;
-                inventory.pickUpText.text = "Pick up " + currentLookAt.GetComponent<Interactable>().itemObject.item.name;
+                inventory.pickUpText.text =
+                    "Collect " + currentLookAt.GetComponent<Interactable>().gameObject.name;
                 inventory.pickUpText.enabled = true;
-            } else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
+            }
+            else if (Physics.Raycast(ray, out hit, 20) && !hit.collider.CompareTag("Item") && currentLookAt != null) {
                 inventory.pickUpText.text = "";
                 inventory.pickUpText.enabled = false;
             }
@@ -125,45 +146,48 @@ public class PlayerController : MonoBehaviour {
                 Interact();
             }
 
-            // Interact with Item
-            if (Input.GetKeyDown(KeyCode.P)) {
-                isTorchActive = !isTorchActive;
+            GameObject currentSelectedTool = null;
+
+            if (selectedTool == null) {
+                if (toolHolder.transform.childCount > 0) {
+                    currentSelectedTool = toolHolder.transform.GetChild(0).gameObject;
+
+                    Destroy(currentSelectedTool);
+                    toolHolder.GetComponent<HarvestAnimation>().enabled = false;
+                }
+            }
+
+            if (selectedTool.item != null) {
+                toolHolder.GetComponent<HarvestAnimation>().enabled = selectedTool.item.isTool;
+                if (toolHolder.transform.childCount > 0)
+                    currentSelectedTool = toolHolder.transform.GetChild(0).gameObject;
+
+
+                if (currentSelectedTool != null &&
+                    currentSelectedTool.gameObject.name != selectedTool.item.prefab.name + "(Clone)") {
+                    Destroy(currentSelectedTool);
+
+                    if (selectedTool.item.isTool)
+                        Instantiate(selectedTool.item.prefab, toolHolder.transform);
+                }
+                else if (currentSelectedTool == null) {
+                    if (selectedTool.item.isTool)
+                        Instantiate(selectedTool.item.prefab, toolHolder.transform);
+                }
             }
         }
 
-        velocity.y += Physics.gravity.y * Time.deltaTime;
-
-        if (controller.isGrounded && velocity.y < 0) { Land(); }
-
         PlayerPrefs.SetFloat("y_rotation", gameObject.transform.rotation.eulerAngles.y);
-        PlayerPrefs.SetFloat("x_rotation", cam.transform.rotation.eulerAngles.x);
+        PlayerPrefs.SetFloat("x_rotation", playerCamera.transform.rotation.eulerAngles.x);
         PlayerPrefs.SetFloat("x", gameObject.transform.position.x);
         PlayerPrefs.SetFloat("y", gameObject.transform.position.y);
         PlayerPrefs.SetFloat("z", gameObject.transform.position.z);
 
         PlayerPrefs.Save();
-
-        controller.Move(velocity * Time.deltaTime);
-    }
-
-    private void S() {
-        velocity.z *= sFactor;
-        velocity.x *= sFactor;
-    }
-
-    private void Jump() {
-        velocity.y = Mathf.Sqrt(jumpHeight * -2 * Physics.gravity.y);
-        jumpsSinceLastLand++;
-    }
-
-    private void Land() {
-        velocity.y = 0;
-        jumpsSinceLastLand = 0;
     }
 
     private void Interact() {
-
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 3) && hit.collider.CompareTag("Item")) {

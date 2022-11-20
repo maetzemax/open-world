@@ -1,18 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
 public class LightingManager : MonoBehaviour {
+    [SerializeField] private Light directionLight;
 
-    [SerializeField]
-    private Light directionLight;
+    [SerializeField] private LightingPreset preset;
 
-    [SerializeField]
-    private LightingPreset preset;
-
-    [SerializeField, Range(0, 24)]
-    private float timeOfDay;
+    [SerializeField, Range(0, 24)] private float timeOfDay;
 
     private void Start() {
         if (PlayerPrefs.HasKey("dayTime"))
@@ -26,16 +20,19 @@ public class LightingManager : MonoBehaviour {
             return;
 
         if (Application.isPlaying) {
-
             if (timeOfDay < 5 || timeOfDay > 19) {
-                timeOfDay += Time.deltaTime * 0.33f;
-            } else {
+                timeOfDay += Time.deltaTime * 0.2f;
+                directionLight.intensity = 0.5f;
+            }
+            else {
                 timeOfDay += Time.deltaTime * 0.075f;
+                directionLight.intensity = 1;
             }
 
             timeOfDay %= 24;
             UpdateLightning(timeOfDay / 24f);
-        } else {
+        }
+        else {
             UpdateLightning(timeOfDay / 24f);
         }
     }
@@ -54,7 +51,6 @@ public class LightingManager : MonoBehaviour {
 
         PlayerPrefs.SetFloat("dayTime", timeOfDay);
         PlayerPrefs.Save();
-
     }
 
     private void OnValidate() {
@@ -63,7 +59,8 @@ public class LightingManager : MonoBehaviour {
 
         if (RenderSettings.sun != null) {
             directionLight = RenderSettings.sun;
-        } else {
+        }
+        else {
             Light[] lights = GameObject.FindObjectsOfType<Light>();
             foreach (Light light in lights) {
                 directionLight = light;
@@ -71,5 +68,4 @@ public class LightingManager : MonoBehaviour {
             }
         }
     }
-
 }

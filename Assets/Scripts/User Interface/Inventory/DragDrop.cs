@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IEndDragHandler, IBeginDragHandler, IDragHandler {
-
     [SerializeField] private Canvas canvas;
 
     private RectTransform rectTransform;
@@ -31,6 +28,5 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IEndDragHandler, IBe
     }
 
     public void OnPointerDown(PointerEventData eventData) {
-
     }
 }

@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using ProceduralToolkit;
 
 [RequireComponent(typeof(MeshFilter))]
 public class GenerateMesh : MonoBehaviour {
-
     private MeshFilter meshFilter;
 
     public Vector3 TerrainSize { get; set; }
@@ -17,7 +15,11 @@ public class GenerateMesh : MonoBehaviour {
     public Vector2 NoiseOffset { get; set; }
 
     private static bool usePerlinNoise = true;
-    public static bool UsePerlinNoise { get { return usePerlinNoise; } set { usePerlinNoise = value; } }
+
+    public static bool UsePerlinNoise {
+        get { return usePerlinNoise; }
+        set { usePerlinNoise = value; }
+    }
 
     public void Generate() {
         meshFilter = GetComponent<MeshFilter>();
@@ -31,7 +33,8 @@ public class GenerateMesh : MonoBehaviour {
             meshCollider.sharedMesh = meshFilter.mesh;
     }
 
-    private static MeshDraft TerrainDraft(Vector3 terrainSize, float cellSize, Vector2 noiseOffset, float noiseScale, Gradient gradient) {
+    private static MeshDraft TerrainDraft(Vector3 terrainSize, float cellSize, Vector2 noiseOffset, float noiseScale,
+        Gradient gradient) {
         int xSegments = Mathf.FloorToInt(terrainSize.x / cellSize);
         int zSegments = Mathf.FloorToInt(terrainSize.z / cellSize);
 
@@ -114,7 +117,7 @@ public class GenerateMesh : MonoBehaviour {
         if (usePerlinNoise)
             return Mathf.PerlinNoise(noiseX, noiseZ);
         else
-            return TerrainController.noisePixels[(int)noiseX % TerrainController.noisePixels.Length][(int)noiseZ % TerrainController.noisePixels[0].Length];
+            return TerrainController.noisePixels[(int)noiseX % TerrainController.noisePixels.Length][
+                (int)noiseZ % TerrainController.noisePixels[0].Length];
     }
-
 }
