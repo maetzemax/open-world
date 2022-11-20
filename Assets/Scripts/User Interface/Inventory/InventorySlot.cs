@@ -17,6 +17,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     private InventoryUI inventoryUI;
     private InventoryDataManager inventoryDataManager;
 
+    public GameObject endBoss;
+
     public bool isAssigned = false;
 
     private void Start() {
@@ -120,6 +122,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
                 if (earthShard != null && waterShard != null && fireShard != null && airShard != null) {
                     // TODO: Instantiate BOSS
                     print("Summon Boss");
+                    Instantiate(endBoss,  GameObject.FindGameObjectWithTag("Player").transform.position + Vector3.forward + Vector3.up, Quaternion.identity);
                 }
                 else {
                     print("NOT ALL SHARDS COLLECTED");
