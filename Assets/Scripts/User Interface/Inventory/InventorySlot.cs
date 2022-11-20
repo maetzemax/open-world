@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 
 public class InventorySlot : MonoBehaviour, IDropHandler {
 
@@ -13,8 +14,15 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     public int slotID;
 
     public ItemObject itemObject;
+    private InventoryUI inventoryUI;
+    private InventoryDataManager inventoryDataManager;
 
     public bool isAssigned = false;
+
+    private void Start() {
+        inventoryUI = gameObject.GetComponentInParent<InventoryUI>();
+        inventoryDataManager = InventoryDataManager.instance;
+    }
 
     public void AddItem(ItemObject itemObject) {
 
@@ -83,10 +91,40 @@ public class InventorySlot : MonoBehaviour, IDropHandler {
     public void OnRemoveButton() {
         InventoryManager.instance.RemoveItem(itemObject, 1);
     }
-
+    
     public void UseItem() {
-        if (itemObject != null) {
+        if (itemObject.item != null) {
             itemObject.item.Use();
+
+            var id = itemObject.item.id;
+            var slots = inventoryDataManager.inventoryObjectDB.inventoryObjects;
+            var shardSlots = new List<InventoryObject>();
+
+            if (id == 14 || id == 15 || id == 16 || id == 17) {
+                
+                // CHECK IF ALL SHARDS ARE COLLECTED
+                foreach (var slot in slots) {
+                    
+                    var currentID = slot.itemID;
+
+                    if (currentID == 14 || currentID == 15 || currentID == 16 || currentID == 17) {
+                        shardSlots.Add(slot);
+                    }
+                }
+                
+                var earthShard = shardSlots.Find(p => p.itemID == 14);
+                var waterShard = shardSlots.Find(p => p.itemID == 15);
+                var fireShard = shardSlots.Find(p => p.itemID == 16);
+                var airShard = shardSlots.Find(p => p.itemID == 17);
+
+                if (earthShard != null && waterShard != null && fireShard != null && airShard != null) {
+                    // TODO: Instantiate BOSS
+                    print("Summon Boss");
+                }
+                else {
+                    print("NOT ALL SHARDS COLLECTED");
+                }
+            }
         }
     }
 }
