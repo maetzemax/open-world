@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour {
     public Transform itemParent;
     public GameObject inventoryUI;
+    public Slider slider; 
 
-    InventoryManager inventory;
+    private PlayerController playerController;
 
-    InventorySlot[] slots;
+    private InventoryManager inventory;
+    private InventorySlot[] slots;
 
     // Start is called before the first frame update
     void Start() {
         inventory = InventoryManager.instance;
         inventory.onItemChangedCallback += UpdateUI;
-
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         slots = itemParent.GetComponentsInChildren<InventorySlot>();
     }
 
@@ -23,6 +26,9 @@ public class InventoryUI : MonoBehaviour {
         if (Input.GetButtonDown("Inventory")) {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
         }
+
+        slider.value = playerController.health;
+
     }
 
     void UpdateUI() {

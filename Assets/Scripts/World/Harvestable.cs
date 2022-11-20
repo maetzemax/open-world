@@ -21,7 +21,7 @@ public class Harvestable : MonoBehaviour {
             health = worldObject.health;
     }
 
-    public virtual void Harvest() {
+    public void Harvest() {
 
 
         // TODO: Drop Item on the Ground if Inventory is full
@@ -106,10 +106,10 @@ public class Harvestable : MonoBehaviour {
     }
 
     void SaveGameObject(GameObject harvestGameObject) {
-        PrefabIdentifier prefabIdentifier = gameObject.GetComponentInParent<PrefabIdentifier>();
+        PrefabIdentifier prefabIdentifier = harvestGameObject.GetComponentInParent<PrefabIdentifier>();
 
         if (prefabIdentifier == null) {
-            prefabIdentifier = gameObject.GetComponent<PrefabIdentifier>();
+            prefabIdentifier = harvestGameObject.GetComponent<PrefabIdentifier>();
         }
 
         GameObject terrainTile = harvestGameObject.GetComponentInParent<GenerateMesh>().gameObject;

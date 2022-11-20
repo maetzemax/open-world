@@ -42,9 +42,10 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 
     void Start() {
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
         rb = gameObject.GetComponentInChildren<Rigidbody>();
         animator = gameObject.GetComponentInChildren<Animator>();
-        playerController = player.GetComponent<PlayerController>();
+        playerController.slider.SetActive(true);
     }
 }

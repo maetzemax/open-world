@@ -24,8 +24,9 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector] public ItemObject selectedTool = null;
 
     public GameObject toolHolder;
-
-    InventoryManager inventory;
+    public GameObject slider;
+    
+    private InventoryManager inventory;
 
     private void Start() {
         inventory = InventoryManager.instance;
